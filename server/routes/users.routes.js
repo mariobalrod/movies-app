@@ -1,4 +1,107 @@
 const express = require('express');
 const router = express.Router();
 
+const User = require('../models/User');
+
+// Obtener todos los usuarios
+router.get('/users', async (req, res) => {
+    const users = await User.find();
+    res.json(users);
+});
+
+// Obtener Un usuario por id
+router.get('/users/:id', async (req, res) => {
+    const user = await User.findById(req.params.id);
+    res.json(user);
+});
+
+// Crear Usuario
+router.post('/users', async (req, res) => {
+    const { username, email, password, confirmPassword } = req.body;
+    const errors = [];
+
+    //! Restricciones para contraseñas
+    if(password!=confirmPassword){
+        errors.push({text: 'Passwords no coinciden!'});
+    }
+
+    if(password.length < 5){
+        errors.push({text: 'Passwords demasiado breve!'});
+    }
+
+    //! Restricciones para Usuario y Email
+    const emailExistente = await User.findOne({email: email});
+    const usernameExistente = await User.findOne({username: username});
+    if(emailExistente) {
+        errors.push({text: 'Email ya en uso!'});
+    }
+    
+    if(usernameExistente) {
+        errors.push({text: 'Username ya en uso!'});
+    }
+
+    //? Vemos si podemos registrarlo o no
+    if(errors.length > 0) {
+        res.json(errors);
+    } else {
+        const newUser = new User({ email, username, password });
+        await newUser.save();
+        res.json(newUser);
+    }    
+});
+
+// Modificar Usuario
+router.put('/users/:id', async (req, res) => {
+    const { username, email, password, newPassword, newConfirmPassword } = req.body;
+    const errors = [];
+
+    const user =  await User.findById(req.params.id);
+    // * Credenciales Actuales
+    const passwordActual = await user.get('password');
+    const usernameActual = await user.get('username');
+    const emailActual = await user.get('email');
+
+    //! Restricciones para Password
+    if(passwordActual!=password) {
+        errors.push({text: 'Password no coincide con la actual!'});
+    }
+
+    if(newPassword!=newConfirmPassword) {
+        errors.push({text: 'Passwords no coinciden!'});
+    }
+
+    if(newPassword.length < 5){
+        errors.push({text: 'Passwords demasiado breve!'});
+    }
+
+    //! Restricciones para email y username
+    if(usernameActual!=username) {
+        const usernameExistente = await User.findOne({username: username});
+        if(usernameExistente) {
+            errors.push({text: 'Username ya en uso!'});
+        }
+    }
+
+    if(emailActual!=email) {
+        const emailExistente = await User.findOne({email: email});
+        if(emailExistente) {
+            errors.push({text: 'Email ya en uso!'});
+        }
+    }
+
+    //? Estudiamos si podemos modificarlo o no
+    if(errors.length > 0) {
+        res.json(errors);
+    } else {
+        await User.findByIdAndUpdate(req.params.id, { email, username, newPassword});
+        res.json(await User.findById(req.params.id));
+    }
+});
+
+// Eliminar Usuario
+router.delete('/users/:id', async (req, res) => {
+    await User.findByIdAndDelete(req.params.id);
+    res.send('Deleted!');
+});
+
 module.exports = router;
