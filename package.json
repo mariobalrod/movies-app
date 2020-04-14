@@ -4,17 +4,27 @@
   "description": "Movies app with MERN Stack Development",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mariobalrod/MoviesApp.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "mongodb", "express", "reacjs", "nodejs"
+  ],
+  "author": "mariobalrod",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mariobalrod/MoviesApp/issues"
   },
-  "homepage": "https://github.com/mariobalrod/MoviesApp#readme"
+  "homepage": "https://github.com/mariobalrod/MoviesApp#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
 }
