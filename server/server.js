@@ -4,6 +4,8 @@ const path = require('path');
 
 const app = express();
 
+require('./database');
+
 // TODO: SETTINGS
 app.set('port', 3000);
 

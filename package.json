@@ -12,7 +12,10 @@
     "url": "git+https://github.com/mariobalrod/MoviesApp.git"
   },
   "keywords": [
-    "mongodb", "express", "reacjs", "nodejs"
+    "mongodb",
+    "express",
+    "reacjs",
+    "nodejs"
   ],
   "author": "mariobalrod",
   "license": "ISC",
@@ -22,6 +25,7 @@
   "homepage": "https://github.com/mariobalrod/MoviesApp#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^5.9.9",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
