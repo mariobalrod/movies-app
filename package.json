@@ -1,0 +1,20 @@
+{
+  "name": "MoviesApp",
+  "version": "1.0.0",
+  "description": "Movies app with MERN Stack Development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariobalrod/MoviesApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mariobalrod/MoviesApp/issues"
+  },
+  "homepage": "https://github.com/mariobalrod/MoviesApp#readme"
+}
