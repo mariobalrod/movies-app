@@ -6,7 +6,6 @@ const MovieSchema = new Schema({
     description: {type: String, required: true},
     director: {type: String, required: false},
     puntuacion: {type: Number, required: true},
-    date: {type: Date, required: false},
     imgUrl: {type: String},
     dateAdded: {type: Date, default: Date.now}
 });
