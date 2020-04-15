@@ -1,11 +1,13 @@
 {
-  "name": "MoviesApp",
+  "name": "movies-app",
   "version": "1.0.0",
   "description": "Movies app with MERN Stack Development",
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",
-    "dev": "nodemon server/index.js"
+    "backend": "nodemon server/index.js",
+    "frontend": "npm run front --prefix client",
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
   "repository": {
     "type": "git",
@@ -24,11 +26,13 @@
   },
   "homepage": "https://github.com/mariobalrod/MoviesApp#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.9.9",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "concurrently": "^5.1.0",
     "nodemon": "^2.0.3"
   }
 }

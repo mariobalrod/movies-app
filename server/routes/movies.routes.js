@@ -4,19 +4,19 @@ const router = express.Router();
 const Movie = require('../models/Movie');
 
 // Obtener todos las peliculas
-router.get('/movies', async (req, res) => {
+router.get('/', async (req, res) => {
     const movies = await Movie.find();
     res.json(movies);
 });
 
 // Obtener Una Pelicula por id
-router.get('/movies/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const movie = await Movie.findById(req.params.id);
     res.json(movie);
 });
 
 // Crear Pelicula
-router.post('/movies', async (req, res) => {
+router.post('/', async (req, res) => {
     const { title, description, director, puntuacion, imgUrl } = req.body;
 
     if(director) {
@@ -48,7 +48,7 @@ router.post('/movies', async (req, res) => {
 });
 
 // Modificar Pelicula
-router.put('/movies/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     const { title, description, director, puntuacion, imgUrl } = req.body;
 
     if(director) {
@@ -73,7 +73,7 @@ router.put('/movies/:id', async (req, res) => {
 });
 
 // Eliminar Pelicula
-router.delete('/movies/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     await Movie.findByIdAndDelete(req.params.id);
     res.send('Deleted!');
 });

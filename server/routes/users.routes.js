@@ -4,19 +4,19 @@ const router = express.Router();
 const User = require('../models/User');
 
 // Obtener todos los usuarios
-router.get('/users', async (req, res) => {
+router.get('/', async (req, res) => {
     const users = await User.find();
     res.json(users);
 });
 
 // Obtener Un usuario por id
-router.get('/users/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const user = await User.findById(req.params.id);
     res.json(user);
 });
 
 // Crear Usuario
-router.post('/users', async (req, res) => {
+router.post('/', async (req, res) => {
     const { username, email, password, confirmPassword } = req.body;
     const errors = [];
 
@@ -51,7 +51,7 @@ router.post('/users', async (req, res) => {
 });
 
 // Modificar Usuario
-router.put('/users/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     const { username, email, password, newPassword, newConfirmPassword } = req.body;
     const errors = [];
 
@@ -99,7 +99,7 @@ router.put('/users/:id', async (req, res) => {
 });
 
 // Eliminar Usuario
-router.delete('/users/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     await User.findByIdAndDelete(req.params.id);
     res.send('Deleted!');
 });
