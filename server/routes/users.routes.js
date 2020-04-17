@@ -45,6 +45,8 @@ router.post('/', async (req, res) => {
         res.json({hay: true, errors: errors});
     } else {
         const newUser = new User({ email, username, password });
+        //Antes de guardar encrypt pass llamando al metodo creado en User
+        newUser.password = await newUser.encryptPassword(password);
         await newUser.save();
         res.json({hay: false, user: newUser});
     }    
@@ -57,21 +59,20 @@ router.put('/:id', async (req, res) => {
 
     const user =  await User.findById(req.params.id);
     // * Credenciales Actuales
-    const passwordActual = await user.get('password');
     const usernameActual = await user.get('username');
     const emailActual = await user.get('email');
 
     //! Restricciones para Password
-    if(passwordActual!=password) {
+    if(user.matchPassword(password)) {
         errors.push({text: 'Password no coincide con la actual!'});
     }
 
     if(newPassword!=newConfirmPassword) {
-        errors.push({text: 'Passwords no coinciden!'});
+        errors.push({text: 'Passwords nuevas no coinciden!'});
     }
 
     if(newPassword.length < 5){
-        errors.push({text: 'Passwords demasiado breve!'});
+        errors.push({text: 'Passwords nuevas demasiado breves!'});
     }
 
     //! Restricciones para email y username
@@ -93,7 +94,9 @@ router.put('/:id', async (req, res) => {
     if(errors.length > 0) {
         res.json(errors);
     } else {
-        await User.findByIdAndUpdate(req.params.id, { email, username, newPassword});
+        //Antes de guardar encrypt pass llamando al metodo creado en User
+        newPasswordEncrypted = await user.encryptPassword(newPassword);
+        await User.findByIdAndUpdate(req.params.id, { email, username, newPasswordEncrypted});
         res.json(await User.findById(req.params.id));
     }
 });
