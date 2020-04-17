@@ -1,13 +1,12 @@
 import React from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 import Settings from '@material-ui/icons/SettingsApplicationsRounded';
 
 const NavBar = () => {
     return (
-        <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="/" style={{marginLeft: 70}}>Movies App</Navbar.Brand>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar.Brand href="/" style={{marginLeft: 40}}>Movies App</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto" style={{marginRight: 120}}>

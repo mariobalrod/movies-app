@@ -23,7 +23,7 @@ class App extends Component {
             <Suspense fallback={(<div>Loading...</div>)}>
                 <Router>
                     <NavBar/>
-                    <div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)' }}>
+                    <div className="my-5" style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)' }}>
                         <Switch>
 
                             <Route exact path="/"> <Home /> </Route>

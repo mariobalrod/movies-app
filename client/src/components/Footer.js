@@ -1,5 +1,4 @@
 import React from 'react';
-import { colors, withTheme } from '@material-ui/core';
 
 const Footer = () => {
     return (
