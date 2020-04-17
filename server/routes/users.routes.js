@@ -42,11 +42,11 @@ router.post('/', async (req, res) => {
 
     //? Vemos si podemos registrarlo o no
     if(errors.length > 0) {
-        res.json(errors);
+        res.json({hay: true, errors: errors});
     } else {
         const newUser = new User({ email, username, password });
         await newUser.save();
-        res.json(newUser);
+        res.json({hay: false, user: newUser});
     }    
 });
 

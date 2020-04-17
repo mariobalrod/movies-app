@@ -6,7 +6,7 @@ export default class Home extends Component {
 
     render () {
         return (
-            <Card className="my-auto text-center">
+            <Card className="mx-auto my-5 text-center animated flipInY" style={{width: 700}}>
                 <Card.Header><h1>WELCOME</h1></Card.Header>
                 <Card.Body>
                     <Card.Title><h5>Your Best Option</h5></Card.Title>
