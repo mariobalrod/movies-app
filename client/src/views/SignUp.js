@@ -12,20 +12,23 @@ export default class SignUp extends Component {
             username: '',
             password: '',
             confirmPassword: '',
-            messages: [],
-            warning: true
+
+            messages: []
         }
     }
 
     handleSubmit = (e) => {
-        fetch('/api/users', {
+        
+        fetch('/api/users/register', {
             method: 'POST',
+
             body: JSON.stringify({
                 username: this.state.username,
                 email: this.state.email,
                 password: this.state.password,
                 confirmPassword: this.state.confirmPassword
             }),
+
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -33,27 +36,21 @@ export default class SignUp extends Component {
         })
             .then(res => res.json())
             .then(data => {
-                if(data.hay) {
-                    const errors = data.errors.map((error, index) => {
-                        const txt = error.text;
-                        return {key: index, txt}
-                    });
-                    
-                    this.setState({
-                        messages: errors,
-                        password: '',
-                        confirmPassword: ''
-                    });
-                    
-                } else {
-                    const newMessage = [{key: 0, txt: 'Registrado con éxito!'}]
+                if(data.type) {
+                    // Registro Exitoso
                     this.setState({
                         email: '',
                         username: '',
                         password: '',
                         confirmPassword: '',
-                        messages: newMessage, 
-                        warning: false
+                        messages: data
+                    });                    
+                } else {
+                    // Error en el Registro                    
+                    this.setState({
+                        password: '',
+                        confirmPassword: '',
+                        messages: data
                     });
                 }
             })
@@ -73,9 +70,7 @@ export default class SignUp extends Component {
         return (
             <div>
                 <div>
-                    {
-                        (this.state.messages.length > 0) ? <Messages messages={this.state.messages} warning={this.state.warning}/> : ''
-                    }
+                    {(this.state.messages.length > 0) ? <Messages messages={this.state.messages}/> : ''}
                 </div>
 
                 <Form className="mx-auto mt-5 animated flipInY" style={{ width: 300 }} onSubmit={this.handleSubmit}>

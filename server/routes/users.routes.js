@@ -3,54 +3,43 @@ const router = express.Router();
 
 const User = require('../models/User');
 
-// Obtener todos los usuarios
-router.get('/', async (req, res) => {
-    const users = await User.find();
-    res.json(users);
-});
+// =============================================================================================
 
-// Obtener Un usuario por id
-router.get('/:id', async (req, res) => {
-    const user = await User.findById(req.params.id);
-    res.json(user);
-});
+// @route POST /api/users/register
+// @desc  Register new User
+// @acces PUBLIC
+// @return { type: ( true || false ), msg: 'text' }
+router.post('/register', async (req, res) => {
 
-// Crear Usuario
-router.post('/', async (req, res) => {
     const { username, email, password, confirmPassword } = req.body;
-    const errors = [];
 
+    const messages = [];
+    
     //! Restricciones para contraseñas
-    if(password!=confirmPassword){
-        errors.push({text: 'Passwords no coinciden!'});
-    }
-
-    if(password.length < 5){
-        errors.push({text: 'Passwords demasiado breve!'});
-    }
+    if(password!=confirmPassword) messages.push({type: false, msg: 'Passwords no coinciden'});
+    if(password.length < 5) messages.push({type: false, msg: 'Passwords demasiado breve'});
 
     //! Restricciones para Usuario y Email
     const emailExistente = await User.findOne({email: email});
     const usernameExistente = await User.findOne({username: username});
-    if(emailExistente) {
-        errors.push({text: 'Email ya en uso!'});
-    }
-    
-    if(usernameExistente) {
-        errors.push({text: 'Username ya en uso!'});
-    }
+    if(emailExistente) messages.push({type: false, msg: 'Email ya en uso'});
+    if(usernameExistente) messages.push({type: false, msg: 'Username ya en uso'});
 
-    //? Vemos si podemos registrarlo o no
-    if(errors.length > 0) {
-        res.json({hay: true, errors: errors});
-    } else {
+    // * No hay errores
+    if(messages.length==0) {
+        //? Tras cumplir condiciones lo registramos en la base de datos
         const newUser = new User({ email, username, password });
         //Antes de guardar encrypt pass llamando al metodo creado en User
         newUser.password = await newUser.encryptPassword(password);
         await newUser.save();
-        res.json({hay: false, user: newUser});
-    }    
+        messages.push({type: true, msg: 'Registrado con éxito'});
+    }
+
+    res.json(messages);
 });
+
+// =============================================================================================
+
 
 // Modificar Usuario
 router.put('/:id', async (req, res) => {
@@ -101,10 +90,26 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+// =============================================================================================
+
+// Obtener todos los usuarios
+router.get('/', async (req, res) => {
+    const users = await User.find();
+    res.json(users);
+});
+
+// Obtener Un usuario por id
+router.get('/:id', async (req, res) => {
+    const user = await User.findById(req.params.id);
+    res.json(user);
+});
+
 // Eliminar Usuario
 router.delete('/:id', async (req, res) => {
     await User.findByIdAndDelete(req.params.id);
     res.send('Deleted!');
 });
+
+// =============================================================================================
 
 module.exports = router;
