@@ -1,7 +1,49 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
 
 const User = require('../models/User');
+
+// =============================================================================================
+
+// @route POST /api/users/login
+// @desc  Login an User
+// @acces PUBLIC
+// @return LoginUser and JWT Token
+
+router.post('/login', async (req, res) => {
+
+    const { username, password } = req.body;
+
+    const user = await User.findOne({ username: username });
+    if (!user) {
+        return res.status(404).json({ emailnotfound: "User not found" });
+    } else {
+        bcrypt.compare(password, user.password)
+            .then(isMatch => {
+                if (isMatch) {
+                    // User matched
+                    // Create JWT Payload
+                    const payload = {
+                        id: user.id,
+                        name: user.username
+                    };
+                    // Generar el token
+                    jwt.sign(payload, 'secret', {
+                        expiresIn: 31556926 // 1 year in seconds
+                    }, (err, token) => {
+                        res.json({
+                            succes: true,
+                            token: "Bearer" + token
+                        });
+                    });
+                } else {
+                    return res.status(400).json({ passwordincorrect: "Password incorrect" });
+                }
+            });
+    }
+});
 
 // =============================================================================================
 
@@ -9,6 +51,7 @@ const User = require('../models/User');
 // @desc  Register new User
 // @acces PUBLIC
 // @return { type: ( true || false ), msg: 'text' }
+
 router.post('/register', async (req, res) => {
 
     const { username, email, password, confirmPassword } = req.body;

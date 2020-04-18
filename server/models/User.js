@@ -18,9 +18,4 @@ UserSchema.methods.encryptPassword = async (password) => {
     return await bcrypt.hash(password, saltGenerated);
 };
 
-// Todo: Para comprobar passwords en el login
-UserSchema.methods.matchPassword = async (password) => {
-    return await bcrypt.compare(password, this.password);
-};
-
 module.exports = model('User', UserSchema);
