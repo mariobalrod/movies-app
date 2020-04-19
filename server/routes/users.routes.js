@@ -3,6 +3,10 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
 
+// Loading input validation
+const validateRegisterInput = require("../validator/register");
+const validateLoginInput = require("../validator/login");
+
 const User = require('../models/User');
 
 // =============================================================================================
@@ -14,12 +18,22 @@ const User = require('../models/User');
 
 router.post('/login', async (req, res) => {
 
-    const { username, password } = req.body;
+    // Form validation
+    const { errors, isValid } = validateLoginInput(req.body);
 
+    // Check validation
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
+
+    const { username, password } = req.body;
+    
     const user = await User.findOne({ username: username });
+    //Check username
     if (!user) {
         return res.status(404).json({ emailnotfound: "User not found" });
     } else {
+        //Check password
         bcrypt.compare(password, user.password)
             .then(isMatch => {
                 if (isMatch) {
@@ -27,7 +41,7 @@ router.post('/login', async (req, res) => {
                     // Create JWT Payload
                     const payload = {
                         id: user.id,
-                        name: user.username
+                        username: user.username
                     };
                     // Generar el token
                     jwt.sign(payload, 'secret', {
@@ -50,35 +64,49 @@ router.post('/login', async (req, res) => {
 // @route POST /api/users/register
 // @desc  Register new User
 // @acces PUBLIC
-// @return { type: ( true || false ), msg: 'text' }
 
 router.post('/register', async (req, res) => {
 
-    const { username, email, password, confirmPassword } = req.body;
-
-    const messages = [];
+    const { errors, isValid } = validateRegisterInput(req.body);
     
-    //! Restricciones para contraseñas
-    if(password!=confirmPassword) messages.push({type: false, msg: 'Passwords no coinciden'});
-    if(password.length < 5) messages.push({type: false, msg: 'Passwords demasiado breve'});
-
-    //! Restricciones para Usuario y Email
-    const emailExistente = await User.findOne({email: email});
-    const usernameExistente = await User.findOne({username: username});
-    if(emailExistente) messages.push({type: false, msg: 'Email ya en uso'});
-    if(usernameExistente) messages.push({type: false, msg: 'Username ya en uso'});
-
-    // * No hay errores
-    if(messages.length==0) {
-        //? Tras cumplir condiciones lo registramos en la base de datos
-        const newUser = new User({ email, username, password });
-        //Antes de guardar encrypt pass llamando al metodo creado en User
-        newUser.password = await newUser.encryptPassword(password);
-        await newUser.save();
-        messages.push({type: true, msg: 'Registrado con éxito'});
+    // Check validation
+    if (!isValid) {
+        return res.status(400).json(errors);
     }
 
-    res.json(messages);
+    const emailExistente = await User.findOne({email: email});
+    const usernameExistente = await User.findOne({username: username});
+
+    if (emailExistente) {
+
+        return res.status(400).json({ email: "Email already exists" });
+
+    } else if (usernameExistente) {
+
+        return res.status(400).json({ email: "Username already exists" });
+
+    } else {
+
+        const newUser = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password
+        });
+
+        // Hash password before saving in database
+        bcrypt.genSaltSync(10, (err, salt) => {
+            bcrypt.hashSync(newUser.password, salt, (err, hash) => {
+                if (err) throw err;
+                newUser.password = hash;
+                newUser
+                    .save()
+                    .then(user => res.json(user))
+                    .catch(err => console.log(err));
+            });
+        });
+
+    }
+
 });
 
 // =============================================================================================
