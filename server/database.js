@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const URI = 'mongodb://localhost/movies-app';
+require('dotenv').config();
+
+const URI = process.env.MONGODB_URI || 'mongodb://localhost/movies-app';
 
 mongoose.connect(URI, {
     useCreateIndex: true,

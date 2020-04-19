@@ -2,7 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
-const passport = require("passport");
+
+require('dotenv').config();
 
 // TODO: Inicializando variable APP
 const app = express();
@@ -17,8 +18,6 @@ app.set('port', process.env.PORT || 5000);
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(passport.initialize());
-require("./config/passport")(passport);
 
 // TODO: ROUTES
 app.use('/api/users', require('./routes/users.routes'));

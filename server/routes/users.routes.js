@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
+const signToken = require('../config/serverAuth').signToken;
+const verifyToken = require('../config/serverAuth').verifyToken;
 
 // Loading input validation
 const validateRegisterInput = require("../validator/register");
@@ -31,27 +33,16 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ username: username });
     //Check username
     if (!user) {
-        return res.status(404).json({ emailnotfound: "User not found" });
+        return res.status(404).json({ usernotfound: "User not found" });
     } else {
         //Check password
         bcrypt.compare(password, user.password)
             .then(isMatch => {
                 if (isMatch) {
                     // User matched
-                    // Create JWT Payload
-                    const payload = {
-                        id: user.id,
-                        username: user.username
-                    };
-                    // Generar el token
-                    jwt.sign(payload, 'secret', {
-                        expiresIn: 31556926 // 1 year in seconds
-                    }, (err, token) => {
-                        res.json({
-                            succes: true,
-                            token: "Bearer" + token
-                        });
-                    });
+                    // Generate JWT Token
+                    const token = signToken(user)
+			        res.json({success: true, message: "Token attached.", token})
                 } else {
                     return res.status(400).json({ passwordincorrect: "Password incorrect" });
                 }
@@ -74,8 +65,8 @@ router.post('/register', async (req, res) => {
         return res.status(400).json(errors);
     }
 
-    const emailExistente = await User.findOne({email: email});
-    const usernameExistente = await User.findOne({username: username});
+    const emailExistente = await User.findOne({email: req.body.email});
+    const usernameExistente = await User.findOne({username: req.body.username});
 
     if (emailExistente) {
 
@@ -88,29 +79,35 @@ router.post('/register', async (req, res) => {
     } else {
 
         const newUser = new User({
-            username: req.body.username,
             email: req.body.email,
+            username: req.body.username,
             password: req.body.password
         });
 
         // Hash password before saving in database
-        bcrypt.genSaltSync(10, (err, salt) => {
-            bcrypt.hashSync(newUser.password, salt, (err, hash) => {
+        bcrypt.genSalt(10, (err, salt) => {
+            if (err) throw err;
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
                 if (err) throw err;
                 newUser.password = hash;
                 newUser
                     .save()
-                    .then(user => res.json(user))
+                    .then(user => {
+                        // once user is created, generate a token to "log in":
+                        const token = signToken(user);
+                        res.json({success: true, message: "User created. Token attached.", token})
+                    })
                     .catch(err => console.log(err));
             });
         });
-
     }
 
 });
 
 // =============================================================================================
 
+//Para que  usar Modificar / Obtener / Eliminar tengas que estar verificado
+router.use(verifyToken);
 
 // Modificar Usuario
 router.put('/:id', async (req, res) => {
@@ -163,19 +160,27 @@ router.put('/:id', async (req, res) => {
 
 // =============================================================================================
 
-// Obtener todos los usuarios
+// @route GET /api
+// @desc obtener usuarios
+// @access PRIVATE
+// @return all users (json)
 router.get('/', async (req, res) => {
     const users = await User.find();
     res.json(users);
 });
 
-// Obtener Un usuario por id
+// @route GET /api/:id
+// @desc obtener un usuario
+// @access PRIVATE
+// @return usuario por id
 router.get('/:id', async (req, res) => {
     const user = await User.findById(req.params.id);
     res.json(user);
 });
 
-// Eliminar Usuario
+// @route DELETE /api/:id
+// @desc delete un usuario
+// @access PRIVATE
 router.delete('/:id', async (req, res) => {
     await User.findByIdAndDelete(req.params.id);
     res.send('Deleted!');
