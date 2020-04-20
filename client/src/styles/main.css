@@ -9,3 +9,35 @@ body {
 .margin-nav-links-dd {
     margin: 5px;
 }
+
+.container1 {
+    display: flex;
+    position: relative;
+    margin-top: 50px;
+    width: 100%;
+    border: 2px solid transparent;
+    justify-content: center;
+    align-items: center;
+}
+
+.container2 {
+    display: flex;
+    position: relative;
+    width: 75%;
+    border: 1px solid transparent;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Style of Carts */
+
+.cardMovie {
+    margin: 20px
+}
+
+.cardMovie img {
+    padding: 0;
+    width: 185px;
+    height: 278px;
+}
