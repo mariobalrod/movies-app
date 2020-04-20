@@ -1,9 +1,7 @@
-import React, { Suspense, Component } from 'react';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route
-} from "react-router-dom";
+import React, { Component } from 'react';
+import { Switch, Route } from "react-router-dom";
+
+import httpClient from './httpClient'
 
 // Components
 import NavBar from './components/Navbar';
@@ -13,30 +11,57 @@ import Footer from './components/Footer';
 import Home from './views/Home';
 import Movies from './views/Movies';
 import Profile from './views/Profile';
-import SignIn from './views/SignIn';
+import LogIn from './views/LogIn';
+import LogOut from './views/LogOut';
 import SignUp from './views/SignUp';
 
 class App extends Component {
 
+    constructor () {
+        super();
+        this.state = {
+            currentUser: httpClient.getCurrentUser()
+        }
+    }
+
+    onLoginSuccess(user) {
+		this.setState({ currentUser: httpClient.getCurrentUser() });
+	}
+
+	logOut() {
+		httpClient.logOut();
+		this.setState({ currentUser: null });
+	}
+
     render () {
+        const { currentUser } = this.state;
         return (
-            <Suspense fallback={(<div>Loading...</div>)}>
-                <Router>
-                    <NavBar/>
-                    <div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)' }}>
-                        <Switch>
+            <div>
+                <NavBar currentUser={currentUser} />
+                <div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)' }}>
+                    <Switch>
 
-                            <Route exact path="/"> <Home /> </Route>
-                            <Route exact path="/signin"> <SignIn /> </Route>
-                            <Route exact path="/signup"> <SignUp /> </Route>
-                            <Route exact path="/movies"> <Movies /> </Route>
-                            <Route exact path="/profile"> <Profile /> </Route>
+                        <Route exact path="/" component={ Home } />
 
-                        </Switch>
-                    </div>
-                    <Footer/>
-                </Router>
-            </Suspense>
+                        <Route path="/login" render={(props) => {
+						    return <LogIn {...props} onLoginSuccess={this.onLoginSuccess.bind(this)} />
+					    }} />
+
+                        <Route path="/signup" render={(props) => {
+                            return <SignUp {...props} onSignUpSuccess={this.onLoginSuccess.bind(this)} />
+                        }} />
+
+                        <Route path="/logout" render={(props) => {
+                            return <LogOut onLogOut={this.logOut.bind(this)} />
+                        }} />
+
+                        <Route exact path="/movies" component={ Movies } />
+
+                        <Route exact path="/profile" component={ Profile } />
+                    </Switch>
+                </div>
+                <Footer />
+            </div>
         );
     }
 
