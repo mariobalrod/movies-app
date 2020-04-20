@@ -25,29 +25,35 @@ router.post('/login', async (req, res) => {
 
     // Check validation
     if (!isValid) {
-        return res.status(400).json(errors);
+        res.json(errors);
+    } else {
+        //Para seguir con el mismo formato de enviar errores -> array de objetos error
+        const errors2 = [];
+    
+        const { username, password } = req.body;
+        
+        const user = await User.findOne({ username: username });
+        //Check username
+        if (!user) {
+            errors2.push({ msg: "User not found" });
+            res.json(errors2);
+        } else {
+            //Check password
+            bcrypt.compare(password, user.password)
+                .then(isMatch => {
+                    if (isMatch) {
+                        // User matched
+                        // Generate JWT Token
+                        const token = signToken(user)
+                        res.json({success: true, message: "Token attached.", token})
+                    } else {
+                        errors2.push({ msg: "Password Incorrect" });
+                        res.json(errors2);
+                    }
+                });
+        }
     }
 
-    const { username, password } = req.body;
-    
-    const user = await User.findOne({ username: username });
-    //Check username
-    if (!user) {
-        return res.status(404).json({ usernotfound: "User not found" });
-    } else {
-        //Check password
-        bcrypt.compare(password, user.password)
-            .then(isMatch => {
-                if (isMatch) {
-                    // User matched
-                    // Generate JWT Token
-                    const token = signToken(user)
-			        res.json({success: true, message: "Token attached.", token})
-                } else {
-                    return res.status(400).json({ passwordincorrect: "Password incorrect" });
-                }
-            });
-    }
 });
 
 // =============================================================================================
@@ -62,44 +68,50 @@ router.post('/register', async (req, res) => {
     
     // Check validation
     if (!isValid) {
-        return res.status(400).json(errors);
-    }
 
-    const emailExistente = await User.findOne({email: req.body.email});
-    const usernameExistente = await User.findOne({username: req.body.username});
-
-    if (emailExistente) {
-
-        return res.status(400).json({ email: "Email already exists" });
-
-    } else if (usernameExistente) {
-
-        return res.status(400).json({ email: "Username already exists" });
+        res.json(errors);
 
     } else {
 
-        const newUser = new User({
-            email: req.body.email,
-            username: req.body.username,
-            password: req.body.password
-        });
+        //Para seguir con el mismo formato de enviar errores -> array de objetos error
+        const errors2 = [];
 
-        // Hash password before saving in database
-        bcrypt.genSalt(10, (err, salt) => {
-            if (err) throw err;
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-                if (err) throw err;
-                newUser.password = hash;
-                newUser
-                    .save()
-                    .then(user => {
-                        // once user is created, generate a token to "log in":
-                        const token = signToken(user);
-                        res.json({success: true, message: "User created. Token attached.", token})
-                    })
-                    .catch(err => console.log(err));
+        const emailExistente = await User.findOne({email: req.body.email});
+        const usernameExistente = await User.findOne({username: req.body.username});
+    
+        if (emailExistente) {
+            errors2.push({ msg: "Email already exists" });
+            res.json(errors2);
+
+        } else if (usernameExistente) {
+            errors2.push({ msg: "Username already exists" });
+            res.json(errors2);
+    
+        } else {
+    
+            const newUser = new User({
+                email: req.body.email,
+                username: req.body.username,
+                password: req.body.password
             });
-        });
+    
+            // Hash password before saving in database
+            bcrypt.genSalt(10, (err, salt) => {
+                if (err) throw err;
+                bcrypt.hash(newUser.password, salt, (err, hash) => {
+                    if (err) throw err;
+                    newUser.password = hash;
+                    newUser
+                        .save()
+                        .then(user => {
+                            // once user is created, generate a token to "log in":
+                            const token = signToken(user);
+                            res.json({success: true, message: "User created. Token attached.", token})
+                        })
+                        .catch(err => console.log(err));
+                });
+            });
+        }
     }
 
 });

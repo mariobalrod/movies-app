@@ -34,35 +34,45 @@ class App extends Component {
 	}
 
     render () {
+
         const { currentUser } = this.state;
+
         return (
             <div>
                 <NavBar currentUser={currentUser} />
                 <div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)' }}>
                     <Switch>
 
-                        <Route exact path="/" component={ Home } />
+                        <Route exact path="/" render={(props) => {
+                            return <Home {...props} currentUser={currentUser} />
+                        }} />
 
                         <Route path="/login" render={(props) => {
-						    return <LogIn {...props} onLoginSuccess={this.onLoginSuccess.bind(this)} />
+						    return <LogIn {...props} onLoginSuccess={this.onLoginSuccess.bind(this)} currentUser={currentUser} />
 					    }} />
 
                         <Route path="/signup" render={(props) => {
-                            return <SignUp {...props} onSignUpSuccess={this.onLoginSuccess.bind(this)} />
+                            return <SignUp {...props} onSignUpSuccess={this.onLoginSuccess.bind(this)} currentUser={currentUser} />
                         }} />
 
                         <Route path="/logout" render={(props) => {
-                            return <LogOut onLogOut={this.logOut.bind(this)} />
+                            return <LogOut onLogOut={this.logOut.bind(this)} currentUser={currentUser} />
                         }} />
 
-                        <Route exact path="/movies" component={ Movies } />
+                        <Route path="/movies" render={(props) => {
+                            return <Movies {...props} currentUser={currentUser} />
+                        }}/>                        
 
-                        <Route exact path="/profile" component={ Profile } />
+                        <Route path="/profile" render={(props) => {
+                            return <Profile {...props} currentUser={currentUser} />
+                        }} />
+
                     </Switch>
                 </div>
                 <Footer />
             </div>
         );
+        
     }
 
 }

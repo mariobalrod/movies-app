@@ -17,7 +17,7 @@ httpClient.setToken = function(token) {
 
 // Para obtener el usuario actual
 httpClient.getCurrentUser = function() {
-    const token = localStorage.getItem('token')
+    const token = this.getToken()
     if(token) return jwtDecode(token)
     return null
 }
@@ -30,9 +30,14 @@ httpClient.logIn = function(credentials) {
 			if(token) {
 				// sets token as an included header for all subsequent api requests
 				this.defaults.headers.common.token = this.setToken(token);
-				return jwtDecode(token);
+				const user = jwtDecode(token);
+				return {success: true, user};
 			} else {
-				return false;
+				const errorMessages = serverResponse.data.map( (error, index) => {
+					let msg = error.msg;
+					return {key: index, msg}
+				})
+				return {success: false, errorMessages};
 			}
 		})
 }
@@ -45,9 +50,14 @@ httpClient.signUp = function(userInfo) {
 			if(token) {
 				// sets token as an included header for all subsequent api requests
 				this.defaults.headers.common.token = this.setToken(token);
-				return jwtDecode(token);
+				const user = jwtDecode(token);
+				return {success: true, user};
 			} else {
-				return false;
+				const errorMessages = serverResponse.data.map( (error, index) => {
+					let msg = error.msg;
+					return {key: index, msg}
+				})
+				return {success: false, errorMessages};
 			}
 		})
 }

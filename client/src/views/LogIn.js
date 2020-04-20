@@ -3,6 +3,8 @@ import { Form, Button } from 'react-bootstrap';
 
 import httpClient from '../httpClient';
 
+import Messages from '../components/Messages';
+
 export default class LogIn extends Component {
 
     constructor () {
@@ -11,7 +13,14 @@ export default class LogIn extends Component {
             fields: {
                 username: '',
                 password: ''
-            }
+            },
+            errorMessages: []
+        }
+    }
+
+    componentDidMount() {
+        if(this.props.currentUser) {
+            this.props.history.push('/');
         }
     }
 
@@ -24,35 +33,52 @@ export default class LogIn extends Component {
         });
     }
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
 		e.preventDefault()
-		httpClient.logIn(this.state.fields).then(user => {
-			this.setState({ 
-                fields: {
-                    username: '',
-                    password: ''
+        httpClient.logIn(this.state.fields)
+            .then(data => {
+                if(data.success) {
+                    // Hay usuario
+                    this.setState({ 
+                        fields: {
+                            username: '',
+                            password: ''
+                        }
+                    });
+
+                    this.props.onLoginSuccess(data.user);
+                    this.props.history.push('/');
+
+                } else {
+                    // Errores de Inicio de sesion
+                    this.setState({
+                        errorMessages: data.errorMessages
+                    })
+
                 }
-            });
-			if(user) {
-				this.props.onLoginSuccess(user);
-				this.props.history.push('/');
-			}
-		})
+            })
 	}
 
     render () {
         return (
-            <Form className="mx-auto mt-5 animated flipInY" style={{ width: 300 }} onSubmit={this.handleSubmit.bind(this)}>
-                <Form.Group>
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control name="username" value={this.state.fields.username} size="sm" type="text" placeholder="name111" onChange={this.handleChange.bind(this)} />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control name="password" value={this.state.fields.password} size="sm" type="password" onChange={this.handleChange.bind(this)} />
-                </Form.Group>
-                <Button className="mx-auto mt-4" variant="primary" type="submit" block>Login</Button>
-            </Form>
+            <div>
+                
+                {
+                    (this.state.errorMessages) ? <Messages messages={this.state.errorMessages} /> : ''
+                }
+
+                <Form className="mx-auto mt-5 animated flipInY" style={{ width: 300 }} onSubmit={this.handleSubmit.bind(this)}>
+                    <Form.Group>
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control name="username" value={this.state.fields.username} size="sm" type="text" placeholder="name111" onChange={this.handleChange.bind(this)} />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control name="password" value={this.state.fields.password} size="sm" type="password" onChange={this.handleChange.bind(this)} />
+                    </Form.Group>
+                    <Button className="mx-auto mt-4" variant="primary" type="submit" block>Login</Button>
+                </Form>
+            </div>
         );
     }
 
