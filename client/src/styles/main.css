@@ -41,3 +41,13 @@ body {
     width: 185px;
     height: 278px;
 }
+
+.linkList {
+    text-decoration: none;
+    color: rgb(107, 107, 107);
+}
+
+.linkList:hover {
+    text-decoration: none;
+    color: rgb(61, 61, 61);
+}
