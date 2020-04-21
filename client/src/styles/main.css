@@ -30,10 +30,46 @@ body {
     flex-wrap: wrap;
 }
 
-/* Style of Carts */
+/* Style of Cards */
 
 .cardMovie {
     margin: 20px
+}
+
+.cardMovie div {
+    opacity: 0;
+}
+
+.cardMovie:hover div {
+    opacity: 1;
+}
+
+.moreInfo {
+    position: absolute;
+    top: 120px;
+    left: 55px;
+    opacity: 0;
+}
+
+.cardMovie:hover .moreInfo {
+    opacity: 1;
+}
+
+.moreInfo {
+    color: rgb(71, 71, 71);
+}
+
+.moreInfo:hover {
+    color: rgb(31, 31, 31);
+}
+
+/* .cardMovie img:hover {
+    width: 200px;
+    height: 300px;
+}
+ */
+ .cardMovie:hover img {
+    opacity: 0.5;
 }
 
 .cardMovie img {
@@ -41,6 +77,8 @@ body {
     width: 185px;
     height: 278px;
 }
+
+/* Links Cards */
 
 .linkList {
     text-decoration: none;

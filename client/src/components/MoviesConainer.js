@@ -1,5 +1,5 @@
 import React from 'react';
-import Movies from './MovieCard';
+import MovieCard from './MovieCard';
 
 const MoviesContainer = (props) => {
     return (
@@ -9,8 +9,7 @@ const MoviesContainer = (props) => {
                     props.movies.map((movie, i) => {
                         if(movie.poster_path !== null && movie.adult === false){
                             return (
-                                <Movies key={i} image={movie.poster_path} adult={movie.adult}/>
-                                /* poster_path -> para obtener la imagen (Codigo API) */
+                                <MovieCard key={i} image={movie.poster_path} adult={movie.adult} id={movie.id} currentUser={props.currentUser}/>
                             )
                         } else {
                             return false;

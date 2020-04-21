@@ -23,7 +23,7 @@ export default class Movies extends Component {
         return (
             <div className="container1">
                 <div className="container2">
-                    <Link to="/lists/favoritas" className="linkList">
+                    <Link to="/lists/favorita" className="linkList">
                         <Card className="animated flipInY" style={{ width: 300, margin: 50 }}>
                             <Card.Body>
                                 <StarIcon className="mx-auto" style={{ fontSize: 250 }} />
@@ -31,7 +31,7 @@ export default class Movies extends Component {
                             <Card.Footer className="text-muted" style={{textAlign: "center"}}>Favoritos</Card.Footer>
                         </Card>
                     </Link>
-                    <Link to="/lists/vistas" className="linkList">
+                    <Link to="/lists/vista" className="linkList">
                         <Card className="animated flipInY" style={{ width: 300, margin: 50 }}>
                             <Card.Body>
                                 <VisibilityOffRoundedIcon className="mx-auto" style={{ fontSize: 250 }} />
@@ -39,7 +39,7 @@ export default class Movies extends Component {
                             <Card.Footer className="text-muted" style={{textAlign: "center"}}>Vistos</Card.Footer>
                         </Card>
                     </Link>
-                    <Link to="/lists/pendintes" className="linkList">
+                    <Link to="/lists/pendiente" className="linkList">
                         <Card className="animated flipInY" style={{ width: 300, margin: 50 }}>
                             <Card.Body>
                                 <VisibilityRoundedIcon className="mx-auto" style={{ fontSize: 250 }} />

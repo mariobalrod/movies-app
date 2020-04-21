@@ -16,17 +16,20 @@ router.post('/', async (req, res) => {
         type: type
     });
 
-    await newMovie.save();
+    await newMovie.save()
+        .then(newMovie => console.log(`${newMovie.movie_id} saved!`))
+        .catch(err => console.log(err))
 });
 
 // Todo: Obetener Peliculas por TYPE
 // @route GET /api/movies/:type
 // @desc  obtener pelis por categoria
 // @acces auth PUBLIC
-router.get('/:type', async (req, res) => {
+router.get('/:type/:user', async (req, res) => {
     const type = req.params.type;
-    const movies = await Movie.find({type: type});
-
+    const user = req.params.user;
+    const movies = await Movie.find({type: type, user_id: user});
+    
     res.json(movies);
 });
 
@@ -35,7 +38,7 @@ router.get('/:type', async (req, res) => {
 // @desc  obtener pelis por categoria
 // @acces auth PUBLIC
 router.delete('/:id', async (req, res) => {
-    await Movie.findByIdAndDelete(req.params.id);
+    await Movie.findByIdAndDelete(req.params.id)
     res.send('Deleted!');
 });
 

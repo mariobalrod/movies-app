@@ -22,7 +22,7 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-        fetch(`${this.apiUrl}trending/movie/day?api_key=${this.apiKey}`)
+        fetch(`${this.apiUrl}trending/all/day?api_key=${this.apiKey}`)
             .then(data => data.json())
             .then(data => {
                 this.setState({ movies: [...data.results] });
@@ -54,7 +54,7 @@ export default class Home extends Component {
                         <div>
                             <h1 style={{textAlign: "center"}}>Popular Movies</h1>
                             <SearchBar handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
-                            <MoviesContainer movies={this.state.movies} />
+                            <MoviesContainer currentUser={this.props.currentUser} movies={this.state.movies} />
                             {/* < MovieForm currentUser={this.props.currentUser}/> */}
                         </div>
                     ) : (
