@@ -2,12 +2,9 @@ const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
 const MovieSchema = new Schema({
-    title: {type: String, required: true},
-    description: {type: String, required: true},
-    director: {type: String, required: false},
-    puntuacion: {type: Number, required: true},
-    imgUrl: {type: String},
-    dateAdded: {type: Date, default: Date.now}
+    movie_id: {type: String, required: true},
+    user_id: {type: String, required: true},
+    type: {type: String, required: true}
 });
 
 module.exports = model('Movie', MovieSchema);
