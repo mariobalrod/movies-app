@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import RangeSlider from 'react-bootstrap-range-slider';
 
 // Components
-import Messages from './Messages';
+import Messages from '../partials/Messages';
 
 export default class MovieForm extends Component {
 

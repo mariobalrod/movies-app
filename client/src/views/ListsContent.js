@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import { API_KEY, API_URL } from '../Config';
+import { API_KEY, API_URL } from '../helpers/Config';
 
 
-import MoviesContainer from '../components/MoviesConainer';
+import MoviesContainer from '../components/movies/MoviesConainer';
 
 class ListsContent extends Component {
     constructor () {
@@ -17,21 +17,26 @@ class ListsContent extends Component {
     }
 
     componentDidMount() {
+
+        if(!this.props.currentUser) {
+            this.props.history.push('/');
+        }
+
         const moviesAdded = [];
         
         const type = this.props.match.params.type;
         const user = this.props.currentUser._id;
         
         axios.get(`/api/movies/${type}/${user}`)
-            .then (data => {
+            .then (function (data) {
                 const ids = data.data.map((movie, index) => {
                     const movie_id = movie.movie_id;
-                    return { key: index, movie_id }
+                    return { key: index, movie_id };
                 });
 
-                ids.map(id => {
+                ids.map(function (id) {
                     axios.get(`${this.apiUrl}movie/${id.movie_id}?api_key=${this.apiKey}`)
-                        .then(movie => {
+                        .then(function(movie) {
                             moviesAdded.push(movie.data)
                             this.setState({
                                 movies: moviesAdded
@@ -43,6 +48,7 @@ class ListsContent extends Component {
                 });
             })
             .catch(err => console.log(err));
+
     }
     
     render() {

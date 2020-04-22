@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Switch, Route } from "react-router-dom";
 
-import httpClient from './httpClient'
+import httpClient from './helpers/httpClient'
 
 // Components
-import NavBar from './components/Navbar';
-import Footer from './components/Footer';
+import NavBar from './components/partials/Navbar';
+import Footer from './components/partials/Footer';
 
 // Views
 import Home from './views/Home';

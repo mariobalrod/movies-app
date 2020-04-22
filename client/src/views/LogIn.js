@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-import httpClient from '../httpClient';
+import httpClient from '../helpers/httpClient';
 
-import Messages from '../components/Messages';
+import Messages from '../components/partials/Messages';
 
 export default class LogIn extends Component {
 

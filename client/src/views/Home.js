@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
 
-import { API_KEY, API_URL } from '../Config';
+import { API_KEY, API_URL } from '../helpers/Config';
 
 // Componentes
 /* import MovieForm from '../components/MovieForm'; */
-import SearchBar from '../components/SearchBar';
-import MoviesContainer from '../components/MoviesConainer';
+import SearchBar from '../components/partials/SearchBar';
+import MoviesContainer from '../components/movies/MoviesConainer';
 
 export default class Home extends Component {
 
