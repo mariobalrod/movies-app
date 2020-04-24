@@ -1,81 +1,19 @@
 const express = require('express');
 const router = express.Router();
 
-const Movie = require('../models/Movie');
+const {
+    getAllMovies, getMovieById, createMovie, updateMovie, deleteMovie
+} = require('../controllers/movies.controllers');
 
 // Obtener todos las peliculas
-router.get('/', async (req, res) => {
-    const movies = await Movie.find();
-    res.json(movies);
-});
-
+router.get('/', getAllMovies);
 // Obtener Una Pelicula por id
-router.get('/:id', async (req, res) => {
-    const movie = await Movie.findById(req.params.id);
-    res.json(movie);
-});
-
+router.get('/:id', getMovieById);
 // Crear Pelicula
-router.post('/', async (req, res) => {
-    const { title, description, director, puntuacion, imgUrl } = req.body;
-
-    if(director) {
-        if(imgUrl) {
-            // Las dos
-            const newMovie = new Movie({ title, description, director, puntuacion, imgUrl });
-            await newMovie.save();
-            res.json(newMovie);
-        } else {
-            // Solo director
-            const newMovie = new Movie({ title, description, director, puntuacion });
-            await newMovie.save();
-            res.json(newMovie);
-        }
-    } else {
-        if(imgUrl) {
-            // Solo imagen
-            const newMovie = new Movie({ title, description, puntuacion, imgUrl });
-            await newMovie.save();
-            res.json(newMovie);
-        } else {
-            // Ninguna
-            const newMovie = new Movie({ title, description, puntuacion });
-            await newMovie.save();
-            res.json(newMovie);
-        }
-    }
-
-});
-
+router.post('/', createMovie);
 // Modificar Pelicula
-router.put('/:id', async (req, res) => {
-    const { title, description, director, puntuacion, imgUrl } = req.body;
-
-    if(director) {
-        if(imgUrl) {
-            // Las dos
-            await Movie.findByIdAndUpdate(req.params.id, { title, description, director, puntuacion, imgUrl });
-        } else {
-            // Solo director
-            await Movie.findByIdAndUpdate(req.params.id, { title, description, director, puntuacion });
-        }
-    } else {
-        if(imgUrl) {
-            // Solo imagen
-            await Movie.findByIdAndUpdate(req.params.id, { title, description, puntuacion, imgUrl });
-        } else {
-            // Ninguna
-            await Movie.findByIdAndUpdate(req.params.id, { title, description, puntuacion });
-        }
-    }
-
-    res.json(await Movie.findById(req.params.id));
-});
-
+router.put('/:id', updateMovie);
 // Eliminar Pelicula
-router.delete('/:id', async (req, res) => {
-    await Movie.findByIdAndDelete(req.params.id);
-    res.send('Deleted!');
-});
+router.delete('/:id', deleteMovie);
 
 module.exports = router;
