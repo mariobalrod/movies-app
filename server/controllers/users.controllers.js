@@ -8,10 +8,13 @@ const validateLoginInput = require("../validator/login");
 
 const User = require('../models/User');
 
-// @route POST /api/users/login
-// @desc  Login an User
-// @acces PUBLIC
-// @return LoginUser and JWT Token
+/**
+ * Login an User
+ * 
+ * @param object req
+ * @param object res
+ * @return LoginUser and JWT Token
+ */
 async function login(req, res) {
 
     // Form validation
@@ -107,7 +110,6 @@ async function registerUser(req, res) {
 
 }
 
-// Modificar Usuario
 async function updateUser(req, res) {
     const { username, email, password, newPassword, newConfirmPassword } = req.body;
     const errors = [];
