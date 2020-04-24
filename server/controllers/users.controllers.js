@@ -183,3 +183,12 @@ async function deleteUser(req, res) {
     await User.findByIdAndDelete(req.params.id);
     res.send('Deleted!');
 }
+
+module.exports = {
+    login,
+    registerUser,
+    updateUser,
+    getAllUsers,
+    getUserById,
+    deleteUser,
+}
