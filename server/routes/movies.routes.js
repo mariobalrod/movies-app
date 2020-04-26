@@ -7,7 +7,7 @@ const Movie = require('../models/Movie');
 // @route POST /api/movies
 // @desc  create movie
 // @acces auth PUBLIC
-router.post('/', async (req, res) => {
+router.post('/add', async (req, res) => {
     const { movie_id, user_id, type } = req.body;
 
     const newMovie = new Movie({

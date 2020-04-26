@@ -19,7 +19,7 @@ const MovieCard = (props) => {
                         <Nav.Link href="#" onClick={() => {
                                 axios({
                                     method: 'POST',
-                                    url: '/api/movies',
+                                    url: '/api/movies/add',
                                     data: {
                                         movie_id: props.id,
                                         user_id: props.currentUser._id,
@@ -35,7 +35,7 @@ const MovieCard = (props) => {
                     <Nav.Link href="#" onClick={() => {
                                 axios({
                                     method: 'POST',
-                                    url: '/api/movies',
+                                    url: '/api/movies/add',
                                     data: {
                                         movie_id: props.id,
                                         user_id: props.currentUser._id,
@@ -51,7 +51,7 @@ const MovieCard = (props) => {
                         <Nav.Link href="#" onClick={() => {
                                 axios({
                                     method: 'POST',
-                                    url: '/api/movies',
+                                    url: '/api/movies/add',
                                     data: {
                                         movie_id: props.id,
                                         user_id: props.currentUser._id,

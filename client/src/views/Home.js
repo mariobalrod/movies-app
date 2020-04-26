@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
 
-import { API_KEY, API_URL } from '../helpers/Config';
+import { searchMovies } from '../helpers/tmdbConfig';
 
 // Componentes
-/* import MovieForm from '../components/MovieForm'; */
+import PaginationCom from '../components/partials/PaginationCom'
 import SearchBar from '../components/partials/SearchBar';
 import MoviesContainer from '../components/movies/MoviesConainer';
 
@@ -17,28 +17,23 @@ export default class Home extends Component {
             movies: [],
             searchTerm: ''
         }
-        this.apiKey = API_KEY;
-        this.apiUrl = API_URL;
     }
 
     componentDidMount() {
-        fetch(`${this.apiUrl}trending/all/day?api_key=${this.apiKey}`)
+        fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=cde4373ea73cf275153e270dc7a886c2`)
             .then(data => data.json())
             .then(data => {
+                console.log(data)
                 this.setState({ movies: [...data.results] });
+                console.log(this.state.movies)
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err));
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-
-        fetch(`${this.apiUrl}search/movie?api_key=${this.apiKey}&query=${this.state.searchTerm}`)
-            .then(data => data.json())
-            .then(data => {
-                this.setState({ movies: [...data.results] });
-            })
-            .catch(err => console.log(err))
+        const moviesFinded = searchMovies(this.state.searchTerm);
+        this.setState({ movies: moviesFinded });
     }
 
     handleChange = (e) => {
@@ -46,16 +41,18 @@ export default class Home extends Component {
     }
 
     render () {
+        
         return (
             <div>
                 { 
                     (this.props.currentUser)
                     ? (
                         <div>
+                            { false && 'Hello'}
                             <h1 style={{textAlign: "center"}}>Popular Movies</h1>
                             <SearchBar handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
                             <MoviesContainer currentUser={this.props.currentUser} movies={this.state.movies} />
-                            {/* < MovieForm currentUser={this.props.currentUser}/> */}
+                            <PaginationCom />
                         </div>
                     ) : (
                         <Card className="mx-auto my-5 text-center animated flipInY" style={{width: 700}}>

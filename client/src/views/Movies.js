@@ -8,8 +8,8 @@ import VisibilityRoundedIcon from '@material-ui/icons/VisibilityRounded';
 
 export default class Movies extends Component {
 
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
         this.state = {}
     }
 
