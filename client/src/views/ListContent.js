@@ -6,7 +6,7 @@ import SearchBar from '../components/partials/SearchBar';
 import MoviesContainer from '../components/movies/MoviesConainer';
 
 
-const ListContentTest = (props) => {
+const ListContent = (props) => {
 
     const [Movies, setMovies] = useState([]);
     const [Title, setTitle] = useState('');
@@ -15,28 +15,20 @@ const ListContentTest = (props) => {
     useEffect(() => {
         const type = props.match.params.type;
         const user = props.currentUser._id;
-
         establecerTitulo();
-
-        establecerPeliculas(type, user)
-        
+        fetchMoviesList(type, user)
     }, [])
 
-    const establecerPeliculas = async (type, user) => {
+    // ==================================================================================================================
+    // Obtener todas las Peliculas por Tipo
+    const fetchMoviesList = async (type, user) => {
         const idsArray = await fetchIds(type, user);
-        /* const temp = await idsArray.map(async id => {
-            const movie = await fetchMovieById(id.idM);
-            console.log(movie)
-            return movie;
-        }) */
-        const temp = [];
+        const helper = [];
         for(let i =0; i<idsArray.length; i++) {
             const movie = await fetchMovieById(idsArray[i].idM);
-            temp.push(movie);
+            helper.push(movie);
         }
-        setMovies(temp);
-        
-        console.log(Movies)
+        setMovies(helper);
     }
     
     // ==================================================================================================================
@@ -60,7 +52,6 @@ const ListContentTest = (props) => {
         setSearchTerm(e.target.value);
     }
 
-
     // ==================================================================================================================
     // Todo: Componente
     return (
@@ -72,4 +63,4 @@ const ListContentTest = (props) => {
     );
 }
 
-export default ListContentTest;
+export default ListContent;
