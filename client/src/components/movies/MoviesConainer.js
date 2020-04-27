@@ -5,11 +5,21 @@ const MoviesContainer = (props) => {
     return (
         <div className="container1">
             <div className="container2">
-                {     
+                {      
                     props.movies.map((movie, i) => {
-                        console.log('LLEGA')
                         return (
-                            <MovieCard key={i} image={movie.poster_path} adult={movie.adult} id={movie.id} currentUser={props.currentUser} />
+                            (movie.poster_path) 
+
+                            ? 
+                                <MovieCard 
+                                    key={i} 
+                                    image={movie.poster_path} 
+                                    id={movie.id} 
+                                    currentUser={props.currentUser} 
+                                /> 
+                            : 
+                                ''
+
                         )
                     })
                 }

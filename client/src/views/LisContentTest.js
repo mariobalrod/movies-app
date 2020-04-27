@@ -1,6 +1,6 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import { searchMovies, fetchSomeMoviesById } from '../helpers/tmdbConfig';
+import { searchMovies, fetchIds, fetchMovieById } from '../helpers/tmdbConfig';
 
 import SearchBar from '../components/partials/SearchBar';
 import MoviesContainer from '../components/movies/MoviesConainer';
@@ -12,17 +12,27 @@ const ListContentTest = (props) => {
     const [Title, setTitle] = useState('');
     const [SearchTerm, setSearchTerm] = useState('');
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         const type = props.match.params.type;
         const user = props.currentUser._id;
 
         establecerTitulo();
 
-        const moviesFinded = fetchSomeMoviesById(type, user);
-
-        setMovies([moviesFinded])
-
+        establecerPeliculas(type, user)
+        
     }, [])
+
+    const establecerPeliculas = async (type, user) => {
+        const idsArray = await fetchIds(type, user);
+
+        idsArray.map(async id => {
+            const movie = await fetchMovieById(id.idM);
+            console.log(movie)
+            setMovies([...Movies, movie]);
+        })
+        
+        console.log(Movies)
+    }
     
     // ==================================================================================================================
     // Establecer el TITULO
@@ -35,9 +45,9 @@ const ListContentTest = (props) => {
     
     // ==================================================================================================================
     // BUSCADOR
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const moviesFinded = searchMovies(SearchTerm);
+        const moviesFinded = await searchMovies(SearchTerm);
         setMovies([...moviesFinded]);
     }
 

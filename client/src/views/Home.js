@@ -30,9 +30,9 @@ export default class Home extends Component {
             .catch(err => console.log(err));
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        const moviesFinded = searchMovies(this.state.searchTerm);
+        const moviesFinded = await searchMovies(this.state.searchTerm);
         this.setState({ movies: moviesFinded });
     }
 

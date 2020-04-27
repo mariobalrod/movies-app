@@ -5,48 +5,27 @@ const apiKey = 'cde4373ea73cf275153e270dc7a886c2';
 const axios = require('axios');
 
 
-async function fetchMovieById (id) {
-    fetch(`${apiUrl}movie/${id}?api_key=${apiKey}&language=en-US`)
-        .then(data => data.json())
-        .then(data =>  {
-            return data;
-        })
-        .catch(err => console.log(err));
+const fetchMovieById = async function(id) {
+    const movie = await axios.get(`${apiUrl}movie/${id}?api_key=${apiKey}&language=en-US`);
+    return movie.data;
 }
 
-async function searchMovies(searchTerm) {
-    const movies = [];
-    axios.get(`${apiUrl}search/movie?api_key=${apiKey}&query=${searchTerm}
-            &language=en-US&include_adult=false`)
-        .then(data => {
-            console.log(data.data.results)
-            movies.push(data.data.results);
-        })
-        .catch(err => console.log(err));
-    return movies;
+const searchMovies = async function(searchTerm) {
+    const movies = await axios.get(`${apiUrl}search/movie?api_key=${apiKey}&query=${searchTerm}&language=en-US&include_adult=false`);
+    return movies.data.results;
 }
 
-async function fetchSomeMoviesById(type, user) {
-
-    // Search own mongodb -> return Array(Movies)
+const fetchIds = async function(type, user) {
     const moviesDb = await axios.get(`/api/movies/${type}/${user}`);
-
-    // Extract movies_id of moviesDb Array
     const ids = moviesDb.data.map(movie => {
-        return movie.id_movie
+        const idM = movie.movie_id;
+        return {idM}
     });
-
-    // Get movies list
-    const movies = ids.map(id => {
-        const movie = fetchMovieById(id);
-        return {movie};
-    });
-
-    return movies;
+    return ids;
 }
 
 module.exports = {
-    fetchMovieById,
     searchMovies,
-    fetchSomeMoviesById
+    fetchMovieById,
+    fetchIds
 }
