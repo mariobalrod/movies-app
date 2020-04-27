@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-// Todo: Actions Movies with my API routes
+// Todo: Actions for moovies of my API routes
 
 const addMovie = function(movie_id, user_id, type) {
     axios({
@@ -22,7 +22,14 @@ const deleteMovie = function(movie_id, user_id) {
         .catch(err => console.log(err))
 }
 
+const getMoviesByType = async function(type, user) {
+    const movies = axios.get(`/api/movies/${type}/${user}`)
+    return movies;
+}
+
+
 module.exports = {
     addMovie,
-    deleteMovie
+    deleteMovie,
+    getMoviesByType
 }

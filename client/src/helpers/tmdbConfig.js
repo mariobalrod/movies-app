@@ -2,6 +2,8 @@
 const apiUrl = 'https://api.themoviedb.org/3/';
 const apiKey = 'cde4373ea73cf275153e270dc7a886c2';
 
+const { getMoviesByType } = require('./moviesActions');
+
 const axios = require('axios');
 
 // Find a movie by a Themoviedb Id
@@ -19,7 +21,8 @@ const searchMovies = async function(searchTerm) {
 // Find movies (own API) by type and User. 
 // @return array with ThemovieDb Ids
 const fetchIds = async function(type, user) {
-    const moviesDb = await axios.get(`/api/movies/${type}/${user}`);
+    const moviesDb = await getMoviesByType(type, user);
+    
     const ids = moviesDb.data.map(movie => {
         const idM = movie.movie_id;
         return {idM}
