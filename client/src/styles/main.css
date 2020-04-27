@@ -74,8 +74,8 @@ body {
 
 .cardMovie img {
     padding: 0;
-    width: 185px;
-    height: 278px;
+    width: 220px;
+    height: 300px;
 }
 
 /* Links Cards */
@@ -88,4 +88,14 @@ body {
 .linkList:hover {
     text-decoration: none;
     color: rgb(61, 61, 61);
+}
+
+.delete {
+    text-decoration: none;
+    color: rgb(255, 2, 2);
+}
+
+.delete :hover {
+    text-decoration: none;
+    color: rgb(146, 0, 0);
 }
