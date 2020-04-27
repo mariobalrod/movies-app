@@ -1,7 +1,7 @@
 import React from 'react';
 import {Nav} from 'react-bootstrap'
 
-import { addMovie } from '../../helpers/moviesActions';
+import { addMovie, deleteMovie } from '../../helpers/moviesActions';
 
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
@@ -38,7 +38,7 @@ const MovieNavMenu = (props) => {
                     (props.owner)
                     ? (
                         <Nav.Item>
-                            <Nav.Link href="#" onClick={() => addMovie(movie_id, user_id, 'favorita')} >
+                            <Nav.Link href="#" onClick={() => deleteMovie(movie_id, user_id)} >
                                 <DeleteForeverIcon className="delete" style={{ fontSize: 20 }} />
                             </Nav.Link>
                         </Nav.Item>

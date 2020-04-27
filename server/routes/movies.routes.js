@@ -40,9 +40,12 @@ router.get('/:type/:user', async (req, res) => {
 // @route GET /api/movies/:type
 // @desc  obtener pelis por categoria
 // @acces auth PUBLIC
-router.delete('/:id', async (req, res) => {
-    await Movie.findByIdAndDelete(req.params.id)
-    res.send('Deleted!');
+router.delete('/delete', async (req, res) => {
+    const { movie_id, user_id } = req.body;
+    const movie = await Movie.findOne({movie_id: movie_id, user_id: user_id});
+    const id = movie._id;
+    await Movie.findByIdAndDelete(id);
+    res.json({success: true, msg: "Pelicula Eliminada"});
 });
 
 

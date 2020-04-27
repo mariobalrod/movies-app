@@ -15,7 +15,8 @@ const MoviesContainer = (props) => {
                                     key={i} 
                                     image={movie.poster_path} 
                                     id={movie.id} 
-                                    currentUser={props.currentUser} 
+                                    currentUser={props.currentUser}
+                                    type={props.type}
                                 /> 
                             : 
                                 ''

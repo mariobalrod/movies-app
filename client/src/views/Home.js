@@ -51,7 +51,7 @@ export default class Home extends Component {
                             { false && 'Hello'}
                             <h1 style={{textAlign: "center"}}>Popular Movies</h1>
                             <SearchBar handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
-                            <MoviesContainer currentUser={this.props.currentUser} movies={this.state.movies} />
+                            <MoviesContainer currentUser={this.props.currentUser} movies={this.state.movies} type={false} />
                             <PaginationCom />
                         </div>
                     ) : (
