@@ -1,71 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
-const Movie = require('../models/Movie');
+const {
+    getAllMovies, 
+    getMovieById, 
+    createMovie, 
+    updateMovie, 
+    deleteMovie,
+    getMoviesByType
+} = require('../controllers/movies.controllers');
 
-// Todo: Crear Pelicula y asignarlo a Lista/Categoria
-// @route POST /api/movies
-// @desc  create movie
-// @acces auth PUBLIC
-router.post('/add', async (req, res) => {
-    const { movie_id, user_id, type } = req.body;
-
-    const newMovie = new Movie({
-        movie_id: movie_id,
-        user_id: user_id,
-        type: type
-    });
-
-    newMovie
-        .save()
-        .then(movie => {
-            res.json({success: true, msg: "Pelicula Listada"})
-        })
-        .catch(err => console.log(err));
-});
-
-// Todo: Obetener Peliculas por TYPE
-// @route GET /api/movies/:type
-// @desc  obtener pelis por categoria
-// @acces auth PUBLIC
-router.get('/:type/:user', async (req, res) => {
-    const type = req.params.type;
-    const user = req.params.user;
-    const movies = await Movie.find({type: type, user_id: user});
-    
-    res.json(movies);
-});
-
-// Todo: Eliminar Pelicula mediante Id de Mongodb
-// @route GET /api/movies/:type
-// @desc  obtener pelis por categoria
-// @acces auth PUBLIC
-router.delete('/delete', async (req, res) => {
-    const { movie_id, user_id } = req.body;
-    const movie = await Movie.findOne({movie_id: movie_id, user_id: user_id});
-    const id = movie._id;
-    await Movie.findByIdAndDelete(id);
-    res.json({success: true, msg: "Pelicula Eliminada"});
-});
-
-
-//===============================================================================================================
-
-//                                   Acciones Generales
-
-//===============================================================================================================
-
-// Todo: Obtener todos las peliculas
-router.get('/', async (req, res) => {
-    const movies = await Movie.find();
-    res.json(movies);
-});
-
-// Todo: Obtener Una Pelicula por Id de Mongodb
-router.get('/:id', async (req, res) => {
-    const movie = await Movie.findById(req.params.id);
-    res.json(movie);
-});
-
+router.get('/', getAllMovies);
+router.get('/:id', getMovieById);
+router.get('/:type/:user', getMoviesByType);
+router.post('/add', createMovie);
+router.put('/:id', updateMovie);
+router.delete('/delete', deleteMovie);
 
 module.exports = router;

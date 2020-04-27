@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
+const routes = require('./routes');
 
 require('dotenv').config();
 
@@ -20,7 +21,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // TODO: ROUTES
-app.use('/api/users', require('./routes/users.routes'));
-app.use('/api/movies', require('./routes/movies.routes'));
+app.use('/api', routes);
 
 module.exports = app;
