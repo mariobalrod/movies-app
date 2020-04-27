@@ -1,25 +1,17 @@
-import axios from 'axios';
+const axios = require('axios');
 
-const moviesActions = {};
+// Todo: Actions Movies with my API routes
 
-moviesActions.addMovie = (data) => {
-    axios.post('/api/movies', data)
-        .catch(err => console.log(err))
+const addMovie = function(movie_id, user_id, type) {
+    axios({
+        method: 'POST',
+        url: '/api/movies/add',
+        data: {movie_id, user_id, type}
+    })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
 }
 
-moviesActions.getMovies = (type, user) => {
-    axios.get(`/api/movies/${type}/${user}`)
-        .then(data => {
-            const movies = data.data;
-            console.log(movies)
-            return movies;
-        })
-        .catch(err => console.log(err))
+module.exports = {
+    addMovie
 }
-
-moviesActions.deleteMovie = (data) => {
-    axios.delete(`/api/movies/${data}`)
-        .catch(err => console.log(err))
-}
-
-export default moviesActions;
