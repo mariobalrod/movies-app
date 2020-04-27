@@ -16,9 +16,12 @@ router.post('/add', async (req, res) => {
         type: type
     });
 
-    await newMovie.save()
-        .then(newMovie => console.log(`${newMovie.movie_id} saved!`))
-        .catch(err => console.log(err))
+    newMovie
+        .save()
+        .then(movie => {
+            res.json({success: true, msg: "Pelicula Listada"})
+        })
+        .catch(err => console.log(err));
 });
 
 // Todo: Obetener Peliculas por TYPE

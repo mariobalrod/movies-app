@@ -24,8 +24,17 @@ const fetchIds = async function(type, user) {
     return ids;
 }
 
+const fetchSomeMoviesByIds = async function(ids) {
+    const movies = await ids.map(async id => {
+        const movie = await fetchMovieById(id.idM);
+        return movie
+    });
+    return movies;
+}
+
 module.exports = {
     searchMovies,
     fetchMovieById,
-    fetchIds
+    fetchIds,
+    fetchSomeMoviesByIds
 }

@@ -24,12 +24,17 @@ const ListContentTest = (props) => {
 
     const establecerPeliculas = async (type, user) => {
         const idsArray = await fetchIds(type, user);
-
-        idsArray.map(async id => {
+        /* const temp = await idsArray.map(async id => {
             const movie = await fetchMovieById(id.idM);
             console.log(movie)
-            setMovies([...Movies, movie]);
-        })
+            return movie;
+        }) */
+        const temp = [];
+        for(let i =0; i<idsArray.length; i++) {
+            const movie = await fetchMovieById(idsArray[i].idM);
+            temp.push(movie);
+        }
+        setMovies(temp);
         
         console.log(Movies)
     }

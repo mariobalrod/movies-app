@@ -14,7 +14,7 @@ import Profile from './views/Profile';
 import LogIn from './views/LogIn';
 import LogOut from './views/LogOut';
 import SignUp from './views/SignUp';
-import ListsContentTest from './views/LisContentTest';
+import ListConstent from './views/ListContent';
 
 class App extends Component {
 
@@ -65,7 +65,7 @@ class App extends Component {
                         }}/> 
 
                         <Route exact path="/lists/:type" render={(props) => {
-                            return <ListsContentTest {...props} currentUser={currentUser} />
+                            return <ListConstent {...props} currentUser={currentUser} />
                         }} />                   
 
                         <Route path="/profile" render={(props) => {
