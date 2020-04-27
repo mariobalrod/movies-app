@@ -45,23 +45,23 @@ const MovieNavMenu = (props) => {
                         </Nav>
                     ) : (
 
-                        <Nav className="navigation">
+                        <Nav className="navigation ml-3">
 
                             <Nav.Item>
                                 <Nav.Link href="#" onClick={() => addMovie(movie_id, user_id, 'pendiente')}>
-                                    <VisibilityIcon style={{ fontSize: 20 }} className="linkList"/>
+                                    <VisibilityIcon style={{ fontSize: 25 }} className="linkList"/>
                                 </Nav.Link>
                             </Nav.Item >
 
                             <Nav.Item>
                                 <Nav.Link href="#" onClick={() => addMovie(movie_id, user_id, 'vista')} >
-                                    <VisibilityOffIcon style={{ fontSize: 20 }} className="linkList" />
+                                    <VisibilityOffIcon style={{ fontSize: 25 }} className="linkList" />
                                 </Nav.Link>
                             </Nav.Item>
 
                             <Nav.Item>
                                 <Nav.Link href="#" onClick={() => addMovie(movie_id, user_id, 'favorita')} >
-                                    <StarIcon style={{ fontSize: 20 }} className="linkList" />
+                                    <StarIcon style={{ fontSize: 25 }} className="linkList" />
                                 </Nav.Link>
                             </Nav.Item>
 
