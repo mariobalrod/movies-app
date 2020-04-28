@@ -23,25 +23,7 @@ body {
 .container2 {
     display: flex;
     position: relative;
-    width: 80%;
-    border: 1px solid transparent;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.container1-2 {
-    display: flex;
-    position: relative;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-.container2-2 {
-    display: flex;
-    position: relative;
-    width: 100%;
+    width: 70%;
     border: 1px solid transparent;
     align-items: center;
     justify-content: center;
@@ -50,16 +32,41 @@ body {
 
 /* Style of Cards */
 
-.cardMovie {
+.cardCustom {
+    max-height: 300px;
+    max-width: 185px;
+    padding: 0;
     margin: 20px;
     margin-top: 50px;
+}
+
+.cardFooter {
+    max-width: 120px;
+    max-height: 30px;
+}
+
+.titleMovie {
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    opacity: 0;
+}
+
+.titleMovie:hover {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.507);
+}
+
+.cardCustom:hover .titleMovie {
+    opacity: 1;
 }
 
 .cardMovie div {
     opacity: 0;
 }
 
-.cardMovie:hover div {
+.cardCustom:hover div {
     opacity: 1;
 }
 
@@ -68,26 +75,18 @@ body {
     top: 140px;
     left: 55px;
     opacity: 0;
-}
-
-.cardMovie:hover .moreInfo {
-    opacity: 1;
-}
-
-.moreInfo {
     color: rgb(71, 71, 71);
+}
+
+.cardCustom:hover .moreInfo {
+    opacity: 1;
 }
 
 .moreInfo:hover {
     color: rgb(31, 31, 31);
 }
 
-/* .cardMovie img:hover {
-    width: 200px;
-    height: 300px;
-}
- */
- .cardMovie:hover img {
+.cardCustom:hover img {
     opacity: 0.5;
 }
 

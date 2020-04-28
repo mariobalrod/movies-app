@@ -23,7 +23,7 @@ const MovieDetails = (props) => {
             <MovieOverviewCard 
                 id={props.match.params.id} 
                 poster_path={movie.poster_path} 
-                title={movie.title} 
+                title={movie.original_title} 
                 overview={movie.overview} 
                 vote_average={movie.vote_average} 
                 vote_count={movie.vote_count} 
