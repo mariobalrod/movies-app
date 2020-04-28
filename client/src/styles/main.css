@@ -23,7 +23,25 @@ body {
 .container2 {
     display: flex;
     position: relative;
-    width: 75%;
+    width: 80%;
+    border: 1px solid transparent;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.container1-2 {
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.container2-2 {
+    display: flex;
+    position: relative;
+    width: 100%;
     border: 1px solid transparent;
     align-items: center;
     justify-content: center;
@@ -33,7 +51,8 @@ body {
 /* Style of Cards */
 
 .cardMovie {
-    margin: 20px
+    margin: 20px;
+    margin-top: 50px;
 }
 
 .cardMovie div {
@@ -47,7 +66,7 @@ body {
 .moreInfo {
     position: absolute;
     top: 140px;
-    left: 70px;
+    left: 55px;
     opacity: 0;
 }
 
@@ -72,12 +91,6 @@ body {
     opacity: 0.5;
 }
 
-.cardMovie img {
-    padding: 0;
-    width: 220px;
-    height: 300px;
-}
-
 /* Links Cards */
 
 .linkList {
@@ -98,4 +111,23 @@ body {
 .delete :hover {
     text-decoration: none;
     color: rgb(146, 0, 0);
+}
+
+
+/**--------------------------------**/
+
+.overviewCard {
+    width: 900px;
+    border: 1px solid rgba(0, 0, 0, 0.233);
+    box-shadow: 0 3px 20px -6px black;
+    border-radius: 1%;
+}
+
+.overviewCard a {
+    color: black;
+    text-decoration: none;
+}
+
+.overviewCard a:hover {
+    color: rgba(0, 0, 0, 0.527);
 }

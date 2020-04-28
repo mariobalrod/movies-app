@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://localhost:5000/",
+  "proxy": "http://localhost:5000/",
   "dependencies": {
     "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^4.9.1",
@@ -16,8 +16,10 @@
     "react-bootstrap": "^1.0.0",
     "react-bootstrap-range-slider": "^0.3.1",
     "react-dom": "^16.13.1",
+    "react-rating": "^2.0.5",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "styled-components": "^5.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
