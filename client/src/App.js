@@ -15,6 +15,7 @@ import LogIn from './views/LogIn';
 import LogOut from './views/LogOut';
 import SignUp from './views/SignUp';
 import ListConstent from './views/ListContent';
+import MovieDetails from './views/MovieDetails';
 
 class App extends Component {
 
@@ -70,6 +71,10 @@ class App extends Component {
 
                         <Route path="/profile" render={(props) => {
                             return <Profile {...props} currentUser={currentUser} />
+                        }} />
+
+                        <Route path="/overview" render={(props) => {
+                            return <MovieDetails {...props} currentUser={currentUser} />
                         }} />
 
                     </Switch>
