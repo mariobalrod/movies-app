@@ -73,7 +73,7 @@ class App extends Component {
                             return <Profile {...props} currentUser={currentUser} />
                         }} />
 
-                        <Route path="/overview" render={(props) => {
+                        <Route path="/overview/:id" render={(props) => {
                             return <MovieDetails {...props} currentUser={currentUser} />
                         }} />
 
