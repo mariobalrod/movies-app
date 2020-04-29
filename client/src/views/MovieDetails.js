@@ -21,6 +21,7 @@ const MovieDetails = (props) => {
     return ( 
         <div>
             <MovieOverviewCard 
+                user={props.currentUser._id}
                 id={props.match.params.id} 
                 poster_path={movie.poster_path} 
                 title={movie.original_title} 

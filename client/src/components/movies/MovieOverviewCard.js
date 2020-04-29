@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Card, Row, Col} from 'react-bootstrap';
 
+import MovieNavMenu from './MovieNavMenu';
+
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 const MovieOverwiewCard = (props) => {
@@ -24,6 +26,9 @@ const MovieOverwiewCard = (props) => {
                     </Col>
                     <Col className="mx-4" sm>
                         <Row className="my-5" >
+                            <div className="mx-auto mb-4">
+                                <MovieNavMenu movie_id={props.id} user_id={props.user} owner={false}/>
+                            </div>
                             <h4 className="mx-auto">{title}</h4>
                             <Card.Text className="mt-3">{descripcion}</Card.Text>  
                             <h1 className="mt-4 mx-auto">{votation}</h1>
