@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import {Card, Row, Col} from 'react-bootstrap';
 
 import MovieNavMenu from './MovieNavMenu';
@@ -7,6 +7,9 @@ import MovieNavMenu from './MovieNavMenu';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 const MovieOverwiewCard = (props) => {
+
+    let history = useHistory();
+
     const image = props.poster_path;
     const title = props.title;
     const descripcion = props.overview;
@@ -15,9 +18,7 @@ const MovieOverwiewCard = (props) => {
     return(       
         <Card className="mx-auto overviewCard mt-5 animated flipInY" style={{width: 700}} sm>
             <Card.Header>
-                <Link to="/">
-                    <KeyboardBackspaceIcon />
-                </Link>
+                <button onClick={() => history.goBack()}><KeyboardBackspaceIcon /></button>
             </Card.Header>
             <Card.Body>
                 <Row>
