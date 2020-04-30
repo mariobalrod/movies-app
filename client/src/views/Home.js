@@ -1,76 +1,76 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
 
-import { searchMovies } from '../helpers/tmdbConfig';
+import { searchMovies, apiKey, apiUrl } from '../helpers/tmdbConfig';
 
 // Componentes
 import PaginationCom from '../components/partials/PaginationCom'
 import SearchBar from '../components/partials/SearchBar';
 import MoviesContainer from '../components/movies/MoviesConainer';
 
-export default class Home extends Component {
+const Home = (props) => {
 
-    constructor () {
-        super();
-        this.state = {
-            movies: [],
-            searchTerm: ''
-        }
-    }
+    const [searchTerm, setSearchTerm] = useState('');
+    const [movies, setMovies] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
 
-    componentDidMount() {
-        fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=cde4373ea73cf275153e270dc7a886c2`)
-            .then(data => data.json())
-            .then(data => {
-                console.log(data)
-                this.setState({ movies: [...data.results] });
-                console.log(this.state.movies)
+    useEffect(() => {
+        const endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=1`;
+        fetchMovies(endpoint)
+    }, []);
+
+    const fetchMovies = (endpoint) => {
+
+        fetch(endpoint)
+            .then(result => result.json())
+            .then(result => {
+                setMovies([...movies, ...result.results])
+                setCurrentPage(result.page)
             })
-            .catch(err => console.log(err));
+            .catch(error => console.error('Error:', error))
+            
     }
 
-    handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const moviesFinded = await searchMovies(this.state.searchTerm);
-        this.setState({ movies: moviesFinded });
+        const moviesFinded = await searchMovies(searchTerm);
+        setMovies([...moviesFinded]);
     }
 
-    handleChange = (e) => {
-        this.setState({ searchTerm: e.target.value })
+    const handleChange = (e) => {
+        setSearchTerm(e.target.value);
     }
 
-    render () {
-        
-        return (
-            <div>
-                { 
-                    (this.props.currentUser)
-                    ? (
-                        <div>
-                            { false && 'Hello'}
-                            <h1 style={{textAlign: "center"}}>Popular Movies</h1>
-                            <SearchBar handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
-                            <MoviesContainer currentUser={this.props.currentUser} movies={this.state.movies} type={false} />
-                            <PaginationCom />
-                        </div>
-                    ) : (
-                        <Card className="mx-auto my-5 text-center animated flipInY" style={{width: 700}}>
-                            <Card.Header><h1>WELCOME</h1></Card.Header>
-                            <Card.Body>
-                                <Card.Title><h5>Your Best Option</h5></Card.Title>
-                                <Card.Text>
-                                    Organizes all your Movies with us.
-                                </Card.Text>
-                                <Link to="/signup"><Button variant="primary">Start</Button></Link>
-                            </Card.Body>
-                            <Card.Footer className="text-muted">Movies App</Card.Footer>
-                        </Card>
-                    )
+    return (
+        <div>
+            { 
+                (props.currentUser)
+                ? (
+                    <div>
+                        { false && 'Hello'}
+                        <h1 style={{textAlign: "center"}}>Popular Movies</h1>
+                        <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} />
+                        <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} />
+                        <PaginationCom />
+                    </div>
+                ) : (
+                    <Card className="mx-auto my-5 text-center animated flipInY" style={{width: 700}}>
+                        <Card.Header><h1>WELCOME</h1></Card.Header>
+                        <Card.Body>
+                            <Card.Title><h5>Your Best Option</h5></Card.Title>
+                            <Card.Text>
+                                Organizes all your Movies with us.
+                            </Card.Text>
+                            <Link to="/signup"><Button variant="primary">Start</Button></Link>
+                        </Card.Body>
+                        <Card.Footer className="text-muted">Movies App</Card.Footer>
+                    </Card>
+                )
 
-                }
-            </div>
-        );
-    }
-
+            }
+        </div>
+    );
 }
+
+export default Home;

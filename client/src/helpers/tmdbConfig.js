@@ -43,5 +43,7 @@ module.exports = {
     searchMovies,
     fetchMovieById,
     fetchIds,
-    fetchSomeMoviesByIds
+    fetchSomeMoviesByIds,
+    apiKey,
+    apiUrl
 }
