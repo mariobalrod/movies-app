@@ -21,7 +21,6 @@ const Home = (props) => {
     }, []);
 
     const fetchMovies = (endpoint) => {
-
         fetch(endpoint)
             .then(result => result.json())
             .then(result => {
@@ -29,7 +28,13 @@ const Home = (props) => {
                 setCurrentPage(result.page)
             })
             .catch(error => console.error('Error:', error))
-            
+    }
+
+    const loadMoreItems = () => {
+        let endpoint = '';
+        console.log('CurrentPage', currentPage)
+        endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=${currentPage + 1}`;
+        fetchMovies(endpoint);
     }
 
     const handleSubmit = async (e) => {
@@ -52,7 +57,7 @@ const Home = (props) => {
                         <h1 style={{textAlign: "center"}}>Popular Movies</h1>
                         <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} />
                         <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} />
-                        <PaginationCom />
+                        <PaginationCom loadMoreItems={loadMoreItems}/>
                     </div>
                 ) : (
                     <Card className="mx-auto my-5 text-center animated flipInY" style={{width: 700}}>

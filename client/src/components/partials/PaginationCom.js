@@ -7,6 +7,7 @@ class PaginationCom extends React.Component {
         super();
         this.state={}
     }
+
     render() {
         return (
             <div className="container" style={{marginTop: 180, marginBottom: 250, width: 400}}>
@@ -20,7 +21,7 @@ class PaginationCom extends React.Component {
                     <Pagination.Item>{5}</Pagination.Item>
                     <Pagination.Ellipsis />
                     <Pagination.Item>{20}</Pagination.Item>
-                    <Pagination.Next />
+                    <Pagination.Next onClick={this.props.loadMoreItems}/>
                     <Pagination.Last />
                 </Pagination>
             </div>
