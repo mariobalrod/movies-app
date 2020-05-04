@@ -13,7 +13,8 @@ const Home = (props) => {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [movies, setMovies] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
     useEffect(() => {
         const endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=1`;
@@ -24,16 +25,38 @@ const Home = (props) => {
         fetch(endpoint)
             .then(result => result.json())
             .then(result => {
-                setMovies([...movies, ...result.results])
-                setCurrentPage(result.page)
+                setMovies(result.results);
+                setCurrentPage(result.page);
+                setTotalPages(result.total_pages);
             })
             .catch(error => console.error('Error:', error))
     }
 
-    const loadMoreItems = () => {
+    const prevPage = () => {
         let endpoint = '';
-        console.log('CurrentPage', currentPage)
-        endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=${currentPage + 1}`;
+        if(currentPage>1){
+            endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=${currentPage - 1}`;
+            fetchMovies(endpoint);
+        }
+    }
+
+    const nextPage = () => {
+        let endpoint = '';
+        if(currentPage<totalPages){
+            endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=${currentPage + 1}`;
+            fetchMovies(endpoint);
+        }
+    }
+
+    const lastPage = () => {
+        let endpoint = '';
+        endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=${totalPages}`;
+        fetchMovies(endpoint);
+    }
+
+    const firstPage = () => {
+        let endpoint = '';
+        endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=${1}`;
         fetchMovies(endpoint);
     }
 
@@ -57,7 +80,7 @@ const Home = (props) => {
                         <h1 style={{textAlign: "center"}}>Popular Movies</h1>
                         <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} />
                         <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} />
-                        <PaginationCom loadMoreItems={loadMoreItems}/>
+                        <PaginationCom prevPage={prevPage} nextPage={nextPage} firstPage={firstPage} lastPage={lastPage}/>
                     </div>
                 ) : (
                     <Card className="mx-auto my-5 text-center animated flipInY" style={{width: 700}}>

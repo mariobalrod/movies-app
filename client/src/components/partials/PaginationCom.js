@@ -10,19 +10,13 @@ class PaginationCom extends React.Component {
 
     render() {
         return (
-            <div className="container" style={{marginTop: 180, marginBottom: 250, width: 400}}>
+            <div className="container" style={{marginTop: 180, marginBottom: 250, width: 200}}>
                 <Pagination className="animated flipInY">
-                    <Pagination.First/>
-                    <Pagination.Prev />
-                    <Pagination.Item>{1}</Pagination.Item>
-                    <Pagination.Item>{2}</Pagination.Item>
-                    <Pagination.Item>{3}</Pagination.Item>
-                    <Pagination.Item>{4}</Pagination.Item>
-                    <Pagination.Item>{5}</Pagination.Item>
+                    <Pagination.First onClick={this.props.firstPage}/>
+                    <Pagination.Prev onClick={this.props.prevPage} />
                     <Pagination.Ellipsis />
-                    <Pagination.Item>{20}</Pagination.Item>
-                    <Pagination.Next onClick={this.props.loadMoreItems}/>
-                    <Pagination.Last />
+                    <Pagination.Next onClick={this.props.nextPage}/>
+                    <Pagination.Last onClick={this.props.lastPage}/>
                 </Pagination>
             </div>
         )
