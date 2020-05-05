@@ -19,6 +19,7 @@ const MoviesContainer = (props) => {
                                     type={props.type}
                                     title={movie.original_title} 
                                     storeToastMessage={props.storeToastMessage}
+                                    deleteToast={props.deleteToast} 
                                 /> 
                             : 
                                 ''

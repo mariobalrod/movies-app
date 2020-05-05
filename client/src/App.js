@@ -39,6 +39,10 @@ class App extends Component {
     storeToastMessage(type) {
         ToastsStore.success(`Añadida a ${type}`);
     }
+    
+    deleteToast() {
+        ToastsStore.error('Eliminada de la lista.');
+    }
 
     render () {
 
@@ -72,7 +76,7 @@ class App extends Component {
                         }}/> 
 
                         <Route exact path="/lists/:type" render={(props) => {
-                            return <ListConstent {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} />
+                            return <ListConstent {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} deleteToast={this.deleteToast} />
                         }} />                   
 
                         <Route path="/profile" render={(props) => {

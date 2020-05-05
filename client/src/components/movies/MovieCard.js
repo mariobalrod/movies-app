@@ -14,6 +14,7 @@ const MovieCard = (props) => {
                     user_id={props.currentUser._id} 
                     owner={props.type}
                     storeToastMessage={props.storeToastMessage}
+                    deleteToast={props.deleteToast} 
                 />
                 <img src={`https://image.tmdb.org/t/p/w185${props.image}`} alt="portada" />
                 <Link to={`/overview/${props.id}`}>

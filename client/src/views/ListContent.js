@@ -58,7 +58,13 @@ const ListContent = (props) => {
             <div>
                 <h1 style={{ textAlign: "center" }}>{Title}</h1>
                 <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} />
-                <MoviesContainer movies={Movies} currentUser={props.currentUser} type={true} storeToastMessage={props.storeToastMessage}/>
+                <MoviesContainer 
+                    movies={Movies} 
+                    currentUser={props.currentUser} 
+                    type={true} 
+                    storeToastMessage={props.storeToastMessage} 
+                    deleteToast={props.deleteToast} 
+                />
             </div>
     );
 }

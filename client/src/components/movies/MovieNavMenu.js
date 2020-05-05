@@ -47,9 +47,10 @@ const MovieNavMenu = (props) => {
                             </Nav.Item>
 
                             <Nav.Item>
-                                <Nav.Link onClick={() => 
-                                    deleteMovie(movie_id, user_id)
-                                }>
+                                <Nav.Link onClick={() => {
+                                    deleteMovie(movie_id, user_id);
+                                    props.deleteToast();
+                                }}>
                                     <DeleteForeverIcon className="delete" style={{ fontSize: 15 }} />
                                 </Nav.Link>
                             </Nav.Item>
