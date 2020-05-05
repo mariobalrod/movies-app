@@ -37,7 +37,7 @@ class App extends Component {
     }
     
     storeToastMessage(type) {
-        ToastsStore.success(`Funciona! ${type}`);
+        ToastsStore.success(`Añadida a ${type}`);
     }
 
     render () {
@@ -72,15 +72,15 @@ class App extends Component {
                         }}/> 
 
                         <Route exact path="/lists/:type" render={(props) => {
-                            return <ListConstent {...props} currentUser={currentUser} />
+                            return <ListConstent {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} />
                         }} />                   
 
                         <Route path="/profile" render={(props) => {
-                            return <Profile {...props} currentUser={currentUser} />
+                            return <Profile {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} />
                         }} />
 
                         <Route path="/overview/:id" render={(props) => {
-                            return <MovieDetails {...props} currentUser={currentUser} />
+                            return <MovieDetails {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} />
                         }} />
 
                     </Switch>

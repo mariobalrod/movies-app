@@ -28,7 +28,7 @@ const MovieOverwiewCard = (props) => {
                     <Col className="mx-4" sm>
                         <Row className="my-5" >
                             <div className="mx-auto mb-4">
-                                <MovieNavMenu movie_id={props.id} user_id={props.user} owner={false}/>
+                                <MovieNavMenu movie_id={props.id} user_id={props.user} owner={false} storeToastMessage={props.storeToastMessage}/>
                             </div>
                             <h4 className="mx-auto">{title}</h4>
                             <Card.Text className="mt-3">{descripcion}</Card.Text>  

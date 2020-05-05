@@ -30,6 +30,7 @@ const MovieDetails = (props) => {
                 vote_count={movie.vote_count} 
                 homepage={movie.homepage} 
                 popularity={movie.popularity}
+                storeToastMessage={props.storeToastMessage} 
             />
         </div>
     );
