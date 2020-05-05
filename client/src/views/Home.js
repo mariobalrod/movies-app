@@ -79,7 +79,7 @@ const Home = (props) => {
                         { false && 'Hello'}
                         <h1 style={{textAlign: "center"}}>Popular Movies</h1>
                         <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} />
-                        <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} />
+                        <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} storeToastMessage={props.storeToastMessage}/>
                         <PaginationCom prevPage={prevPage} nextPage={nextPage} firstPage={firstPage} lastPage={lastPage}/>
                     </div>
                 ) : (

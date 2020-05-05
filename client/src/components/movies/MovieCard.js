@@ -9,7 +9,12 @@ const MovieCard = (props) => {
     return (
         <div className="cardCustom">
             <div className="cardMovie animated flipInY">
-                <MovieNavMenu movie_id={props.id} user_id={props.currentUser._id} owner={props.type}/>
+                <MovieNavMenu 
+                    movie_id={props.id} 
+                    user_id={props.currentUser._id} 
+                    owner={props.type}
+                    storeToastMessage={props.storeToastMessage}
+                />
                 <img src={`https://image.tmdb.org/t/p/w185${props.image}`} alt="portada" />
                 <Link to={`/overview/${props.id}`}>
                     <ZoomInIcon style={{ fontSize: 80 }} className="moreInfo"/>

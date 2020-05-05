@@ -10,7 +10,6 @@ const addMovie = function(movie_id, user_id, type) {
     })
         .then(res => console.log(res.data))
         .catch(err => console.log(err));
-    window.location.replace('');
 }
 
 const deleteMovie = function(movie_id, user_id) {
@@ -20,8 +19,7 @@ const deleteMovie = function(movie_id, user_id) {
         data: {movie_id, user_id}
     })
         .then(res => console.log(res.data))
-        .catch(err => console.log(err))
-    window.location.replace('');
+        .catch(err => console.log(err));
 }
 
 const getMoviesByType = async function(type, user) {

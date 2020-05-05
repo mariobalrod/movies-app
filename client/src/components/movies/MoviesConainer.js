@@ -18,6 +18,7 @@ const MoviesContainer = (props) => {
                                     currentUser={props.currentUser}
                                     type={props.type}
                                     title={movie.original_title} 
+                                    storeToastMessage={props.storeToastMessage}
                                 /> 
                             : 
                                 ''

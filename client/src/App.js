@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from "react-router-dom";
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
 import httpClient from './helpers/httpClient'
 
@@ -33,7 +34,11 @@ class App extends Component {
 	logOut() {
 		httpClient.logOut();
 		this.setState({ currentUser: null });
-	}
+    }
+    
+    storeToastMessage(type) {
+        ToastsStore.success(`Funciona! ${type}`);
+    }
 
     render () {
 
@@ -42,11 +47,12 @@ class App extends Component {
         return (
             <div>
                 <NavBar currentUser={currentUser} />
+                <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.TOP_LEFT}/>
                 <div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)' }}>
                     <Switch>
 
                         <Route exact path="/" render={(props) => {
-                            return <Home {...props} currentUser={currentUser} />
+                            return <Home {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} />
                         }} />
 
                         <Route path="/login" render={(props) => {
