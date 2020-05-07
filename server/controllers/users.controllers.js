@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
+const fs = require('fs');
 const signToken = require('../config/serverAuth').signToken;
 
 // Loading input validation
@@ -184,6 +185,17 @@ async function deleteUser(req, res) {
     res.send('Deleted!');
 }
 
+// @route PUT /api/users/upload
+// @desc upload an image
+// @access PRIVATE
+async function uploadImage(req, res) {
+    const user = await User.findById(req.params.id);
+    user.img.data = fs.readFileSync(req.files.userPhoyo.path);
+    user.img.contentType = 'image/png';
+    await User.findByIdAndUpdate(req.params.id, user);
+}
+
+
 module.exports = {
     login,
     registerUser,
@@ -191,4 +203,5 @@ module.exports = {
     getAllUsers,
     getUserById,
     deleteUser,
+    uploadImage
 }

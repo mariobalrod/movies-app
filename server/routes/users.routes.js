@@ -8,11 +8,13 @@ const {
     updateUser, 
     getUserById, 
     getAllUsers, 
-    deleteUser
+    deleteUser,
+    uploadImage
 } = require('../controllers/users.controllers');
 
 router.post('/login', login);
 router.post('/register', registerUser);
+router.put('/upload/:id', uploadImage);
 router.put('/:id', verifyToken, updateUser);
 router.get('/', verifyToken, getAllUsers);
 router.get('/:id', verifyToken, getUserById);
