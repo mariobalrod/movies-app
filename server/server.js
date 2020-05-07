@@ -20,12 +20,10 @@ app.set('port', process.env.PORT || 5000);
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
+console.log(path.join(__dirname, '/uploads'))
 app.use(multer({
-    dest: './uploads/',
-    rename: function (fieldname, filename) {
-        return filename;
-    },
-}));
+    dest: path.join(__dirname, '/uploads')
+}).single('image'));
 
 // TODO: ROUTES
 app.use('/api', routes);

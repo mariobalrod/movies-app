@@ -133,7 +133,7 @@ async function updatePassword(req, res) {
                     // Crypt New Password
                     bcrypt.genSalt(10, (err, salt) => {
                         if (err) throw err;
-                        bcrypt.hash(newPassword, salt, (err, hash) => {
+                        bcrypt.hash(newPassword, salt, async (err, hash) => {
                             if (err) throw err;
                             const passwordToSave = hash;
                             await User.findByIdAndUpdate(req.params.id, {passwordToSave})
