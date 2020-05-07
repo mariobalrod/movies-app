@@ -6,7 +6,7 @@ const UserSchema = new Schema({
     username: {type: String, required: true},
     password: {type: String, required: true},
     description: {type: String, require: false},
-    imgUrl: {type: String},
+    img: { data: Buffer, contentType: String, default: '../static/default.png'},
     date: {type: Date, default: Date.now}
 });
 
