@@ -111,52 +111,41 @@ async function registerUser(req, res) {
 
 }
 
-async function updateUser(req, res) {
-    const { username, email, password, newPassword, newConfirmPassword } = req.body;
+// @route PUT /api/users/change/password/:id
+// @desc modificar contraseña
+// @return messages on json
+async function updatePassword(req, res) {
+    const user = await User.findById(req.params.id);
+    const { password, newPassword, newConfirmPassword } = req.body;
     const errors = [];
-
-    const user =  await User.findById(req.params.id);
-    // * Credenciales Actuales
-    const usernameActual = await user.get('username');
-    const emailActual = await user.get('email');
-
-    //! Restricciones para Password
-    if(user.matchPassword(password)) {
-        errors.push({text: 'Password no coincide con la actual!'});
-    }
-
-    if(newPassword!=newConfirmPassword) {
-        errors.push({text: 'Passwords nuevas no coinciden!'});
-    }
-
-    if(newPassword.length < 5){
-        errors.push({text: 'Passwords nuevas demasiado breves!'});
-    }
-
-    //! Restricciones para email y username
-    if(usernameActual!=username) {
-        const usernameExistente = await User.findOne({username: username});
-        if(usernameExistente) {
-            errors.push({text: 'Username ya en uso!'});
-        }
-    }
-
-    if(emailActual!=email) {
-        const emailExistente = await User.findOne({email: email});
-        if(emailExistente) {
-            errors.push({text: 'Email ya en uso!'});
-        }
-    }
-
-    //? Estudiamos si podemos modificarlo o no
-    if(errors.length > 0) {
-        res.json(errors);
-    } else {
-        //Antes de guardar encrypt pass llamando al metodo creado en User
-        newPasswordEncrypted = await user.encryptPassword(newPassword);
-        await User.findByIdAndUpdate(req.params.id, { email, username, newPasswordEncrypted});
-        res.json(await User.findById(req.params.id));
-    }
+    //Check passwords
+    bcrypt.compare(password, user.password)
+        .then(isMatch => {
+            if (isMatch) {
+                if (newPassword != newConfirmPassword) {
+                    errors.push({ msg: "Nuevas contraseñas no coinciden" })
+                    res.json(errors);
+                } else if (newPassword.length < 6) {
+                    errors.push({ msg: "Contraseñas demasiado breves" })
+                    res.json(errors);
+                } else {
+                    // Todo: Ruta en la que todo es correcto y se puede modificar
+                    // Crypt New Password
+                    bcrypt.genSalt(10, (err, salt) => {
+                        if (err) throw err;
+                        bcrypt.hash(newPassword, salt, (err, hash) => {
+                            if (err) throw err;
+                            const passwordToSave = hash;
+                            await User.findByIdAndUpdate(req.params.id, {passwordToSave})
+                            res.json({success: true, message: "Contraseña Cambiada"});
+                        });
+                    });
+                }
+            } else {
+                errors.push({ msg: "Contraseña Incorrecta" })
+                res.json(errors);
+            }
+        });
 }
 
 // @route GET /api
@@ -199,7 +188,7 @@ async function uploadImage(req, res) {
 module.exports = {
     login,
     registerUser,
-    updateUser,
+    updatePassword,
     getAllUsers,
     getUserById,
     deleteUser,
