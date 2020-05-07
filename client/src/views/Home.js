@@ -14,6 +14,7 @@ const Home = (props) => {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [option, setOption] = useState('movie/popular');
+    const [title, setTitle] = useState('Popular Movies')
     const [movies, setMovies] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -27,25 +28,24 @@ const Home = (props) => {
     // Options Functions
     const changeToPopular= () => {  
         setOption('movie/popular');
+        setTitle('Popular Movies');
         let endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=1`;
         fetchMovies(endpoint);
     }
 
     const changeToRated = () => {
         setOption('movie/top_rated');
+        setTitle('Top Rated Movies');
         let endpoint = `${apiUrl}movie/top_rated?api_key=${apiKey}&language=en-US&page=1`;
         fetchMovies(endpoint);
     }
 
     const changeToUpcoming = () => {
         setOption('movie/upcoming');
+        setTitle('Upcoming Movies');
         let endpoint = `${apiUrl}movie/upcoming?api_key=${apiKey}&language=en-US&page=1`;
         fetchMovies(endpoint);
     }
-
-    // ========================================================================================================
-    // Title
-
 
     // ========================================================================================================
     // Movies
@@ -110,7 +110,7 @@ const Home = (props) => {
                 (props.currentUser)
                 ? (
                     <div>
-                        <h1 style={{textAlign: "center"}}>Popular Movies {option}</h1>
+                        <h1 style={{textAlign: "center"}}>{title}</h1>
                         <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} />
                         <NavOptions changeToPopular={changeToPopular} changeToRated={changeToRated} changeToUpcoming={changeToUpcoming}/>
                         <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} storeToastMessage={props.storeToastMessage}/>
