@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import ProfileCard from '../components/users/ProfileCard';
+
 export default class Profile extends Component {
 
     constructor () {
@@ -15,8 +17,13 @@ export default class Profile extends Component {
 
     render () {
         return (
-            <div>
-                <h1>Profile</h1>
+            <div className="mt-5">
+                <div>
+                    <h1 style={{textAlign: "center", marginBottom: 120}}>Your Profile</h1>
+                </div>
+                <div>
+                    <ProfileCard />  
+                </div>
             </div>
         );
     }
