@@ -6,21 +6,49 @@ import { searchMovies, apiKey, apiUrl } from '../helpers/tmdbConfig';
 
 // Componentes
 import PaginationCom from '../components/partials/PaginationCom'
+import NavOptions from '../components/partials/NavOptions';
 import SearchBar from '../components/partials/SearchBar';
 import MoviesContainer from '../components/movies/MoviesConainer';
 
 const Home = (props) => {
 
     const [searchTerm, setSearchTerm] = useState('');
+    const [option, setOption] = useState('movie/popular');
     const [movies, setMovies] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
     useEffect(() => {
-        const endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=1`;
-        fetchMovies(endpoint)
+        const endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=1`;
+        fetchMovies(endpoint);
     }, []);
 
+    // ========================================================================================================
+    // Options Functions
+    const changeToPopular= () => {  
+        setOption('movie/popular');
+        let endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=1`;
+        fetchMovies(endpoint);
+    }
+
+    const changeToRated = () => {
+        setOption('movie/top_rated');
+        let endpoint = `${apiUrl}movie/top_rated?api_key=${apiKey}&language=en-US&page=1`;
+        fetchMovies(endpoint);
+    }
+
+    const changeToUpcoming = () => {
+        setOption('movie/upcoming');
+        let endpoint = `${apiUrl}movie/upcoming?api_key=${apiKey}&language=en-US&page=1`;
+        fetchMovies(endpoint);
+    }
+
+    // ========================================================================================================
+    // Title
+
+
+    // ========================================================================================================
+    // Movies
     const fetchMovies = (endpoint) => {
         fetch(endpoint)
             .then(result => result.json())
@@ -32,10 +60,12 @@ const Home = (props) => {
             .catch(error => console.error('Error:', error))
     }
 
+    // ========================================================================================================
+    // Pagination functions
     const prevPage = () => {
         let endpoint = '';
         if(currentPage>1){
-            endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=${currentPage - 1}`;
+            endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=${currentPage - 1}`;
             fetchMovies(endpoint);
         }
     }
@@ -43,23 +73,25 @@ const Home = (props) => {
     const nextPage = () => {
         let endpoint = '';
         if(currentPage<totalPages){
-            endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=${currentPage + 1}`;
+            endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=${currentPage + 1}`;
             fetchMovies(endpoint);
         }
     }
 
     const lastPage = () => {
         let endpoint = '';
-        endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=${totalPages}`;
+        endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=${totalPages}`;
         fetchMovies(endpoint);
     }
 
     const firstPage = () => {
         let endpoint = '';
-        endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=${1}`;
+        endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=${1}`;
         fetchMovies(endpoint);
     }
 
+    // ========================================================================================================
+    // Buscador
     const handleSubmit = async (e) => {
         e.preventDefault();
         const moviesFinded = await searchMovies(searchTerm);
@@ -70,15 +102,17 @@ const Home = (props) => {
         setSearchTerm(e.target.value);
     }
 
+    // ========================================================================================================
+    // Component
     return (
         <div>
             { 
                 (props.currentUser)
                 ? (
                     <div>
-                        { false && 'Hello'}
-                        <h1 style={{textAlign: "center"}}>Popular Movies</h1>
+                        <h1 style={{textAlign: "center"}}>Popular Movies {option}</h1>
                         <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} />
+                        <NavOptions changeToPopular={changeToPopular} changeToRated={changeToRated} changeToUpcoming={changeToUpcoming}/>
                         <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} storeToastMessage={props.storeToastMessage}/>
                         <PaginationCom prevPage={prevPage} nextPage={nextPage} firstPage={firstPage} lastPage={lastPage}/>
                     </div>
