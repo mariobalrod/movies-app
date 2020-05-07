@@ -3,9 +3,9 @@ import React from 'react';
 const ProfileCard = (props) => {
     
     return (
-        <div className="card gray mx-auto mt-5 animated flipInY">
+        <div className="cardP gray mx-auto mt-5 animated flipInY">
             <div className="additional">
-                <div className="user-card">
+                <div className="user-cardP">
                     <div className="level center">
                         Level 13
                     </div>
@@ -50,7 +50,7 @@ const ProfileCard = (props) => {
             <div className="general">
                 <h1>Jane Doe</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a volutpat mauris, at molestie lacus. Nam vestibulum sodales odio ut pulvinar.</p>
-                <span className="more">Mouse over the card for more info</span>
+                <span className="more">Mouse over the cardP for more info</span>
             </div>
         </div>
     )

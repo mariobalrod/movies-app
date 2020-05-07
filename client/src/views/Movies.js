@@ -21,32 +21,37 @@ export default class Movies extends Component {
 
     render () {
         return (
-            <div className="container1">
-                <div className="container2">
-                    <Link to="/lists/favorita" className="linkList">
-                        <Card className="animated flipInY" style={{ width: 300, margin: 50 }}>
-                            <Card.Body>
-                                <StarIcon className="mx-auto" style={{ fontSize: 250 }} />
-                            </Card.Body>
-                            <Card.Footer className="text-muted" style={{textAlign: "center"}}>Favoritos</Card.Footer>
-                        </Card>
-                    </Link>
-                    <Link to="/lists/vista" className="linkList">
-                        <Card className="animated flipInY" style={{ width: 300, margin: 50 }}>
-                            <Card.Body>
-                                <VisibilityOffRoundedIcon className="mx-auto" style={{ fontSize: 250 }} />
-                            </Card.Body>
-                            <Card.Footer className="text-muted" style={{textAlign: "center"}}>Vistos</Card.Footer>
-                        </Card>
-                    </Link>
-                    <Link to="/lists/pendiente" className="linkList">
-                        <Card className="animated flipInY" style={{ width: 300, margin: 50 }}>
-                            <Card.Body>
-                                <VisibilityRoundedIcon className="mx-auto" style={{ fontSize: 250 }} />
-                            </Card.Body>
-                            <Card.Footer className="text-muted" style={{textAlign: "center"}}>Pendientes</Card.Footer>
-                        </Card>
-                    </Link>
+            <div className="mt-5">
+                <div>
+                    <h1 style={{textAlign: "center", marginBottom: 60}}>All your Lists</h1>
+                </div>
+                <div className="container1">
+                    <div className="container2">
+                        <Link to="/lists/favorita" className="linkList">
+                            <Card className="animated flipInY" style={{ width: 300, margin: 50 }}>
+                                <Card.Body>
+                                    <StarIcon className="mx-auto" style={{ fontSize: 250 }} />
+                                </Card.Body>
+                                <Card.Footer className="text-muted" style={{textAlign: "center"}}>Favoritos</Card.Footer>
+                            </Card>
+                        </Link>
+                        <Link to="/lists/vista" className="linkList">
+                            <Card className="animated flipInY" style={{ width: 300, margin: 50 }}>
+                                <Card.Body>
+                                    <VisibilityOffRoundedIcon className="mx-auto" style={{ fontSize: 250 }} />
+                                </Card.Body>
+                                <Card.Footer className="text-muted" style={{textAlign: "center"}}>Vistos</Card.Footer>
+                            </Card>
+                        </Link>
+                        <Link to="/lists/pendiente" className="linkList">
+                            <Card className="animated flipInY" style={{ width: 300, margin: 50 }}>
+                                <Card.Body>
+                                    <VisibilityRoundedIcon className="mx-auto" style={{ fontSize: 250 }} />
+                                </Card.Body>
+                                <Card.Footer className="text-muted" style={{textAlign: "center"}}>Pendientes</Card.Footer>
+                            </Card>
+                        </Link>
+                    </div>
                 </div>
             </div>
         );

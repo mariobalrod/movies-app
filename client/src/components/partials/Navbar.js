@@ -1,7 +1,9 @@
 import React from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
-import Settings from '@material-ui/icons/SettingsApplicationsRounded';
+import MoreVertRoundedIcon from '@material-ui/icons/MoreVertRounded';
+import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
+import SubscriptionsRoundedIcon from '@material-ui/icons/SubscriptionsRounded';
 
 const NavBar = (props) => {
     return (
@@ -11,12 +13,16 @@ const NavBar = (props) => {
             <Navbar.Collapse id="responsive-navbar-nav">   
                 {props.currentUser
                     ? (
-                        <Nav className="ml-auto" style={{ marginRight: 120 }}>
-                            <Nav.Link className="margin-nav-links" href="/movies">Movies</Nav.Link>
+                        <Nav className="ml-auto" style={{ marginRight: 80 }}>
+                            <Nav.Link className="margin-nav-links" href="/movies" style={{ marginLeft: 30 }}>
+                                <SubscriptionsRoundedIcon style={{ fontSize: 20, marginRight: 10 }} />  Movies
+                            </Nav.Link>
 
-                            <Nav.Link className="margin-nav-links" href="/profile">Profile</Nav.Link>
+                            <Nav.Link className="margin-nav-links" href="/profile" style={{ marginLeft: 30 }}>
+                                <PersonRoundedIcon style={{ fontSize: 20, marginRight: 10 }}/>  Profile
+                            </Nav.Link>
 
-                            <NavDropdown className="margin-nav-links-dd" title={<Settings style={{ fontSize: 30 }} />} id="collasible-nav-dropdown">
+                            <NavDropdown className="margin-nav-links-dd" title={<MoreVertRoundedIcon style={{ fontSize: 20 }} />} id="collasible-nav-dropdown" style={{ marginLeft: 30 }}>
                                 <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="#disabled">Configuration</NavDropdown.Item>
