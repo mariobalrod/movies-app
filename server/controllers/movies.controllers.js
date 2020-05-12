@@ -42,9 +42,12 @@ async function updateMovie(req, res) {
 
 async function deleteMovie(req, res) {
     const { movie_id, user_id } = req.body;
-    const movie = await Movie.findOne({movie_id: movie_id, user_id: user_id});
-    const id = movie._id;
-    await Movie.findByIdAndDelete(id);
+    await Movie.findOneAndDelete({movie_id: movie_id, user_id: user_id});
+    res.json({success: true, msg: "Pelicula Eliminada"});
+}
+
+async function deleteMovieById(req, res) {
+    await Movie.findByIdAndDelete(req.params.id);
     res.json({success: true, msg: "Pelicula Eliminada"});
 }
 
@@ -54,5 +57,6 @@ module.exports = {
     createMovie,
     updateMovie,
     deleteMovie,
-    getMoviesByType
+    getMoviesByType,
+    deleteMovieById
 }
