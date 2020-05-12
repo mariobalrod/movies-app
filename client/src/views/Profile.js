@@ -22,7 +22,7 @@ export default class Profile extends Component {
                     <h1 style={{textAlign: "center", marginBottom: 120}}>Your Profile</h1>
                 </div>
                 <div>
-                    <ProfileCard />  
+                    <ProfileCard currentUser={this.props.currentUser} />  
                 </div>
             </div>
         );
