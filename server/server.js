@@ -20,7 +20,6 @@ app.set('port', process.env.PORT || 5000);
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
-console.log(path.join(__dirname, '/uploads'))
 app.use(multer({
     dest: path.join(__dirname, '/uploads')
 }).single('image'));

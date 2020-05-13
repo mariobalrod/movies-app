@@ -51,6 +51,13 @@ async function deleteMovieById(req, res) {
     res.json({success: true, msg: "Pelicula Eliminada"});
 }
 
+async function getCountMoviesByType(req, res) {
+    const type = req.params.type;
+    const user = req.params.user;
+    const count = await Movie.countDocuments({type: type, user_id: user});
+    res.json(count);
+}
+
 module.exports = {
     getAllMovies,
     getMovieById,
@@ -58,5 +65,6 @@ module.exports = {
     updateMovie,
     deleteMovie,
     getMoviesByType,
-    deleteMovieById
+    deleteMovieById,
+    getCountMoviesByType
 }

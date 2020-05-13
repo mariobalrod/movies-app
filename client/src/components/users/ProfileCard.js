@@ -1,12 +1,10 @@
 import React from 'react';
-
-import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import { Link } from 'react-router-dom';
 
-const ProfileCard = (props) => {
+import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 
-    const username = props.currentUser.username;
-    const date = props.currentUser.date;
+
+const ProfileCard = (props) => {
     
     return (
         <div className="cardP gray mx-auto mt-5 animated flipInY">
@@ -22,31 +20,31 @@ const ProfileCard = (props) => {
                 </div>
                 <div className="more-info">
                     <Link to="/profile" className="link m-3"><h6 style={{textAlign: "center"}}><EditTwoToneIcon/></h6></Link>
-                    <h1 className="">{username}</h1>
+                    <h1 className="">{props.currentUser.username}</h1>
                     <div className="coords">
-                        <span>Joined {date}</span>
+                        <span>Joined {props.currentUser.date}</span>
                     </div>
                     <div className="stats">
                         <div>
                             <div className="title">Vistas</div>
                             <i className="fa fa-trophy"></i>
-                            <div className="value">0</div>
+                            <div className="value">{props.vistas}</div>
                         </div>
                         <div>
                             <div className="title">Pendientes</div>
                             <i className="fa fa-gamepad"></i>
-                            <div className="value">0</div>
+                            <div className="value">{props.pendientes}</div>
                         </div>
                         <div>
                             <div className="title">Favoritas</div>
                             <i className="fa fa-group"></i>
-                            <div className="value">0</div>
+                            <div className="value">{props.favoritas}</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="general">
-                <h1 className="m-3">{username}</h1>
+                <h1 className="m-3">{props.currentUser.username}</h1>
                 <p style={{textAlign: "center"}}>Descripcion</p>
                 <span className="more">Mouse over for more info</span>
             </div>

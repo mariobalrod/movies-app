@@ -8,7 +8,8 @@ const {
     updateMovie, 
     deleteMovie,
     getMoviesByType,
-    deleteMovieById
+    deleteMovieById,
+    getCountMoviesByType
 } = require('../controllers/movies.controllers');
 
 router.get('/', getAllMovies);
@@ -18,5 +19,6 @@ router.post('/add', createMovie);
 router.put('/:id', updateMovie);
 router.delete('/delete', deleteMovie);
 router.delete('/:id', deleteMovieById);
+router.get('/count/:type/:user', getCountMoviesByType);
 
 module.exports = router;

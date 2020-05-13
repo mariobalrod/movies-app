@@ -23,13 +23,19 @@ const deleteMovie = function(movie_id, user_id) {
 }
 
 const getMoviesByType = async function(type, user) {
-    const movies = axios.get(`/api/movies/${type}/${user}`)
+    const movies = await axios.get(`/api/movies/${type}/${user}`)
     return movies;
 }
 
+const getCountMoviesByType = async function(type, user) {
+    const count = await axios.get(`/api/movies/count/${type}/${user}`)
+    const data = count.data;
+    return data;
+}
 
 module.exports = {
     addMovie,
     deleteMovie,
-    getMoviesByType
+    getMoviesByType,
+    getCountMoviesByType
 }
