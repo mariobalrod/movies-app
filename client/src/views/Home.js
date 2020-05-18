@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Button, Spinner } from 'react-bootstrap';
 
-import { searchMovies, apiKey, apiUrl } from '../helpers/tmdbConfig';
+import { apiKey, apiUrl } from '../helpers/tmdbConfig';
 
 // Componentes
 import NavOptions from '../components/partials/NavOptions';
@@ -21,6 +21,7 @@ const Home = (props) => {
     const [Loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setSearchTerm('');
         const endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=1`;
         fetchMovies(endpoint);
     }, [option]);
@@ -32,6 +33,7 @@ const Home = (props) => {
     // ========================================================================================================
     // Options Functions
     const changeToPopular= () => {  
+        setSearchTerm('');
         setOption('movie/popular');
         setTitle('Popular Movies');
         let endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&language=en-US&page=1`;
@@ -39,6 +41,7 @@ const Home = (props) => {
     }
 
     const changeToRated = () => {
+        setSearchTerm('');
         setOption('movie/top_rated');
         setTitle('Top Rated Movies');
         let endpoint = `${apiUrl}movie/top_rated?api_key=${apiKey}&language=en-US&page=1`;
@@ -46,6 +49,7 @@ const Home = (props) => {
     }
 
     const changeToUpcoming = () => {
+        setSearchTerm('');
         setOption('movie/upcoming');
         setTitle('Upcoming Movies');
         let endpoint = `${apiUrl}movie/upcoming?api_key=${apiKey}&language=en-US&page=1`;
@@ -82,8 +86,13 @@ const Home = (props) => {
 
     const loadMoreItems = () => {
         let endpoint = '';
-        endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=${currentPage + 1}`;
-        fetchMoreMovies(endpoint);
+        if(searchTerm){
+            endpoint = `${apiUrl}search/movie?api_key=${apiKey}&query=${searchTerm}&language=en-US&page=${currentPage + 1}&include_adult=false`;
+            fetchMoreMovies(endpoint);
+        }else{
+            endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=${currentPage + 1}`;
+            fetchMoreMovies(endpoint);
+        }
     }
 
     // ========================================================================================================
@@ -104,8 +113,8 @@ const Home = (props) => {
     // Buscador
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const moviesFinded = await searchMovies(searchTerm);
-        setMovies([...moviesFinded]);
+        let endpoint = `${apiUrl}search/movie?api_key=${apiKey}&query=${searchTerm}&language=en-US&page=1&include_adult=false`;
+        fetchMovies(endpoint);
     }
 
     const handleChange = (e) => {
@@ -121,7 +130,7 @@ const Home = (props) => {
                 ? (
                     <div>
                         <h1 style={{textAlign: "center"}}>{title}</h1>
-                        <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} />
+                        <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} searchTerm={searchTerm}/>
                         <NavOptions changeToPopular={changeToPopular} changeToRated={changeToRated} changeToUpcoming={changeToUpcoming}/>
                         <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} storeToastMessage={props.storeToastMessage}/>
                         {Loading ? 
