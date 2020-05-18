@@ -1,28 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Spinner } from 'react-bootstrap';
 
 import { searchMovies, apiKey, apiUrl } from '../helpers/tmdbConfig';
 
 // Componentes
-import PaginationCom from '../components/partials/PaginationCom'
 import NavOptions from '../components/partials/NavOptions';
 import SearchBar from '../components/partials/SearchBar';
 import MoviesContainer from '../components/movies/MoviesConainer';
 
 const Home = (props) => {
 
+    const buttonRef = useRef(null);
+
     const [searchTerm, setSearchTerm] = useState('');
     const [option, setOption] = useState('movie/popular');
     const [title, setTitle] = useState('Popular Movies')
     const [movies, setMovies] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [Loading, setLoading] = useState(true);
 
     useEffect(() => {
         const endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=1`;
         fetchMovies(endpoint);
     }, [option]);
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+    }, [])
 
     // ========================================================================================================
     // Options Functions
@@ -55,39 +60,44 @@ const Home = (props) => {
             .then(result => {
                 setMovies(result.results);
                 setCurrentPage(result.page);
-                setTotalPages(result.total_pages);
-            })
+            }, setLoading(false))
             .catch(error => console.error('Error:', error))
     }
 
+    const fetchMoreMovies = (endpoint) => {
+        setLoading(true);
+        setTimeout(() => {
+            fetch(endpoint)
+            .then(result => result.json())
+            .then(result => {
+                setMovies([...movies, ...result.results]);
+                setCurrentPage(result.page);
+            }, setLoading(false))
+            .catch(error => console.error('Error:', error))
+        }, 1000)       
+    }
+
     // ========================================================================================================
-    // Pagination functions
-    const prevPage = () => {
+    // Load More Movies (new Pagination)
+
+    const loadMoreItems = () => {
         let endpoint = '';
-        if(currentPage>1){
-            endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=${currentPage - 1}`;
-            fetchMovies(endpoint);
+        endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=${currentPage + 1}`;
+        fetchMoreMovies(endpoint);
+    }
+
+    // ========================================================================================================
+    // Scroll System
+
+    const handleScroll = () => {
+        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+        const body = document.body;
+        const html = document.documentElement;
+        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        const windowBottom = windowHeight + window.pageYOffset;
+        if (windowBottom >= docHeight - 1) {
+            buttonRef.current.click();
         }
-    }
-
-    const nextPage = () => {
-        let endpoint = '';
-        if(currentPage<totalPages){
-            endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=${currentPage + 1}`;
-            fetchMovies(endpoint);
-        }
-    }
-
-    const lastPage = () => {
-        let endpoint = '';
-        endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=${totalPages}`;
-        fetchMovies(endpoint);
-    }
-
-    const firstPage = () => {
-        let endpoint = '';
-        endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=${1}`;
-        fetchMovies(endpoint);
     }
 
     // ========================================================================================================
@@ -114,7 +124,15 @@ const Home = (props) => {
                         <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} />
                         <NavOptions changeToPopular={changeToPopular} changeToRated={changeToRated} changeToUpcoming={changeToUpcoming}/>
                         <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} storeToastMessage={props.storeToastMessage}/>
-                        <PaginationCom prevPage={prevPage} nextPage={nextPage} firstPage={firstPage} lastPage={lastPage}/>
+                        {Loading ? 
+                            <div className="mx-auto" style={{width: 80, marginTop: 100}}>
+                                <Spinner animation="border" /> 
+                            </div>
+                            : ''}
+                        <Button onClick={loadMoreItems} style={{width: 200, marginTop: 100}} className="mx-auto" variant="primary" ref={buttonRef} block>
+                            Load more items
+                        </Button>
+                        {/* <PaginationCom prevPage={prevPage} nextPage={nextPage} firstPage={firstPage} lastPage={lastPage}/> */}
                     </div>
                 ) : (
                     <Card className="mx-auto my-5 text-center animated flipInY" style={{width: 700}}>
