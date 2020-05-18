@@ -16,10 +16,12 @@ const ProfileCard = (props) => {
                     <div className="points center">
                         0 Points
                     </div>
-                    <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y&d=mp" className="rounded-circle center" alt="avatar"></img>
+                     <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y&d=mp" className="rounded-circle center" alt="avatar"></img>
                 </div>
                 <div className="more-info">
-                    <Link to="/profile" className="link m-3"><h6 style={{textAlign: "center"}}><EditTwoToneIcon/></h6></Link>
+                    <Link to="/form" className="link m-3">
+                        <h6 style={{textAlign: "center"}}><EditTwoToneIcon/></h6>
+                    </Link>
                     <h1 className="">{props.currentUser.username}</h1>
                     <div className="coords">
                         <span>Joined {props.currentUser.date}</span>
@@ -44,8 +46,8 @@ const ProfileCard = (props) => {
                 </div>
             </div>
             <div className="general">
-                <h1 className="m-3">{props.currentUser.username}</h1>
-                <p style={{textAlign: "center"}}>Descripcion</p>
+                <h1 className="m-3">{props.currentUser.username}</h1>                
+                <p style={{textAlign: "center"}}>{props.description}</p>
                 <span className="more">Mouse over for more info</span>
             </div>
         </div>

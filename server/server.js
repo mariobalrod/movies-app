@@ -1,8 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const path = require('path');
-var multer = require('multer');
 const routes = require('./routes');
 
 require('dotenv').config();
@@ -20,9 +18,6 @@ app.set('port', process.env.PORT || 5000);
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(multer({
-    dest: path.join(__dirname, '/uploads')
-}).single('image'));
 
 // TODO: ROUTES
 app.use('/api', routes);

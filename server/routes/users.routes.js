@@ -5,19 +5,21 @@ const verifyToken = require('../config/serverAuth').verifyToken;
 const {
     login, 
     registerUser, 
-    updatePassword, 
     getUserById, 
     getAllUsers, 
     deleteUser,
-    uploadImage
+    updatePassword, 
+    updateDescription,
+    getDescription
 } = require('../controllers/users.controllers');
 
 router.post('/login', login);
 router.post('/register', registerUser);
-router.put('/upload/:id', verifyToken, uploadImage);
-router.put('/change/password/:id', verifyToken, updatePassword);
-router.get('/', verifyToken, getAllUsers);
-router.get('/:id', verifyToken, getUserById);
+router.post('/description/:id', updateDescription);
+router.get('/description/:id', getDescription)
+router.put('/password/:id', verifyToken, updatePassword);
+router.get('/', getAllUsers);
+router.get('/:id', getUserById);
 router.delete('/:id', verifyToken, deleteUser);
 
 module.exports = router;

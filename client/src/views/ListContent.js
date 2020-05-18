@@ -13,9 +13,10 @@ const ListContent = (props) => {
     useEffect(() => {
         const type = props.match.params.type;
         const user = props.currentUser._id;
-        establecerTitulo();
+        
+        establecerTitulo(type);
         fetchMoviesList(type, user)
-    }, [])
+    }, [props.currentUser._id, props.match.params.type])
 
     // ==================================================================================================================
     // Obtener todas las Peliculas por Tipo
@@ -31,8 +32,7 @@ const ListContent = (props) => {
     
     // ==================================================================================================================
     // Establecer el TITULO
-    const establecerTitulo = () => {
-        const type = props.match.params.type;
+    const establecerTitulo = (type) => {
         if (type === 'favorita') setTitle('Peliculas Favoritas')
         if (type === 'vista') setTitle('Peliculas Vistas')
         if (type === 'pendiente') setTitle('Peliculas Pendientes')

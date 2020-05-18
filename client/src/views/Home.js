@@ -22,7 +22,7 @@ const Home = (props) => {
     useEffect(() => {
         const endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=1`;
         fetchMovies(endpoint);
-    }, []);
+    }, [option]);
 
     // ========================================================================================================
     // Options Functions

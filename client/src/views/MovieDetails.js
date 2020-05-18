@@ -11,7 +11,7 @@ const MovieDetails = (props) => {
     useEffect(() => {
         const id_movie = props.match.params.id;
         fetchMovie(id_movie);
-    }, [])
+    }, [props.match.params.id])
 
     const fetchMovie = async (id_movie) => {
         const movieF = await fetchMovieById(id_movie);

@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
-const fs = require('fs');
 const signToken = require('../config/serverAuth').signToken;
 
 // Loading input validation
@@ -111,7 +110,7 @@ async function registerUser(req, res) {
 
 }
 
-// @route PUT /api/users/change/password/:id
+// @route PUT /api/users/password/:id
 // @desc modificar contraseña
 // @return messages on json
 async function updatePassword(req, res) {
@@ -148,7 +147,15 @@ async function updatePassword(req, res) {
         });
 }
 
-// @route GET /api
+// @route PUT /api/users/description/:id
+// @desc update the description
+// @return msg json
+async function updateDescription (req, res) {
+    await User.findByIdAndUpdate(req.params.id, {description: req.body.description});
+    res.json({success: true, message: "Description Updated"});
+}
+
+// @route GET /api/users
 // @desc obtener usuarios
 // @access PRIVATE
 // @return all users (json)
@@ -157,7 +164,7 @@ async function getAllUsers(req, res) {
     res.json(users);
 }
 
-// @route GET /api/:id
+// @route GET /api/users/:id
 // @desc obtener un usuario
 // @access PRIVATE
 // @return usuario por id
@@ -166,7 +173,7 @@ async function getUserById(req, res) {
     res.json(user);
 }
 
-// @route DELETE /api/:id
+// @route DELETE /api/users/:id
 // @desc delete un usuario
 // @access PRIVATE
 async function deleteUser(req, res) {
@@ -174,16 +181,13 @@ async function deleteUser(req, res) {
     res.send('Deleted!');
 }
 
-// @route PUT /api/users/upload
-// @desc upload an image
-// @access PRIVATE
-async function uploadImage(req, res) {
+// @route GET /api/users/description/:id
+// @desc obtener descripcion del usuario
+// @return descripcion
+async function getDescription(req, res) {
     const user = await User.findById(req.params.id);
-    user.img.data = fs.readFileSync(req.files.userPhoyo.path);
-    user.img.contentType = 'image/png';
-    await User.findByIdAndUpdate(req.params.id, user);
+    res.json(user);
 }
-
 
 module.exports = {
     login,
@@ -192,5 +196,6 @@ module.exports = {
     getAllUsers,
     getUserById,
     deleteUser,
-    uploadImage
+    updateDescription,
+    getDescription
 }

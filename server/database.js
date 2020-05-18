@@ -7,7 +7,8 @@ const URI = process.env.MONGODB_URI || 'mongodb://localhost/movies-app';
 mongoose.connect(URI, {
     useCreateIndex: true,
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 }) 
     .then(db => console.log('DB connected!'))
     .catch(err => console.error(err));

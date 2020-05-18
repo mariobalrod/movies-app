@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from "react-router-dom";
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
-import httpClient from './helpers/httpClient'
+import httpClient from './helpers/httpClient';
 
 // Components
 import NavBar from './components/partials/Navbar';
@@ -12,6 +12,7 @@ import Footer from './components/partials/Footer';
 import Home from './views/Home';
 import Movies from './views/Movies';
 import Profile from './views/Profile';
+import ProfileForm from './views/ProfileForm';
 import LogIn from './views/LogIn';
 import LogOut from './views/LogOut';
 import SignUp from './views/SignUp';
@@ -81,6 +82,10 @@ class App extends Component {
 
                         <Route path="/profile" render={(props) => {
                             return <Profile {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} />
+                        }} />
+
+                        <Route path="/form" render={(props) => {
+                            return <ProfileForm {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} />
                         }} />
 
                         <Route path="/overview/:id" render={(props) => {

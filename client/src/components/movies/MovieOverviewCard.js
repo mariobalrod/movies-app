@@ -22,10 +22,10 @@ const MovieOverwiewCard = (props) => {
             </Card.Header>
             <Card.Body>
                 <Row>
-                    <Col className="mx-2" sm>
+                    <Col className="mx-2">
                         <Card.Img src={`https://image.tmdb.org/t/p/w342${image}`} alt="portada"/>
                     </Col>
-                    <Col className="mx-4" sm>
+                    <Col className="mx-4">
                         <Row className="my-5" >
                             <div className="mx-auto mb-4">
                                 <MovieNavMenu movie_id={props.id} user_id={props.user} owner={false} storeToastMessage={props.storeToastMessage}/>

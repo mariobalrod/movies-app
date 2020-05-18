@@ -2,24 +2,21 @@ const axios = require('axios');
 
 // Todo: Actions for moovies of my API routes
 
-const addMovie = function(movie_id, user_id, type) {
-    axios({
+const addMovie = async function(movie_id, user_id, type) {
+    await axios({
         method: 'POST',
         url: '/api/movies/add',
         data: {movie_id, user_id, type}
     })
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err));
 }
 
-const deleteMovie = function(movie_id, user_id) {
-    axios({
+const deleteMovie = async function(movie_id, user_id) {
+    await axios({
         method: 'DELETE',
         url: '/api/movies/delete',
         data: {movie_id, user_id}
     })
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err));
+    window.location.reload(true);
 }
 
 const getMoviesByType = async function(type, user) {
