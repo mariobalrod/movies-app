@@ -3,6 +3,8 @@ import {Nav} from 'react-bootstrap'
 
 import { addMovie, deleteMovie } from '../../helpers/moviesActions';
 
+import {useHistory} from 'react-router-dom';
+
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import StarIcon from '@material-ui/icons/Star';
@@ -10,15 +12,19 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const MovieNavMenu = (props) => {
 
+    let history = useHistory();
+
     const movie_id = props.movie_id;
     const user_id = props.user_id;
 
+    console.log(props.owner)
+
     return (
-        <div style={{width: 250}}>
+        <div style={{width: 220}}>
                 {
                     (props.owner)
                     ? (
-                        <Nav className="mr-4">
+                        <Nav className="navigation mr-3">
                             <Nav.Item>
                                 <Nav.Link onClick={() => {
                                     addMovie(movie_id, user_id, 'pendiente');
@@ -48,8 +54,15 @@ const MovieNavMenu = (props) => {
 
                             <Nav.Item>
                                 <Nav.Link onClick={() => {
-                                    deleteMovie(movie_id, user_id);
-                                    props.deleteToast();
+                                    if(props.overview){
+                                        deleteMovie(movie_id, user_id);
+                                        history.goBack();
+                                        props.deleteToast();
+                                    }else {
+                                        deleteMovie(movie_id, user_id);
+                                        props.deleteToast();
+                                    }
+                                    
                                 }}>
                                     <DeleteForeverIcon className="delete" style={{ fontSize: 15 }} />
                                 </Nav.Link>

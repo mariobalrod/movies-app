@@ -23,14 +23,14 @@ const MovieDetails = (props) => {
             <MovieOverviewCard 
                 user={props.currentUser._id}
                 id={props.match.params.id} 
+                owner={props.match.params.type}
                 poster_path={movie.poster_path} 
                 title={movie.original_title} 
                 overview={movie.overview} 
                 vote_average={movie.vote_average} 
-                vote_count={movie.vote_count} 
-                homepage={movie.homepage} 
-                popularity={movie.popularity}
+                homepage={movie.homepage}
                 storeToastMessage={props.storeToastMessage} 
+                deleteToast={props.deleteToast}
             />
         </div>
     );

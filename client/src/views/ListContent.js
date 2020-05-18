@@ -2,10 +2,16 @@ import React, {useEffect, useState} from 'react';
 
 import { fetchIds, fetchMovieById } from '../helpers/tmdbConfig';
 
+import {useHistory, Link} from 'react-router-dom';
+
 import MoviesContainer from '../components/movies/MoviesConainer';
+
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 
 const ListContent = (props) => {
+
+    let history = useHistory();
 
     const [Movies, setMovies] = useState([]);
     const [Title, setTitle] = useState('');
@@ -42,6 +48,9 @@ const ListContent = (props) => {
     // Todo: Componente
     return (
             <div>
+                <div className="mx-auto mb-5" style={{width: 50}}>
+                    <Link to="" className="linkList" onClick={() => history.goBack()}><KeyboardBackspaceIcon style={{fontSize: 40}}/></Link>
+                </div>
                 <h1 style={{ textAlign: "center" }}>{Title}</h1>
                 <MoviesContainer 
                     movies={Movies} 

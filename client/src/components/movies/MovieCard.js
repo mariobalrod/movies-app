@@ -15,14 +15,15 @@ const MovieCard = (props) => {
                     owner={props.type}
                     storeToastMessage={props.storeToastMessage}
                     deleteToast={props.deleteToast} 
+                    overview={false}
                 />
                 <img src={`https://image.tmdb.org/t/p/w185${props.image}`} alt="portada" />
-                <Link to={`/overview/${props.id}`}>
+                <Link to={`/overview/${props.id}/${props.type}`}>
                     <ZoomInIcon style={{ fontSize: 80 }} className="moreInfo"/>
                 </Link>
             </div>
             <div className="container" style={{width: 150}}>
-                <Link to={`/overview/${props.id}`}>
+                <Link to={`/overview/${props.id}/${props.type}`}>
                     <h6 className="titleMovie">{props.title}</h6>
                 </Link>
             </div>

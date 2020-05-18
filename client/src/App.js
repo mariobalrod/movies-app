@@ -88,8 +88,8 @@ class App extends Component {
                             return <ProfileForm {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} />
                         }} />
 
-                        <Route path="/overview/:id" render={(props) => {
-                            return <MovieDetails {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} />
+                        <Route exact path="/overview/:id/:type" render={(props) => {
+                            return <MovieDetails {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} deleteToast={this.deleteToast}/>
                         }} />
 
                     </Switch>
