@@ -32,7 +32,7 @@ const MovieOverwiewCard = (props) => {
                                 movie_id={props.id}
                                 user_id={props.user} 
                                 owner={props.owner} 
-                                storeToastMessage={props.storeToastMessage}
+                                successToast={props.successToast}
                                 deleteToast={props.deleteToast}
                                 overview={true}
                             />

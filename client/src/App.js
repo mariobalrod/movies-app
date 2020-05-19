@@ -37,8 +37,8 @@ class App extends Component {
 		this.setState({ currentUser: null });
     }
     
-    storeToastMessage(type) {
-        ToastsStore.success(`Añadida a ${type}`);
+    successToast(msg) {
+        ToastsStore.success(msg);
     }
     
     deleteToast() {
@@ -57,7 +57,7 @@ class App extends Component {
                     <Switch>
 
                         <Route exact path="/" render={(props) => {
-                            return <Home {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} />
+                            return <Home {...props} currentUser={currentUser} successToast={this.successToast} />
                         }} />
 
                         <Route path="/login" render={(props) => {
@@ -77,19 +77,19 @@ class App extends Component {
                         }}/> 
 
                         <Route exact path="/lists/:type" render={(props) => {
-                            return <ListConstent {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} deleteToast={this.deleteToast} />
+                            return <ListConstent {...props} currentUser={currentUser} successToast={this.successToast} deleteToast={this.deleteToast} />
                         }} />                   
 
                         <Route path="/profile" render={(props) => {
-                            return <Profile {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} />
+                            return <Profile {...props} currentUser={currentUser} successToast={this.successToast} />
                         }} />
 
                         <Route path="/form" render={(props) => {
-                            return <ProfileForm {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} />
+                            return <ProfileForm {...props} currentUser={currentUser} successToast={this.successToast} />
                         }} />
 
                         <Route exact path="/overview/:id" render={(props) => {
-                            return <MovieDetails {...props} currentUser={currentUser} storeToastMessage={this.storeToastMessage} deleteToast={this.deleteToast}/>
+                            return <MovieDetails {...props} currentUser={currentUser} successToast={this.successToast} deleteToast={this.deleteToast}/>
                         }} />
 
                     </Switch>

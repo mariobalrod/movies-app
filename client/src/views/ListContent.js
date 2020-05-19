@@ -56,7 +56,7 @@ const ListContent = (props) => {
                     movies={Movies} 
                     currentUser={props.currentUser} 
                     type={true} 
-                    storeToastMessage={props.storeToastMessage} 
+                    successToast={props.successToast} 
                     deleteToast={props.deleteToast} 
                     auth={true}
                 />

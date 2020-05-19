@@ -112,7 +112,7 @@ const Home = (props) => {
                         <h1 style={{textAlign: "center"}}>{title}</h1>
                         <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} searchTerm={searchTerm}/>
                         <NavOptions changeToPopular={changeToPopular} changeToRated={changeToRated} changeToUpcoming={changeToUpcoming}/>
-                        <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} auth={true} storeToastMessage={props.storeToastMessage}/>
+                        <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} auth={true} successToast={props.successToast}/>
                         {Loading ? 
                             <div className="mx-auto" style={{width: 80, marginTop: 100}}>
                                 <Spinner animation="border" /> 

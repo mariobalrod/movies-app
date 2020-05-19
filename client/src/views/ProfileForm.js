@@ -31,6 +31,7 @@ const ProfileForm = (props) => {
         e.preventDefault();
         await changeUserDescription(description, props.currentUser._id);
         history.push('/profile');
+        props.successToast('Description Update')
     }   
 
     return (

@@ -26,7 +26,7 @@ const MovieNavMenu = (props) => {
                             <Nav.Item>
                                 <Nav.Link onClick={() => {
                                     addMovie(movie_id, user_id, 'pendiente');
-                                    props.storeToastMessage('Pendiente')
+                                    props.successToast('Añadida a Pendiente')
                                 }}>
                                     <VisibilityIcon style={{ fontSize: 15 }} className="linkList"/>
                                 </Nav.Link>
@@ -35,7 +35,7 @@ const MovieNavMenu = (props) => {
                             <Nav.Item>
                                 <Nav.Link onClick={() => {
                                     addMovie(movie_id, user_id, 'vista')
-                                    props.storeToastMessage('Vista')
+                                    props.successToast('Añadida a Vista')
                                 }}>
                                     <VisibilityOffIcon style={{ fontSize: 15 }} className="linkList" />
                                 </Nav.Link>
@@ -44,7 +44,7 @@ const MovieNavMenu = (props) => {
                             <Nav.Item>
                                 <Nav.Link onClick={() => {
                                     addMovie(movie_id, user_id, 'favorita')
-                                    props.storeToastMessage('Favorita')
+                                    props.successToast('Añadida a Favorita')
                                 }}>
                                     <StarIcon style={{ fontSize: 15 }} className="linkList" />
                                 </Nav.Link>
@@ -73,7 +73,7 @@ const MovieNavMenu = (props) => {
                             <Nav.Item>
                                 <Nav.Link onClick={() => {
                                     addMovie(movie_id, user_id, 'pendiente');
-                                    props.storeToastMessage('Pendiente')
+                                    props.successToast('Añadida a Pendiente')
                                 }}>
                                     <VisibilityIcon style={{ fontSize: 20 }} className="linkList"/>
                                 </Nav.Link>
@@ -82,7 +82,7 @@ const MovieNavMenu = (props) => {
                             <Nav.Item>
                                 <Nav.Link onClick={() => {
                                     addMovie(movie_id, user_id, 'vista')
-                                    props.storeToastMessage('Vista')
+                                    props.successToast('Añadida a Vista')
                                 }}>
                                     <VisibilityOffIcon style={{ fontSize: 20 }} className="linkList" />
                                 </Nav.Link>
@@ -91,7 +91,7 @@ const MovieNavMenu = (props) => {
                             <Nav.Item>
                                 <Nav.Link onClick={() => {
                                     addMovie(movie_id, user_id, 'favorita')
-                                    props.storeToastMessage('Favorita')
+                                    props.successToast('Añadida a Favorita')
                                 }}>
                                     <StarIcon style={{ fontSize: 20 }} className="linkList" />
                                 </Nav.Link>

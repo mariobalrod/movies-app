@@ -29,7 +29,7 @@ const MovieDetails = (props) => {
                 overview={movie.overview} 
                 vote_average={movie.vote_average} 
                 homepage={movie.homepage}
-                storeToastMessage={props.storeToastMessage} 
+                successToast={props.successToast} 
                 deleteToast={props.deleteToast}
             />
         </div>

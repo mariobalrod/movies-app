@@ -17,7 +17,7 @@ const MovieCard = (props) => {
                                         movie_id={props.id} 
                                         user_id={props.currentUser._id} 
                                         owner={props.type}
-                                        storeToastMessage={props.storeToastMessage}
+                                        successToast={props.successToast}
                                         deleteToast={props.deleteToast} 
                                         overview={false}
                                     />
