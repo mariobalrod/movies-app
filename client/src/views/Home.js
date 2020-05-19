@@ -112,7 +112,7 @@ const Home = (props) => {
                         <h1 style={{textAlign: "center"}}>{title}</h1>
                         <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} searchTerm={searchTerm}/>
                         <NavOptions changeToPopular={changeToPopular} changeToRated={changeToRated} changeToUpcoming={changeToUpcoming}/>
-                        <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} storeToastMessage={props.storeToastMessage}/>
+                        <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} auth={true} storeToastMessage={props.storeToastMessage}/>
                         {Loading ? 
                             <div className="mx-auto" style={{width: 80, marginTop: 100}}>
                                 <Spinner animation="border" /> 
@@ -123,17 +123,31 @@ const Home = (props) => {
                         </Button>
                     </div>
                 ) : (
-                    <Card className="mx-auto my-5 text-center animated flipInY" style={{width: 700}}>
-                        <Card.Header><h1>WELCOME</h1></Card.Header>
-                        <Card.Body>
-                            <Card.Title><h5>Your Best Option</h5></Card.Title>
-                            <Card.Text>
-                                Organizes all your Movies with us.
-                            </Card.Text>
-                            <Link to="/signup"><Button variant="primary">Start</Button></Link>
-                        </Card.Body>
-                        <Card.Footer className="text-muted">Movies App</Card.Footer>
-                    </Card>
+                        <div>
+                            <Card className="mx-auto my-5 text-center animated flipInY" style={{width: 700}}>
+                                <Card.Header><h1>WELCOME</h1></Card.Header>
+                                <Card.Body>
+                                    <Card.Title><h5>Your Best Option</h5></Card.Title>
+                                    <Card.Text>
+                                        Organizes all your Movies with us.
+                                    </Card.Text>
+                                    <Link to="/signup"><Button variant="primary">Start</Button></Link>
+                                </Card.Body>
+                                <Card.Footer className="text-muted">Movies App</Card.Footer>
+                            </Card>
+                            <h1 style={{textAlign: "center"}}>{title}</h1>
+                            <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} searchTerm={searchTerm}/>
+                            <NavOptions changeToPopular={changeToPopular} changeToRated={changeToRated} changeToUpcoming={changeToUpcoming}/>
+                            <MoviesContainer movies={movies} type={false} auth={false}/>
+                            {Loading ? 
+                                <div className="mx-auto" style={{width: 80, marginTop: 100}}>
+                                    <Spinner animation="border" /> 
+                                </div>
+                                : ''}
+                            <Button onClick={loadMoreItems} style={{width: 200, marginTop: 100}} className="mx-auto" variant="primary" block>
+                                Load more items
+                            </Button>
+                        </div>
                 )
 
             }

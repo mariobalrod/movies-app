@@ -58,6 +58,7 @@ const ListContent = (props) => {
                     type={true} 
                     storeToastMessage={props.storeToastMessage} 
                     deleteToast={props.deleteToast} 
+                    auth={true}
                 />
             </div>
     );

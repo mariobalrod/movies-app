@@ -20,6 +20,7 @@ const MoviesContainer = (props) => {
                                     title={movie.original_title} 
                                     storeToastMessage={props.storeToastMessage}
                                     deleteToast={props.deleteToast} 
+                                    auth={props.auth}
                                 /> 
                             : 
                                 ''

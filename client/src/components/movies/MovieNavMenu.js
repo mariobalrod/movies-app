@@ -17,8 +17,6 @@ const MovieNavMenu = (props) => {
     const movie_id = props.movie_id;
     const user_id = props.user_id;
 
-    console.log(props.owner)
-
     return (
         <div style={{width: 220}}>
                 {

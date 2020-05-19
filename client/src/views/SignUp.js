@@ -4,6 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import httpClient from '../helpers/httpClient';
 
 import Messages from '../components/partials/Messages';
+import { Link } from 'react-router-dom';
 
 export default class SignUp extends Component {
 
@@ -67,6 +68,8 @@ export default class SignUp extends Component {
                 {
                     (this.state.errorMessages) ? <Messages messages={this.state.errorMessages} /> : ''
                 }
+
+                <Link to="/login"><Button className="mx-auto mt-4" variant="dark" type="submit" style={{width: 300}} block>I have an account</Button></Link>
 
                 <Form className="mx-auto mt-5 animated flipInY" style={{ width: 300 }} onSubmit={this.handleSubmit.bind(this)}>
                     <Form.Group>

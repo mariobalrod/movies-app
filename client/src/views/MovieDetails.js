@@ -23,7 +23,7 @@ const MovieDetails = (props) => {
             <MovieOverviewCard 
                 user={props.currentUser._id}
                 id={props.match.params.id} 
-                owner={props.match.params.type}
+                owner={props.location.state.own}
                 poster_path={movie.poster_path} 
                 title={movie.original_title} 
                 overview={movie.overview} 
