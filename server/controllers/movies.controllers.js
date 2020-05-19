@@ -21,18 +21,141 @@ async function getMoviesByType(req, res) {
 async function createMovie(req, res) {
     const { movie_id, user_id, type } = req.body;
 
-    const newMovie = new Movie({
-        movie_id: movie_id,
-        user_id: user_id,
-        type: type
-    });
+    const movies = await Movie.find({movie_id, user_id});
 
-    newMovie
-        .save()
-        .then(movie => {
-            res.json({success: true, msg: "Pelicula Listada"})
-        })
-        .catch(err => console.log(err));
+    if(type==='vista'){
+        movies.forEach(async movie => {
+            if(movie.type === type){
+                res.json({success: false, msg: 'Already exist'});
+            }
+            if(movie.type === 'pendiente'){
+                await deleteMovieReqId(movie._id)
+
+                const newMovie = new Movie({
+                    movie_id: movie_id,
+                    user_id: user_id,
+                    type: type
+                });
+            
+                newMovie
+                    .save()
+                    .then(movieSaved => {
+                        res.json({success: true, msg: "Cambiada a Vistas"})
+                    })
+                    .catch(err => console.log(err));
+            }
+            if(movie.type === 'favorita'){
+
+                const newMovie = new Movie({
+                    movie_id: movie_id,
+                    user_id: user_id,
+                    type: type
+                });
+            
+                newMovie
+                    .save()
+                    .then(movieSaved => {
+                        res.json({success: true, msg: "Guardada en Vistas"})
+                    })
+                    .catch(err => console.log(err));
+            }
+        });
+    }
+
+    if(type==='favorita'){
+        movies.forEach( async movie => {
+            if(movie.type === type){
+                res.json({success: false, msg: 'Already exist'});
+            }
+            if(movie.type === 'pendiente'){
+                await deleteMovieReqId(movie._id)
+
+                const newMovie = new Movie({
+                    movie_id: movie_id,
+                    user_id: user_id,
+                    type: type
+                });
+            
+                newMovie
+                    .save()
+                    .then(movieSaved => {
+                        res.json({success: true, msg: "Cambiada a Favoritas"})
+                    })
+                    .catch(err => console.log(err));
+            }
+            if(movie.type === 'vista'){
+
+                const newMovie = new Movie({
+                    movie_id: movie_id,
+                    user_id: user_id,
+                    type: type
+                });
+            
+                newMovie
+                    .save()
+                    .then(movieSaved => {
+                        res.json({success: true, msg: "Guardada en Favoritas"})
+                    })
+                    .catch(err => console.log(err));
+            }
+            
+        });
+    }
+
+    if(type==='pendiente'){
+        movies.forEach(async movie => {
+            if(movie.type === type){
+                res.json({success: false, msg: 'Already exist'});
+            }
+            if(movie.type === 'vista'){
+                await deleteMovieReqId(movie._id)
+
+                const newMovie = new Movie({
+                    movie_id: movie_id,
+                    user_id: user_id,
+                    type: type
+                });
+            
+                newMovie
+                    .save()
+                    .then(movieSaved => {
+                        res.json({success: true, msg: "Cambiada a Pendientes"})
+                    })
+                    .catch(err => console.log(err));
+            }
+            if(movie.type === 'favorita'){
+                await deleteMovieReqId(movie._id)
+
+                const newMovie = new Movie({
+                    movie_id: movie_id,
+                    user_id: user_id,
+                    type: type
+                });
+            
+                newMovie
+                    .save()
+                    .then(movieSaved => {
+                        res.json({success: true, msg: "Cambiada a Pendientes"})
+                    })
+                    .catch(err => console.log(err));
+            }
+        });
+    }
+
+    if(movies.length === 0){
+        const newMovie = new Movie({
+            movie_id: movie_id,
+            user_id: user_id,
+            type: type
+        });
+    
+        newMovie
+            .save()
+            .then(movieSaved => {
+                res.json({success: true, msg: "Guardada"})
+            })
+            .catch(err => console.log(err));
+    }
 }
 
 async function updateMovie(req, res) {
@@ -43,6 +166,11 @@ async function updateMovie(req, res) {
 async function deleteMovie(req, res) {
     const { movie_id, user_id } = req.body;
     await Movie.findOneAndDelete({movie_id: movie_id, user_id: user_id});
+    res.json({success: true, msg: "Pelicula Eliminada"});
+}
+
+async function deleteMovieReqId(req, res) {
+    await Movie.findByIdAndDelete(req.id);
     res.json({success: true, msg: "Pelicula Eliminada"});
 }
 
