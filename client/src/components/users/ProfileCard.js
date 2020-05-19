@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Avatar from '../../svg/person.svg';
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 
 
@@ -16,7 +16,7 @@ const ProfileCard = (props) => {
                     <div className="points center">
                         0 Points
                     </div>
-                     <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y&d=mp" className="rounded-circle center" alt="avatar"></img>
+                     <img style={{width: 110}} src={`${Avatar}`} className="rounded-circle center" alt="avatar" />
                 </div>
                 <div className="more-info">
                     <Link to="/form" className="link m-3">

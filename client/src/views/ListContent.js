@@ -1,13 +1,9 @@
 import React, {useEffect, useState} from 'react';
-
 import { fetchIds, fetchMovieById } from '../helpers/tmdbConfig';
-
 import {useHistory, Link} from 'react-router-dom';
-
 import MoviesContainer from '../components/movies/MoviesConainer';
-
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
-
+import Empty from '../svg/empty.svg';
 
 const ListContent = (props) => {
 
@@ -52,14 +48,24 @@ const ListContent = (props) => {
                     <Link to="" className="linkList" onClick={() => history.goBack()}><KeyboardBackspaceIcon style={{fontSize: 40}}/></Link>
                 </div>
                 <h1 style={{ textAlign: "center" }}>{Title}</h1>
-                <MoviesContainer 
-                    movies={Movies} 
-                    currentUser={props.currentUser} 
-                    type={true} 
-                    successToast={props.successToast} 
-                    deleteToast={props.deleteToast} 
-                    auth={true}
-                />
+                {
+                    (Movies.length === 0)
+                        ? (
+                            <div className="mx-auto" style={{width: 1000, marginTop: 125}}>
+                                <img src={`${Empty}`} alt="Empty Image" />
+                            </div>
+                        ) : (
+                            <MoviesContainer 
+                                movies={Movies} 
+                                currentUser={props.currentUser} 
+                                type={true} 
+                                successToast={props.successToast} 
+                                deleteToast={props.deleteToast} 
+                                auth={true}
+                            />
+                        )
+                }
+                
             </div>
     );
 }
