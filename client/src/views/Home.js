@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Button, Spinner } from 'react-bootstrap';
 
@@ -10,8 +10,6 @@ import SearchBar from '../components/partials/SearchBar';
 import MoviesContainer from '../components/movies/MoviesConainer';
 
 const Home = (props) => {
-
-    const buttonRef = useRef(null);
 
     const [searchTerm, setSearchTerm] = useState('');
     const [option, setOption] = useState('movie/popular');
@@ -25,10 +23,6 @@ const Home = (props) => {
         const endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=1`;
         fetchMovies(endpoint);
     }, [option]);
-
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-    }, [])
 
     // ========================================================================================================
     // Options Functions
@@ -96,20 +90,6 @@ const Home = (props) => {
     }
 
     // ========================================================================================================
-    // Scroll System
-
-    const handleScroll = () => {
-        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
-        const body = document.body;
-        const html = document.documentElement;
-        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-        const windowBottom = windowHeight + window.pageYOffset;
-        if (windowBottom >= docHeight - 1) {
-            buttonRef.current.click();
-        }
-    }
-
-    // ========================================================================================================
     // Buscador
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -138,10 +118,9 @@ const Home = (props) => {
                                 <Spinner animation="border" /> 
                             </div>
                             : ''}
-                        <Button onClick={loadMoreItems} style={{width: 200, marginTop: 100}} className="mx-auto" variant="primary" ref={buttonRef} block>
+                        <Button onClick={loadMoreItems} style={{width: 200, marginTop: 100}} className="mx-auto" variant="primary" block>
                             Load more items
                         </Button>
-                        {/* <PaginationCom prevPage={prevPage} nextPage={nextPage} firstPage={firstPage} lastPage={lastPage}/> */}
                     </div>
                 ) : (
                     <Card className="mx-auto my-5 text-center animated flipInY" style={{width: 700}}>
