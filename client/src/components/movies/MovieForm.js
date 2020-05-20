@@ -23,13 +23,7 @@ export default class MovieForm extends Component {
         }
     }
 
-    componentWillMount() {
-        this.setState({
-            fields: {
-                idUser: this.props.currentUser._id
-            }
-        });
-    }
+    
 
     handleChange = (e) => {
         this.setState ({
