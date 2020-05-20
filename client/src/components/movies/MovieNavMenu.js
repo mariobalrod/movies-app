@@ -25,9 +25,15 @@ const MovieNavMenu = (props) => {
                         <Nav className="navigation mr-3">
                             <Nav.Item>
                                 <Nav.Link onClick={() => {
-                                    addMovie(movie_id, user_id, 'pendiente');
-                                    window.location.reload(true);
-                                    props.successToast('Añadida a Pendiente')
+                                    addMovie(movie_id, user_id, 'pendiente')
+                                        .then(data => {
+                                            if(data.success) {
+                                                props.successToast('Añadida a Pendiente')                                                
+                                            } else {
+                                                props.warningToast(data.msg)
+                                            }
+                                        })
+                                        .catch(err => console.log(err))
                                 }}>
                                     <VisibilityIcon style={{ fontSize: 15 }} className="linkList"/>
                                 </Nav.Link>
@@ -36,8 +42,14 @@ const MovieNavMenu = (props) => {
                             <Nav.Item>
                                 <Nav.Link onClick={() => {
                                     addMovie(movie_id, user_id, 'vista')
-                                    window.location.reload(true);
-                                    props.successToast('Añadida a Vista')
+                                        .then(data => {
+                                            if(data.success) {
+                                                props.successToast('Añadida a Vista')
+                                            } else {
+                                                props.warningToast(data.msg)
+                                            }
+                                        })
+                                        .catch(err => console.log(err))
                                 }}>
                                     <VisibilityOffIcon style={{ fontSize: 15 }} className="linkList" />
                                 </Nav.Link>
@@ -46,8 +58,14 @@ const MovieNavMenu = (props) => {
                             <Nav.Item>
                                 <Nav.Link onClick={() => {
                                     addMovie(movie_id, user_id, 'favorita')
-                                    window.location.reload(true);
-                                    props.successToast('Añadida a Favorita')
+                                        .then(data => {
+                                            if(data.success) {
+                                                props.successToast('Añadida a Favorita')
+                                            } else {
+                                                props.warningToast(data.msg)
+                                            }
+                                        })
+                                        .catch(err => console.log(err))
                                 }}>
                                     <StarIcon style={{ fontSize: 15 }} className="linkList" />
                                 </Nav.Link>
@@ -56,11 +74,11 @@ const MovieNavMenu = (props) => {
                             <Nav.Item>
                                 <Nav.Link onClick={() => {
                                     if(props.overview){
-                                        deleteMovie(movie_id, user_id);
+                                        deleteMovie(props.mongoId);
                                         history.goBack();
                                         props.deleteToast();
                                     }else {
-                                        deleteMovie(movie_id, user_id);
+                                        deleteMovie(props.mongoId);
                                         props.deleteToast();
                                     }
                                     
@@ -75,8 +93,15 @@ const MovieNavMenu = (props) => {
 
                             <Nav.Item>
                                 <Nav.Link onClick={() => {
-                                    addMovie(movie_id, user_id, 'pendiente');
-                                    props.successToast('Añadida a Pendiente')
+                                    addMovie(movie_id, user_id, 'pendiente')
+                                        .then(data => {
+                                            if(data.success) {
+                                                props.successToast('Añadida a Pendiente')                                                
+                                            } else {
+                                                props.warningToast(data.msg)
+                                            }
+                                        })
+                                        .catch(err => console.log(err))
                                 }}>
                                     <VisibilityIcon style={{ fontSize: 20 }} className="linkList"/>
                                 </Nav.Link>
@@ -85,7 +110,14 @@ const MovieNavMenu = (props) => {
                             <Nav.Item>
                                 <Nav.Link onClick={() => {
                                     addMovie(movie_id, user_id, 'vista')
-                                    props.successToast('Añadida a Vista')
+                                        .then(data => {
+                                            if(data.success) {
+                                                props.successToast('Añadida a Vista')
+                                            } else {
+                                                props.warningToast(data.msg)
+                                            }
+                                        })
+                                        .catch(err => console.log(err))
                                 }}>
                                     <VisibilityOffIcon style={{ fontSize: 20 }} className="linkList" />
                                 </Nav.Link>
@@ -94,7 +126,14 @@ const MovieNavMenu = (props) => {
                             <Nav.Item>
                                 <Nav.Link onClick={() => {
                                     addMovie(movie_id, user_id, 'favorita')
-                                    props.successToast('Añadida a Favorita')
+                                        .then(data => {
+                                            if(data.success) {
+                                                props.successToast('Añadida a Favorita')                                                
+                                            } else {
+                                                props.warningToast(data.msg)
+                                            }
+                                        })
+                                        .catch(err => console.log(err))
                                 }}>
                                     <StarIcon style={{ fontSize: 20 }} className="linkList" />
                                 </Nav.Link>

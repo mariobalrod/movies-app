@@ -26,8 +26,9 @@ const ListContent = (props) => {
         const idsArray = await fetchIds(type, user);
         const helper = [];
         for(let i =0; i<idsArray.length; i++) {
+            const mongoId = idsArray[i].mongoId
             const movie = await fetchMovieById(idsArray[i].idM);
-            helper.push(movie);
+            helper.push({mongoId, movie});
         }
         setMovies(helper);
     }
@@ -52,10 +53,12 @@ const ListContent = (props) => {
                     (Movies.length === 0)
                         ? (
                             <div className="mx-auto" style={{width: 1000, marginTop: 125}}>
-                                <img src={`${Empty}`} alt="Empty Image" />
+                                <img src={`${Empty}`} alt="EmptyImage" />
                             </div>
                         ) : (
+                            
                             <MoviesContainer 
+                                warningToast={props.warningToast}
                                 movies={Movies} 
                                 currentUser={props.currentUser} 
                                 type={true} 

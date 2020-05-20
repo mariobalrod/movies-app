@@ -27,10 +27,7 @@ async function createMovie(req, res) {
         movies.forEach(async movie => {
             if(movie.type === type){
                 res.json({success: false, msg: 'Already exist'});
-            }
-            if(movie.type === 'pendiente'){
-                await deleteMovieReqId(movie._id)
-
+            } else {
                 const newMovie = new Movie({
                     movie_id: movie_id,
                     user_id: user_id,
@@ -40,22 +37,7 @@ async function createMovie(req, res) {
                 newMovie
                     .save()
                     .then(movieSaved => {
-                        res.json({success: true, msg: "Cambiada a Vistas"})
-                    })
-                    .catch(err => console.log(err));
-            }
-            if(movie.type === 'favorita'){
-
-                const newMovie = new Movie({
-                    movie_id: movie_id,
-                    user_id: user_id,
-                    type: type
-                });
-            
-                newMovie
-                    .save()
-                    .then(movieSaved => {
-                        res.json({success: true, msg: "Guardada en Vistas"})
+                        res.json({success: true, msg: "Guardada"})
                     })
                     .catch(err => console.log(err));
             }
@@ -66,10 +48,7 @@ async function createMovie(req, res) {
         movies.forEach( async movie => {
             if(movie.type === type){
                 res.json({success: false, msg: 'Already exist'});
-            }
-            if(movie.type === 'pendiente'){
-                await deleteMovieReqId(movie._id)
-
+            } else {
                 const newMovie = new Movie({
                     movie_id: movie_id,
                     user_id: user_id,
@@ -79,22 +58,7 @@ async function createMovie(req, res) {
                 newMovie
                     .save()
                     .then(movieSaved => {
-                        res.json({success: true, msg: "Cambiada a Favoritas"})
-                    })
-                    .catch(err => console.log(err));
-            }
-            if(movie.type === 'vista'){
-
-                const newMovie = new Movie({
-                    movie_id: movie_id,
-                    user_id: user_id,
-                    type: type
-                });
-            
-                newMovie
-                    .save()
-                    .then(movieSaved => {
-                        res.json({success: true, msg: "Guardada en Favoritas"})
+                        res.json({success: true, msg: "Guardada"})
                     })
                     .catch(err => console.log(err));
             }
@@ -106,10 +70,7 @@ async function createMovie(req, res) {
         movies.forEach(async movie => {
             if(movie.type === type){
                 res.json({success: false, msg: 'Already exist'});
-            }
-            if(movie.type === 'vista'){
-                await deleteMovieReqId(movie._id)
-
+            } else {
                 const newMovie = new Movie({
                     movie_id: movie_id,
                     user_id: user_id,
@@ -119,23 +80,7 @@ async function createMovie(req, res) {
                 newMovie
                     .save()
                     .then(movieSaved => {
-                        res.json({success: true, msg: "Cambiada a Pendientes"})
-                    })
-                    .catch(err => console.log(err));
-            }
-            if(movie.type === 'favorita'){
-                await deleteMovieReqId(movie._id)
-
-                const newMovie = new Movie({
-                    movie_id: movie_id,
-                    user_id: user_id,
-                    type: type
-                });
-            
-                newMovie
-                    .save()
-                    .then(movieSaved => {
-                        res.json({success: true, msg: "Cambiada a Pendientes"})
+                        res.json({success: true, msg: "Guardada"})
                     })
                     .catch(err => console.log(err));
             }

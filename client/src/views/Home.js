@@ -19,7 +19,6 @@ const Home = (props) => {
     const [Loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setSearchTerm('');
         const endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=1`;
         fetchMovies(endpoint);
     }, [option]);
@@ -112,7 +111,7 @@ const Home = (props) => {
                         <h1 style={{textAlign: "center"}}>{title}</h1>
                         <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} searchTerm={searchTerm}/>
                         <NavOptions changeToPopular={changeToPopular} changeToRated={changeToRated} changeToUpcoming={changeToUpcoming}/>
-                        <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} auth={true} successToast={props.successToast}/>
+                        <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} auth={true} successToast={props.successToast} warningToast={props.warningToast}/>
                         {Loading ? 
                             <div className="mx-auto" style={{width: 80, marginTop: 100}}>
                                 <Spinner animation="border" /> 

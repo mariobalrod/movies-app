@@ -14,11 +14,13 @@ const MovieCard = (props) => {
                             <div>
                                 <div className="cardMovie animated flipInY">
                                     <MovieNavMenu 
+                                        mongoId={props.mongoId}
                                         movie_id={props.id} 
                                         user_id={props.currentUser._id} 
                                         owner={props.type}
                                         successToast={props.successToast}
                                         deleteToast={props.deleteToast} 
+                                        warningToast={props.warningToast}
                                         overview={false}
                                     />
                                     <img src={`https://image.tmdb.org/t/p/w185${props.image}`} alt="portada" />
@@ -26,7 +28,8 @@ const MovieCard = (props) => {
                                         to={{
                                             pathname: `/overview/${props.id}`,
                                             state: {
-                                                own: props.type
+                                                own: props.type,
+                                                mongoId: props.mongoId
                                             }
                                         }}
                                     >
@@ -38,7 +41,8 @@ const MovieCard = (props) => {
                                         to={{
                                             pathname: `/overview/${props.id}`,
                                             state: {
-                                                own: props.type
+                                                own: props.type,
+                                                mongoId: props.mongoId
                                             }
                                         }}
                                     >

@@ -22,6 +22,7 @@ const MovieDetails = (props) => {
         <div>
             <MovieOverviewCard 
                 user={props.currentUser._id}
+                mongoId={props.location.state.mongoId}
                 id={props.match.params.id} 
                 owner={props.location.state.own}
                 poster_path={movie.poster_path} 
@@ -31,6 +32,7 @@ const MovieDetails = (props) => {
                 homepage={movie.homepage}
                 successToast={props.successToast} 
                 deleteToast={props.deleteToast}
+                warningToast={props.warningToast}
             />
         </div>
     );

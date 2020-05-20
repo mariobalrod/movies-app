@@ -25,7 +25,8 @@ const fetchIds = async function(type, user) {
     
     const ids = moviesDb.data.map(movie => {
         const idM = movie.movie_id;
-        return {idM}
+        const mongoId = movie._id;
+        return {idM, mongoId}
     });
     return ids;
 }

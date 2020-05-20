@@ -29,9 +29,11 @@ const MovieOverwiewCard = (props) => {
                     <Col className="mx-4">
                         <Row style={{marginLeft: 45}}>
                             <MovieNavMenu 
+                                mongoId={props.mongoId}
                                 movie_id={props.id}
                                 user_id={props.user} 
                                 owner={props.owner} 
+                                warningToast={props.warningToast}
                                 successToast={props.successToast}
                                 deleteToast={props.deleteToast}
                                 overview={true}

@@ -3,18 +3,20 @@ const axios = require('axios');
 // Todo: Actions for moovies of my API routes
 
 const addMovie = async function(movie_id, user_id, type) {
-    await axios({
+    const response = await axios({
         method: 'POST',
         url: '/api/movies/add',
         data: {movie_id, user_id, type}
     })
+    
+    const data = response.data;
+    return data;
 }
 
-const deleteMovie = async function(movie_id, user_id) {
+const deleteMovie = async function(mongoId) {
     await axios({
         method: 'DELETE',
-        url: '/api/movies/delete',
-        data: {movie_id, user_id}
+        url: `/api/movies/${mongoId}`
     })
     window.location.reload(true);
 }

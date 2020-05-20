@@ -40,6 +40,10 @@ class App extends Component {
     successToast(msg) {
         ToastsStore.success(msg);
     }
+
+    warningToast(msg) {
+        ToastsStore.warning(msg);
+    }
     
     deleteToast() {
         ToastsStore.error('Eliminada de la lista.');
@@ -57,7 +61,7 @@ class App extends Component {
                     <Switch>
 
                         <Route exact path="/" render={(props) => {
-                            return <Home {...props} currentUser={currentUser} successToast={this.successToast} />
+                            return <Home {...props} currentUser={currentUser} successToast={this.successToast} warningToast={this.warningToast}/>
                         }} />
 
                         <Route path="/login" render={(props) => {
@@ -77,7 +81,7 @@ class App extends Component {
                         }}/> 
 
                         <Route exact path="/lists/:type" render={(props) => {
-                            return <ListConstent {...props} currentUser={currentUser} successToast={this.successToast} deleteToast={this.deleteToast} />
+                            return <ListConstent {...props} currentUser={currentUser} successToast={this.successToast} deleteToast={this.deleteToast} warningToast={this.warningToast}/>
                         }} />                   
 
                         <Route path="/profile" render={(props) => {
@@ -89,7 +93,7 @@ class App extends Component {
                         }} />
 
                         <Route exact path="/overview/:id" render={(props) => {
-                            return <MovieDetails {...props} currentUser={currentUser} successToast={this.successToast} deleteToast={this.deleteToast}/>
+                            return <MovieDetails {...props} currentUser={currentUser} successToast={this.successToast} deleteToast={this.deleteToast} warningToast={this.warningToast}/>
                         }} />
 
                     </Switch>
