@@ -21,73 +21,11 @@ async function getMoviesByType(req, res) {
 async function createMovie(req, res) {
     const { movie_id, user_id, type } = req.body;
 
-    const movies = await Movie.find({movie_id, user_id});
+    const movie = await Movie.findOne({movie_id, user_id, type});
 
-    if(type==='vista'){
-        movies.forEach(async movie => {
-            if(movie.type === type){
-                res.json({success: false, msg: 'Already exist'});
-            } else {
-                const newMovie = new Movie({
-                    movie_id: movie_id,
-                    user_id: user_id,
-                    type: type
-                });
-            
-                newMovie
-                    .save()
-                    .then(movieSaved => {
-                        res.json({success: true, msg: "Guardada"})
-                    })
-                    .catch(err => console.log(err));
-            }
-        });
-    }
-
-    if(type==='favorita'){
-        movies.forEach( async movie => {
-            if(movie.type === type){
-                res.json({success: false, msg: 'Already exist'});
-            } else {
-                const newMovie = new Movie({
-                    movie_id: movie_id,
-                    user_id: user_id,
-                    type: type
-                });
-            
-                newMovie
-                    .save()
-                    .then(movieSaved => {
-                        res.json({success: true, msg: "Guardada"})
-                    })
-                    .catch(err => console.log(err));
-            }
-            
-        });
-    }
-
-    if(type==='pendiente'){
-        movies.forEach(async movie => {
-            if(movie.type === type){
-                res.json({success: false, msg: 'Already exist'});
-            } else {
-                const newMovie = new Movie({
-                    movie_id: movie_id,
-                    user_id: user_id,
-                    type: type
-                });
-            
-                newMovie
-                    .save()
-                    .then(movieSaved => {
-                        res.json({success: true, msg: "Guardada"})
-                    })
-                    .catch(err => console.log(err));
-            }
-        });
-    }
-
-    if(movies.length === 0){
+    if(movie) {
+        res.json({success: false, msg: 'Already exist'});
+    } else {
         const newMovie = new Movie({
             movie_id: movie_id,
             user_id: user_id,
