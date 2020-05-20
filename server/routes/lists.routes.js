@@ -14,8 +14,8 @@ const {
 router.get('/', getAllLists);
 router.get('/:id', getListById);
 router.get('/:user', getLists);
-router.post('/add', createList);
-router.put('/:id', updateList);
+router.post('/create', createList);
+router.post('/:id', updateList);
 router.delete('/:id', deleteListById);
 router.get('/count/:user', getCountList);
 
