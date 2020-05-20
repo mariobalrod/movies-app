@@ -6,8 +6,6 @@ import ListCard from './ListCard';
 
 const ListContainer = (props) => {
 
-
-
     return (
         <div>
             <Nav variant="tabs" className="justify-content-center" style={{ marginTop: 80, width: 1500 }}>

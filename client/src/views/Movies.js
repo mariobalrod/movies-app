@@ -8,7 +8,7 @@ import VisibilityRoundedIcon from '@material-ui/icons/VisibilityRounded';
 import PlaylistAddRoundedIcon from '@material-ui/icons/PlaylistAddRounded';
 
 import ListContainer from '../components/lists/ListContainer';
-import MovieForm from '../components/movies/MovieForm'
+import ListForm from '../components/lists/ListForm';
 
 export default class Movies extends Component {
 
@@ -26,7 +26,7 @@ export default class Movies extends Component {
     }
 
     render () {
-        let form = this.state.show ? <MovieForm /> : '';
+        let form = this.state.show ? <ListForm /> : '';
         return (
             <div className="mt-5">
                 <div>
@@ -38,7 +38,7 @@ export default class Movies extends Component {
                 {form}
                 <Nav variant="tabs" className="mx-auto justify-content-center" style={{ marginTop: 80, width: 1500 }}>
                     <Nav.Item className="mb-3">
-                        Deafult Lists
+                        Default Lists
                     </Nav.Item>
                 </Nav>
                 <div className="container1">
