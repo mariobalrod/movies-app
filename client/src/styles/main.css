@@ -101,13 +101,11 @@ body {
     color: rgb(61, 61, 61);
 }
 
-.linkList:hover .deleteList{
+.custom:hover .deleteList{
     opacity: 1;
 }
 
 .deleteList {
-    margin: 13px;
-    position: absolute;
     opacity: 0;
     text-decoration: none;
     color: rgb(255, 2, 2);
@@ -162,6 +160,7 @@ body {
 .container1Custom {
     display: flex;
     position: relative;
+    margin-top: 45px;
     width: 100%;
     border: 2px solid transparent;
     justify-content: center;
