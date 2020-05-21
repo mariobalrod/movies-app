@@ -23,7 +23,7 @@ const ListContainer = (props) => {
                                     {
                                         props.lists.map((list, i) => {
                                             return (
-                                                <ListCard key={i} list={list} />
+                                                <ListCard key={i} list={list} lists={props.lists}/>
                                             )
                                         })
                                     }
