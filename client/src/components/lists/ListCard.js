@@ -12,14 +12,18 @@ const ListCard = (props) => {
 
     const id = props.list._id;
     const name = props.list.name;
-    const description = props.list.description;
 
     return (
         <div className="custom">
             <div className="mx-auto mb-2" style={{width: 30}}>
                 <DeleteForeverIcon className="deleteList" onClick={() => deleteList(id)}/>
             </div>
-            <Link to={`/lists/${name}`} className="linkList">
+            <Link to={{
+                pathname: `/lists/${name}`,
+                state: {
+                    lists: props.lists
+                }
+            }} className="linkList">
                 <Card className="animated flipInY" style={{ width: 300, margin: 50, marginTop: 0 }}>
                     <Card.Body>
                         <TheatersRoundedIcon className="mx-auto" style={{ fontSize: 250 }} />

@@ -26,7 +26,7 @@ const Home = (props) => {
         fetchMovies(endpoint);
 
         fetchList(user);
-    }, [option]);
+    }, [option, props.currentUser._id]);
 
     const fetchList = async (user) => {
         const listsF = await getLists(user);

@@ -74,7 +74,7 @@ export default class SignUp extends Component {
                 <Form className="mx-auto mt-5 animated flipInY" style={{ width: 300 }} onSubmit={this.handleSubmit.bind(this)} autoComplete="off">
                     <Form.Group>
                         <Form.Label>Email</Form.Label>
-                        <Form.Control name="email" value={this.state.fields.email} size="sm" type="email" placeholder="name@example.com" autoFocus onChange={this.handleChange.bind(this)} autoFocus/>
+                        <Form.Control name="email" value={this.state.fields.email} size="sm" type="email" placeholder="name@example.com" onChange={this.handleChange.bind(this)} autoFocus/>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Username</Form.Label>

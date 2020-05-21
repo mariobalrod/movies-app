@@ -1,8 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Nav, NavDropdown} from 'react-bootstrap';
-
-//Actions
-import { getLists } from '../../helpers/listsActions';
 
 import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
 
