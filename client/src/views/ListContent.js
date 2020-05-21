@@ -40,6 +40,7 @@ const ListContent = (props) => {
         if (type === 'favorita') setTitle('Peliculas Favoritas')
         if (type === 'vista') setTitle('Peliculas Vistas')
         if (type === 'pendiente') setTitle('Peliculas Pendientes')
+        if  (type !== 'favorita' && type !== 'vista' && type !== 'pendiente') setTitle(type)
     }
 
     // ==================================================================================================================
