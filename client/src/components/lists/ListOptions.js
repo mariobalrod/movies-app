@@ -7,8 +7,10 @@ import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
 
 const ListOptions = (props) => {
 
+    let centrar = (props.overview) ? 60 : 0;
+
     return (
-        <Nav.Item className="listOptions">
+        <Nav.Item className="listOptions" style={{marginLeft: centrar}}>
             {
                 (props.lists.length!==0)
                     ? (

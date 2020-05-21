@@ -30,7 +30,8 @@ const MovieCard = (props) => {
                                             pathname: `/overview/${props.id}`,
                                             state: {
                                                 own: props.type,
-                                                mongoId: props.mongoId
+                                                mongoId: props.mongoId,
+                                                lists: props.lists
                                             }
                                         }}
                                     >
@@ -43,7 +44,8 @@ const MovieCard = (props) => {
                                             pathname: `/overview/${props.id}`,
                                             state: {
                                                 own: props.type,
-                                                mongoId: props.mongoId
+                                                mongoId: props.mongoId,
+                                                lists: props.lists
                                             }
                                         }}
                                     >

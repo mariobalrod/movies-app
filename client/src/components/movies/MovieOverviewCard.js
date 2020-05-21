@@ -29,6 +29,7 @@ const MovieOverwiewCard = (props) => {
                     <Col className="mx-4">
                         <Row style={{marginLeft: 45}}>
                             <MovieNavMenu 
+                                lists={props.lists}
                                 mongoId={props.mongoId}
                                 movie_id={props.id}
                                 user_id={props.user} 
