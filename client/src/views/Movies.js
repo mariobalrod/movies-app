@@ -7,6 +7,9 @@ import VisibilityOffRoundedIcon from '@material-ui/icons/VisibilityOffRounded';
 import VisibilityRoundedIcon from '@material-ui/icons/VisibilityRounded';
 import PlaylistAddRoundedIcon from '@material-ui/icons/PlaylistAddRounded';
 
+//Actions
+import { getLists } from '../helpers/listsActions';
+
 import ListContainer from '../components/lists/ListContainer';
 import ListForm from '../components/lists/ListForm';
 
@@ -15,7 +18,8 @@ export default class Movies extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            show: false
+            show: false,
+            lists: []
         }
     }
 
@@ -23,10 +27,18 @@ export default class Movies extends Component {
         if(!this.props.currentUser) {
             this.props.history.push('/');
         }
+
+        this.fetchList(this.props.currentUser._id)
+    }
+
+    async fetchList (user) {
+        const listsF = await getLists(user);
+        this.setState({lists: listsF})
     }
 
     render () {
         let form = this.state.show ? <ListForm currentUser={this.props.currentUser} /> : '';
+        const {lists} = this.state;
         return (
             <div className="mt-5">
                 <div>
@@ -43,7 +55,12 @@ export default class Movies extends Component {
                 </Nav>
                 <div className="container1">
                     <div className="container2">
-                        <Link to="/lists/favorita" className="linkList">
+                        <Link to={{
+                                pathname: "/lists/favorita",
+                                state: {
+                                    lists: lists
+                                }
+                            }} className="linkList">
                             <Card className="animated flipInY" style={{ width: 300, margin: 50 }}>
                                 <Card.Body>
                                     <StarIcon className="mx-auto" style={{ fontSize: 250 }} />
@@ -51,7 +68,12 @@ export default class Movies extends Component {
                                 <Card.Footer className="text-muted" style={{textAlign: "center"}}>Favoritos</Card.Footer>
                             </Card>
                         </Link>
-                        <Link to="/lists/vista" className="linkList">
+                        <Link to={{
+                                pathname: "/lists/vista",
+                                state: {
+                                    lists: lists
+                                }
+                            }} className="linkList">
                             <Card className="animated flipInY" style={{ width: 300, margin: 50 }}>
                                 <Card.Body>
                                     <VisibilityOffRoundedIcon className="mx-auto" style={{ fontSize: 250 }} />
@@ -59,7 +81,12 @@ export default class Movies extends Component {
                                 <Card.Footer className="text-muted" style={{textAlign: "center"}}>Vistos</Card.Footer>
                             </Card>
                         </Link>
-                        <Link to="/lists/pendiente" className="linkList">
+                        <Link to={{
+                                pathname: "/lists/pendiente",
+                                state: {
+                                    lists: lists
+                                }
+                            }} className="linkList">
                             <Card className="animated flipInY" style={{ width: 300, margin: 50 }}>
                                 <Card.Body>
                                     <VisibilityRoundedIcon className="mx-auto" style={{ fontSize: 250 }} />
@@ -68,7 +95,7 @@ export default class Movies extends Component {
                             </Card>
                         </Link>
 
-                        <ListContainer currentUser={this.props.currentUser} />
+                        <ListContainer currentUser={this.props.currentUser} lists={lists}/>
                     </div>
                 </div>
             </div>

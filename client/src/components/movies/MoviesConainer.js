@@ -18,6 +18,7 @@ const MoviesContainer = (props) => {
                                         <MovieCard 
                                             key={i} 
                                             mongoId={data.mongoId}
+                                            lists={props.lists}
                                             image={data.movie.poster_path} 
                                             id={data.movie.id} 
                                             currentUser={props.currentUser}
@@ -42,6 +43,7 @@ const MoviesContainer = (props) => {
                                     ? 
                                         <MovieCard 
                                             key={i} 
+                                            lists={props.lists}
                                             image={movie.poster_path} 
                                             id={movie.id} 
                                             currentUser={props.currentUser}

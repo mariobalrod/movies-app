@@ -101,6 +101,16 @@ body {
     color: rgb(61, 61, 61);
 }
 
+.linkListOptions {
+    text-decoration: none;
+    color: rgb(32, 32, 32);
+}
+
+.linkListOptions:hover {
+    text-decoration: none;
+    color: rgb(87, 87, 87);
+}
+
 .custom:hover .deleteList{
     opacity: 1;
 }
@@ -175,4 +185,11 @@ body {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+.listOptions {
+    position: absolute;
+    top: 50px;
+    left: 60px;
+    z-index: 1;
 }

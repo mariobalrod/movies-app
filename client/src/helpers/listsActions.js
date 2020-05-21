@@ -21,7 +21,6 @@ const deleteList = async function(id) {
 
 const getLists = async function(user) {
     const lists = await axios.get(`api/lists/own/${user}`)
-    console.log('getLists', lists.data)
     return lists.data;
 }
 

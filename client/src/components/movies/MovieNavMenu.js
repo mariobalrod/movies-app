@@ -5,6 +5,8 @@ import { addMovie, deleteMovie } from '../../helpers/moviesActions';
 
 import {useHistory} from 'react-router-dom';
 
+import ListOptions from '../lists/ListOptions';
+
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import StarIcon from '@material-ui/icons/Star';
@@ -86,6 +88,9 @@ const MovieNavMenu = (props) => {
                                     <DeleteForeverIcon className="delete" style={{ fontSize: 15 }} />
                                 </Nav.Link>
                             </Nav.Item>
+
+                            <ListOptions user_id={user_id} lists={props.lists}/>
+
                         </Nav>
                     ) : (
 
@@ -138,6 +143,8 @@ const MovieNavMenu = (props) => {
                                     <StarIcon style={{ fontSize: 20 }} className="linkList" />
                                 </Nav.Link>
                             </Nav.Item>
+
+                            <ListOptions user_id={user_id} lists={props.lists} />
 
                         </Nav>
                         

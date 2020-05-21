@@ -5,6 +5,7 @@ import MoviesContainer from '../components/movies/MoviesConainer';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import Empty from '../svg/empty.svg';
 
+
 const ListContent = (props) => {
 
     let history = useHistory();
@@ -17,7 +18,7 @@ const ListContent = (props) => {
         const user = props.currentUser._id;
         
         establecerTitulo(type);
-        fetchMoviesList(type, user)
+        fetchMoviesList(type, user);
     }, [props.currentUser._id, props.match.params.type])
 
     // ==================================================================================================================
@@ -58,6 +59,7 @@ const ListContent = (props) => {
                         ) : (
                             
                             <MoviesContainer 
+                                lists={props.location.state.lists}
                                 warningToast={props.warningToast}
                                 movies={Movies} 
                                 currentUser={props.currentUser} 

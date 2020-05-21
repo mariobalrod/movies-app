@@ -14,6 +14,7 @@ const MovieCard = (props) => {
                             <div>
                                 <div className="cardMovie animated flipInY">
                                     <MovieNavMenu 
+                                        lists={props.lists}
                                         mongoId={props.mongoId}
                                         movie_id={props.id} 
                                         user_id={props.currentUser._id} 

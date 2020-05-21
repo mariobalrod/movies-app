@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Button, Spinner } from 'react-bootstrap';
-
+//Actions
+import { getLists } from '../helpers/listsActions';
 import { apiKey, apiUrl } from '../helpers/tmdbConfig';
 
 // Componentes
@@ -17,11 +18,20 @@ const Home = (props) => {
     const [movies, setMovies] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [Loading, setLoading] = useState(true);
+    const [lists, setLists] = useState([]);
 
     useEffect(() => {
+        const user = props.currentUser._id;
         const endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=1`;
         fetchMovies(endpoint);
+
+        fetchList(user);
     }, [option]);
+
+    const fetchList = async (user) => {
+        const listsF = await getLists(user);
+        setLists(listsF);
+    }
 
     // ========================================================================================================
     // Options Functions
@@ -111,7 +121,7 @@ const Home = (props) => {
                         <h1 style={{textAlign: "center"}}>{title}</h1>
                         <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} searchTerm={searchTerm}/>
                         <NavOptions changeToPopular={changeToPopular} changeToRated={changeToRated} changeToUpcoming={changeToUpcoming}/>
-                        <MoviesContainer currentUser={props.currentUser} movies={movies} type={false} auth={true} successToast={props.successToast} warningToast={props.warningToast}/>
+                        <MoviesContainer lists={lists} currentUser={props.currentUser} movies={movies} type={false} auth={true} successToast={props.successToast} warningToast={props.warningToast}/>
                         {Loading ? 
                             <div className="mx-auto" style={{width: 80, marginTop: 100}}>
                                 <Spinner animation="border" /> 
