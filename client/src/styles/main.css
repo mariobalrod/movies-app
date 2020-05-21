@@ -101,6 +101,23 @@ body {
     color: rgb(61, 61, 61);
 }
 
+.linkList:hover .deleteList{
+    opacity: 1;
+}
+
+.deleteList {
+    margin: 13px;
+    position: absolute;
+    opacity: 0;
+    text-decoration: none;
+    color: rgb(255, 2, 2);
+}
+
+.deleteList:hover {
+    text-decoration: none;
+    color: rgb(146, 0, 0);
+}
+
 .delete {
     text-decoration: none;
     color: rgb(255, 2, 2);

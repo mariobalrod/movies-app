@@ -23,7 +23,7 @@ const ListForm =(props) => {
     }
 
     return (
-        <Form className="mx-auto mt-5 animated flipInY" style={{ width: 300 }} onSubmit={handleSubmit}>
+        <Form className="mx-auto mt-5 animated flipInY" style={{ width: 300 }} onSubmit={handleSubmit} autoComplete="off">
             <h5 style={{textAlign: "center"}}>Create a new List</h5>
             <Form.Group>
                 <Form.Label>Name</Form.Label>

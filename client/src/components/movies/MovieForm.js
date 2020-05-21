@@ -51,7 +51,7 @@ export default class MovieForm extends Component {
                     (this.state.errorMessages) ? <Messages messages={this.state.errorMessages} /> : ''
                 }
 
-                <Form className="mx-auto mt-5 animated flipInY" style={{ width: 300 }} onSubmit={this.handleSubmit.bind(this)}>
+                <Form className="mx-auto mt-5 animated flipInY" style={{ width: 300 }} onSubmit={this.handleSubmit.bind(this)} autoComplete="off">
 
                     <Form.Group>
                         <Form.Label>Title*</Form.Label>

@@ -67,10 +67,10 @@ export default class LogIn extends Component {
                     (this.state.errorMessages) ? <Messages messages={this.state.errorMessages} /> : ''
                 }
 
-                <Form className="mx-auto mt-5 animated flipInY" style={{ width: 300 }} onSubmit={this.handleSubmit.bind(this)}>
+                <Form className="mx-auto mt-5 animated flipInY" style={{ width: 300 }} onSubmit={this.handleSubmit.bind(this)} autoComplete="off">
                     <Form.Group>
                         <Form.Label>Username</Form.Label>
-                        <Form.Control name="username" value={this.state.fields.username} size="sm" type="text" placeholder="name111" onChange={this.handleChange.bind(this)} />
+                        <Form.Control name="username" value={this.state.fields.username} size="sm" type="text" onChange={this.handleChange.bind(this)} autoFocus/>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Password</Form.Label>

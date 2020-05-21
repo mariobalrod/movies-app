@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import TheatersRoundedIcon from '@material-ui/icons/TheatersRounded';
 
 const ListCard = (props) => {
@@ -12,6 +13,7 @@ const ListCard = (props) => {
     return (
         <Link to={`/lists/${name}`} className="linkList">
             <Card className="animated flipInY" style={{ width: 300, margin: 50 }}>
+                <DeleteForeverIcon className="deleteList" />
                 <Card.Body>
                     <TheatersRoundedIcon className="mx-auto" style={{ fontSize: 250 }} />
                 </Card.Body>

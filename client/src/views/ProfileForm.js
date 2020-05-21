@@ -36,7 +36,7 @@ const ProfileForm = (props) => {
 
     return (
         <Card className="mx-auto overviewCard mt-5 animated flipInY" style={{width: 500}} sm>
-            <Form className="mx-auto mt-5" style={{width: 400}} onSubmit={handleSubmit}>
+            <Form className="mx-auto mt-5" style={{width: 400}} onSubmit={handleSubmit} autoComplete="off">
                 <Link to="" onClick={() => history.goBack()}><KeyboardBackspaceIcon /></Link>
                 <div className="mt-3">
                     <h3 style={{textAlign: "center"}}>Edit your description</h3>
