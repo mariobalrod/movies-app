@@ -13,7 +13,7 @@ const {
 
 router.get('/', getAllLists);
 router.get('/:id', getListById);
-router.get('/:user', getLists);
+router.get('/own/:user', getLists);
 router.post('/create', createList);
 router.post('/:id', updateList);
 router.delete('/:id', deleteListById);

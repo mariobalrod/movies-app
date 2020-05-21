@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import { Form, Button } from 'react-bootstrap';
 
+import { createList } from '../../helpers/listsActions';
+
 const ListForm =(props) => {
 
     const [name, setName] = useState('');
@@ -8,7 +10,8 @@ const ListForm =(props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Crear Lista!')
+        await createList(name, description, props.currentUser._id);
+        window.location.reload(true);
     }
 
     const handleChangeName = (e) => {

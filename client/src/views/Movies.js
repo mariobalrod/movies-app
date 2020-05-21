@@ -26,7 +26,7 @@ export default class Movies extends Component {
     }
 
     render () {
-        let form = this.state.show ? <ListForm /> : '';
+        let form = this.state.show ? <ListForm currentUser={this.props.currentUser} /> : '';
         return (
             <div className="mt-5">
                 <div>
@@ -68,7 +68,7 @@ export default class Movies extends Component {
                             </Card>
                         </Link>
 
-                        <ListContainer />
+                        <ListContainer currentUser={this.props.currentUser} />
                     </div>
                 </div>
             </div>

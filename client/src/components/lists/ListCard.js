@@ -5,13 +5,17 @@ import { Link } from 'react-router-dom';
 import TheatersRoundedIcon from '@material-ui/icons/TheatersRounded';
 
 const ListCard = (props) => {
+
+    const name = props.list.name;
+    const description = props.list.description;
+
     return (
-        <Link to="/lists/favorita" className="linkList">
+        <Link to={`/lists/${name}`} className="linkList">
             <Card className="animated flipInY" style={{ width: 300, margin: 50 }}>
                 <Card.Body>
                     <TheatersRoundedIcon className="mx-auto" style={{ fontSize: 250 }} />
                 </Card.Body>
-                <Card.Footer className="text-muted" style={{ textAlign: "center" }}>Favoritos</Card.Footer>
+                <Card.Footer className="text-muted" style={{ textAlign: "center" }}>{name}</Card.Footer>
             </Card>
         </Link>
     )
