@@ -89,7 +89,7 @@ const MovieNavMenu = (props) => {
                                 </Nav.Link>
                             </Nav.Item>
 
-                            <ListOptions user_id={user_id} lists={props.lists}/>
+                            <ListOptions user_id={user_id} movie_id={movie_id} lists={props.lists} successToast={props.successToast} warningToast={props.warningToast}/>
 
                         </Nav>
                     ) : (
