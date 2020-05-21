@@ -10,8 +10,13 @@ const ListForm =(props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await createList(name, description, props.currentUser._id);
-        window.location.reload(true);
+        const response = await createList(name, description, props.currentUser._id);
+        console.log(response)
+        if(response.succes === false){
+            props.warningToast(response.msg)
+        } else {
+           window.location.reload(true);
+        }
     }
 
     const handleChangeName = (e) => {

@@ -77,7 +77,7 @@ class App extends Component {
                         }} />
 
                         <Route path="/movies" render={(props) => {
-                            return <Movies {...props} currentUser={currentUser} />
+                            return <Movies {...props} currentUser={currentUser}  warningToast={this.warningToast}/>
                         }}/> 
 
                         <Route exact path="/lists/:type" render={(props) => {

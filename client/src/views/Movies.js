@@ -37,7 +37,7 @@ export default class Movies extends Component {
     }
 
     render () {
-        let form = this.state.show ? <ListForm currentUser={this.props.currentUser} /> : '';
+        let form = this.state.show ? <ListForm  warningToast={this.props.warningToast} currentUser={this.props.currentUser} /> : '';
         const {lists} = this.state;
         return (
             <div className="mt-5">

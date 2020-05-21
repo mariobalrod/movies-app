@@ -7,7 +7,6 @@ const ListOptions = (props) => {
 
     return (
         <Nav.Item className="listOptions">
-            {console.log(props.lists.length)}
             {
                 (props.lists.length!==0)
                     ? (
@@ -15,7 +14,7 @@ const ListOptions = (props) => {
                             {
                                 props.lists.map((list, i) => {
                                     return (
-                                        <NavDropdown.Item key={i} href="#" onClick={() => console.log(list.id)}>{list.name}</NavDropdown.Item>
+                                        <NavDropdown.Item key={i} href="#" onClick={() => console.log(list.name)}>{list.name}</NavDropdown.Item>
                                     )
                                 })
                             }
