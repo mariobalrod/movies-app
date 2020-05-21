@@ -21,6 +21,8 @@ async function createList(req, res) {
     const list = await List.findOne({name, user_id});
     if(list){
         res.json({succes: false, msg: 'List name already exist'});
+    }else if(!name){
+        res.json({succes: false, msg: 'Name Required'});
     }else if(!description){
         res.json({succes: false, msg: 'Description Required'});
     } else {
@@ -39,6 +41,10 @@ async function updateList(req, res) {
     const list = await List.findOne({name, user_id});
     if(list){
         res.json({succes: false, msg: 'List name already exist'});
+    }else if(!name){
+        res.json({succes: false, msg: 'Name Required'});
+    }else if(!description){
+        res.json({succes: false, msg: 'Description Required'});
     } else {
         await List.findByIdAndUpdate(req.params.id, {name, description, user_id});
         res.json({succes: true, msg: 'Lista Actualizada'});

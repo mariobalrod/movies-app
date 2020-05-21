@@ -4,7 +4,7 @@ import {useHistory, Link} from 'react-router-dom';
 import MoviesContainer from '../components/movies/MoviesConainer';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import Empty from '../svg/empty.svg';
-
+import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 
 const ListContent = (props) => {
 
@@ -16,10 +16,11 @@ const ListContent = (props) => {
     useEffect(() => {
         const type = props.match.params.type;
         const user = props.currentUser._id;
-        
-        establecerTitulo(type);
+        const custom = props.location.state.custom;
+
+        establecerTitulo(type, custom);
         fetchMoviesList(type, user);
-    }, [props.currentUser._id, props.match.params.type])
+    }, [props.currentUser._id, props.match.params.type, props.location.state.custom])
 
     // ==================================================================================================================
     // Obtener todas las Peliculas por Tipo
@@ -36,11 +37,11 @@ const ListContent = (props) => {
     
     // ==================================================================================================================
     // Establecer el TITULO
-    const establecerTitulo = (type) => {
+    const establecerTitulo = (type, custom = false) => {
         if (type === 'favorita') setTitle('Peliculas Favoritas')
         if (type === 'vista') setTitle('Peliculas Vistas')
         if (type === 'pendiente') setTitle('Peliculas Pendientes')
-        if  (type !== 'favorita' && type !== 'vista' && type !== 'pendiente') setTitle(type)
+        if (custom) setTitle(type)
     }
 
     // ==================================================================================================================
@@ -51,6 +52,26 @@ const ListContent = (props) => {
                     <Link to="" className="linkList" onClick={() => history.goBack()}><KeyboardBackspaceIcon style={{fontSize: 40}}/></Link>
                 </div>
                 <h1 style={{ textAlign: "center" }}>{Title}</h1>
+                <div className="mx-auto mt-4" style={{width: 25}}>
+                    {
+                        (props.location.state.custom) ? 
+                        (
+                            <Link to={{
+                                pathname: '/formList',
+                                state: {
+                                    list_id: props.location.state.list_id
+                                }
+                            }}>
+                                <CreateRoundedIcon />
+                            </Link>
+                        ) : ''
+                    }
+                </div>
+                <div className="mx-auto mt-4" style={{width: 300}}>
+                    {
+                        (props.location.state.custom) ? (<p style={{textAlign: "center"}}>{props.location.state.description}</p>) : ' '
+                    }
+                </div>
                 {
                     (Movies.length === 0)
                         ? (

@@ -22,8 +22,9 @@ const ListContainer = (props) => {
                                 <div className="container2Custom">
                                     {
                                         props.lists.map((list, i) => {
+                                            console.log(list)
                                             return (
-                                                <ListCard key={i} list={list} lists={props.lists} currentUser={props.currentUser}/>
+                                                <ListCard key={i} idList={list._id} list={list} lists={props.lists} currentUser={props.currentUser}/>
                                             )
                                         })
                                     }

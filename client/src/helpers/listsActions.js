@@ -30,16 +30,19 @@ const getCountList = async function(user) {
     return data;
 }
 
-const updateList = async function(name, description, user_id, id) {
-    await axios({
+const updateList = async function(id, name, description, user_id) {
+    const response = await axios({
         method: 'POST',
-        url: `api/lists/${id}`,
+        url: `api/lists/update/${id}`,
         data: { name, description, user_id }
     });
+
+    const data = response.data;
+    return data;
 }
 
-const getCredentials = async function(user) {
-    const list = await axios.get(`api/lists/${user}`)
+const getCredentials = async function(id) {
+    const list = await axios.get(`api/lists/${id}`)
     const name = list.data.name;
     const description = list.data.description;
     return {name, description};

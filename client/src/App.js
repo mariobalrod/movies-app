@@ -13,6 +13,7 @@ import Home from './views/Home';
 import Movies from './views/Movies';
 import Profile from './views/Profile';
 import ProfileForm from './views/ProfileForm';
+import ListFormEdition from './views/ListFormEdition';
 import LogIn from './views/LogIn';
 import LogOut from './views/LogOut';
 import SignUp from './views/SignUp';
@@ -90,6 +91,10 @@ class App extends Component {
 
                         <Route path="/form" render={(props) => {
                             return <ProfileForm {...props} currentUser={currentUser} successToast={this.successToast} />
+                        }} />
+
+                        <Route path="/formList" render={(props) => {
+                            return <ListFormEdition {...props} currentUser={currentUser} successToast={this.successToast} warningToast={this.warningToast}/>
                         }} />
 
                         <Route exact path="/overview/:id" render={(props) => {

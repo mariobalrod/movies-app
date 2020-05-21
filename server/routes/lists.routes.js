@@ -15,7 +15,7 @@ router.get('/', getAllLists);
 router.get('/:id', getListById);
 router.get('/own/:user', getLists);
 router.post('/create', createList);
-router.post('/:id', updateList);
+router.post('/update/:id', updateList);
 router.delete('/:id', deleteListById);
 router.get('/count/:user', getCountList);
 

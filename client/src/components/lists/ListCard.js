@@ -11,11 +11,13 @@ import TheatersRoundedIcon from '@material-ui/icons/TheatersRounded';
 
 const ListCard = (props) => {
 
-    const id = props.list._id;
+    const id = props.idList;
     const name = props.list.name;
+    const description = props.list.description;
     const type = name;
     const user = props.currentUser._id;
 
+    console.log('Card', props.idList);
     return (
         <div className="custom">
             <div className="mx-auto mb-2" style={{width: 30}}>
@@ -29,7 +31,10 @@ const ListCard = (props) => {
             <Link to={{
                 pathname: `/lists/${name}`,
                 state: {
-                    lists: props.lists
+                    lists: props.lists,
+                    custom: true,
+                    description: description,
+                    list_id: id
                 }
             }} className="linkList">
                 <Card className="animated flipInY" style={{ width: 300, margin: 50, marginTop: 0 }}>
