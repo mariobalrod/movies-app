@@ -77,6 +77,15 @@ async function deleteMoviesByType(req, res) {
     res.json({success: true, msg: "Peliculas Eliminadas"});
 }
 
+async function updateTypeMovies(req, res) {
+    const {user_id, type, newType} = req.body;
+    const movies = await Movie.find({type: type, user_id: user_id});
+    movies.forEach(async movie => {
+        await Movie.findByIdAndUpdate(movie.id, {type: newType})
+    })
+    res.json({success: true, msg: "Type Update"});
+}
+
 module.exports = {
     getAllMovies,
     getMovieById,
@@ -86,5 +95,7 @@ module.exports = {
     getMoviesByType,
     deleteMovieById,
     getCountMoviesByType,
-    deleteMoviesByType
+    deleteMoviesByType,
+    updateTypeMovies
 }
+

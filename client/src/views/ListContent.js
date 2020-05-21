@@ -59,7 +59,8 @@ const ListContent = (props) => {
                             <Link to={{
                                 pathname: '/formList',
                                 state: {
-                                    list_id: props.location.state.list_id
+                                    list_id: props.location.state.list_id,
+                                    type: props.location.state.name
                                 }
                             }}>
                                 <CreateRoundedIcon />

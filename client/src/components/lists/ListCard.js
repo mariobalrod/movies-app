@@ -33,6 +33,7 @@ const ListCard = (props) => {
                 state: {
                     lists: props.lists,
                     custom: true,
+                    name: name,
                     description: description,
                     list_id: id
                 }

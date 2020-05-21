@@ -5,25 +5,28 @@ import {useHistory, Link} from 'react-router-dom';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 import { updateList } from '../helpers/listsActions';
+import { updateTypeMovies } from '../helpers/moviesActions';
 
 const ListFormEdition =(props) => {
 
     let history = useHistory();
 
-    const [name, setName] = useState('');
+    const [newType, setName] = useState('');
     const [description, setDescription] = useState('');
 
     const user_id = props.currentUser._id;
     const id = props.location.state.list_id;
+    const type = props.location.state.type;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(id)
-        const response = await updateList(id, name, description, user_id);
+        const response = await updateList(id, newType, description, user_id);
         console.log(response)
         if(response.succes === false){
             props.warningToast(response.msg)
         } else {
+            await updateTypeMovies(user_id, type, newType);
             history.push('/movies')
         }
     }
@@ -42,7 +45,7 @@ const ListFormEdition =(props) => {
             <h5 style={{textAlign: "center"}}>Edit your List</h5>
             <Form.Group>
                 <Form.Label>Name</Form.Label>
-                <Form.Control name="title" value={name} size="sm" type="text" autoFocus onChange={handleChangeName} />
+                <Form.Control name="title" value={newType} size="sm" type="text" autoFocus onChange={handleChangeName} />
             </Form.Group>
             <Form.Group controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Description</Form.Label>

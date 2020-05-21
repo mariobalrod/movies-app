@@ -39,10 +39,24 @@ const deleteMoviesByType = async function(type, user) {
     })
 }
 
+const updateTypeMovies = async function(user_id, type, newType) {
+    await axios({
+        method: 'POST',
+        url: '/api/movies/types',
+        data: {user_id, type, newType}
+    });
+    
+}
+
+
+
 module.exports = {
     addMovie,
     deleteMovie,
     getMoviesByType,
     getCountMoviesByType,
-    deleteMoviesByType
+    deleteMoviesByType,
+    updateTypeMovies
 }
+
+
