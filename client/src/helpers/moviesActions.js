@@ -32,9 +32,17 @@ const getCountMoviesByType = async function(type, user) {
     return data;
 }
 
+const deleteMoviesByType = async function(type, user) {
+    await axios({
+        method: 'DELETE',
+        url: `/api/movies/${type}/${user}`
+    })
+}
+
 module.exports = {
     addMovie,
     deleteMovie,
     getMoviesByType,
-    getCountMoviesByType
+    getCountMoviesByType,
+    deleteMoviesByType
 }

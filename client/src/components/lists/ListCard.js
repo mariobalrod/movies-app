@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 //Actions
 import { deleteList } from '../../helpers/listsActions';
+import { deleteMoviesByType } from '../../helpers/moviesActions';
 
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import TheatersRoundedIcon from '@material-ui/icons/TheatersRounded';
@@ -12,11 +13,18 @@ const ListCard = (props) => {
 
     const id = props.list._id;
     const name = props.list.name;
+    const type = name;
+    const user = props.currentUser._id;
 
     return (
         <div className="custom">
             <div className="mx-auto mb-2" style={{width: 30}}>
-                <DeleteForeverIcon className="deleteList" onClick={() => deleteList(id)}/>
+                <DeleteForeverIcon 
+                    className="deleteList" 
+                    onClick={() => {
+                        deleteMoviesByType(type, user);
+                        deleteList(id);
+                    }}/>
             </div>
             <Link to={{
                 pathname: `/lists/${name}`,
