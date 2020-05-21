@@ -1,6 +1,8 @@
 import React from 'react';
 import {Nav, NavDropdown} from 'react-bootstrap';
 
+import { addMovie } from '../../helpers/moviesActions';
+
 import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
 
 const ListOptions = (props) => {
@@ -14,7 +16,19 @@ const ListOptions = (props) => {
                             {
                                 props.lists.map((list, i) => {
                                     return (
-                                        <NavDropdown.Item key={i} href="#" onClick={() => console.log(list.name)}>{list.name}</NavDropdown.Item>
+                                        <NavDropdown.Item key={i} href="#" onClick={() => {
+                                            addMovie(props.movie_id, props.user_id, list.name)
+                                                .then(data => {
+                                                    if(data.success) {
+                                                        props.successToast(`Añadida a ${list.name}`)
+                                                    } else {
+                                                        props.warningToast(data.msg)
+                                                    }
+                                                })
+                                                .catch(err => console.log(err))
+                                        }}>
+                                            {list.name}
+                                        </NavDropdown.Item>
                                     )
                                 })
                             }
