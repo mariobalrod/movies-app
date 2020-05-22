@@ -20,7 +20,7 @@ MoviesApp is an application that allows you to classify movies in lists. It offe
 - [Installing](#installing)
 - [Deployment](#dep)
 - [Contributing](#contributing)
-- [Authors](#authors)
+- [Authors](#autors)
 
 
 
