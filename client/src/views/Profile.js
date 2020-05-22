@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import { getCountMoviesByType, getAllMovies } from '../helpers/moviesActions';
+import { getCountMoviesByType } from '../helpers/moviesActions';
 import {fetchDescription} from '../helpers/usersActions';
 import {getCountList} from '../helpers/listsActions';
 
