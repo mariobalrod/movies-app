@@ -1,16 +1,15 @@
 # MoviesApp
 
 
-
+</br>
 MoviesApp is an application that allows you to classify movies in lists. It offers you to keep an order for the movies that you have seen or you want to see, in addition you can create your own movies lists.
-
-
+</br>
+</br>
+</br>
 
 ![App](./docs/App.png)
-
-
-
-
+</br>
+</br>
 
 ## Table of contents
 
@@ -19,13 +18,17 @@ MoviesApp is an application that allows you to classify movies in lists. It offe
 3. [Prerequisites](#pre)
 4. [Installing](#installing)
 5. [Deployment](#dep)
-6. [Contributing](#contributing)
-7. [BUGs or comments](#bugs)
-8. [Version](#version)
-9. [Authors](#autors)
+6. [About the App](#app)
 
+    6.1. [Data models](#models)
 
+    6.2. [Api Routes](#apiroutes)
 
+    6.3. [Screenshots](#screens)
+7. [Contributing](#contributing)
+8. [BUGs or comments](#bugs)
+9. [Version](#version)
+10. [Authors](#autors)
 
 
 <a name="techs"></a>
@@ -130,14 +133,14 @@ JWT_SECRET=secret
 ```bash
 git clone https://github.com/mariobalrod/MoviesApp.git
 ```
-2. *Make sure MongoDB service is running.*
+2. Make sure **MongoDB** service is running.
 
-3. For the **back-end**, install the dependencies once via the terminal.
+3. For the **Back-end**, install the dependencies once via the terminal.
 ```bash
 npm install
 ```
 
-4. For the **front-end**, install the dependencies once via the terminal.
+4. For the **Front-end**, install the dependencies once via the terminal.
 ```bash
 cd client/
 npm install
@@ -153,6 +156,79 @@ To deploy simply run the next command on the root of the project
 ```
 npm run dev
 ```
+
+<a name="app"></a>
+
+## About the App
+
+
+<a name="models"></a>
+
+### Data Models
+
+![App](./docs/models.png)
+
+
+
+
+<a name="apiroutes"></a>
+
+### Api Routes
+```javascript
+// Api Movies Routes
+router.get('/', getAllMovies);
+router.get('/:id', getMovieById);
+router.get('/:type/:user', getMoviesByType);
+router.post('/add', createMovie);
+router.post('/types', updateTypeMovies);
+router.put('/:id', updateMovie);
+router.delete('/:type/:user', deleteMoviesByType);
+router.delete('/delete', deleteMovie);
+router.delete('/:id', deleteMovieById);
+router.get('/count/:type/:user', getCountMoviesByType);
+```
+
+```javascript
+// Api Users Routes
+router.post('/login', login);
+router.post('/register', registerUser);
+router.post('/description/:id', updateDescription);
+router.get('/description/:id', getDescription)
+router.put('/password/:id', updatePassword);
+router.get('/', getAllUsers);
+router.get('/:id', getUserById);
+router.delete('/:id', deleteUser);
+```
+
+```javascript
+// Api Lists Routes
+router.get('/', getAllLists);
+router.get('/:id', getListById);
+router.get('/own/:user', getLists);
+router.post('/create', createList);
+router.post('/update/:id', updateList);
+router.delete('/:id', deleteListById);
+router.get('/count/:user', getCountList);
+```
+
+<a name="screens"></a>
+
+### Screenshots
+
+**Home Page**
+![App](./docs/Home.png)
+</br>
+</br>
+</br>
+
+**Lists Page**
+![App](./docs/Lists.png)
+</br>
+</br>
+</br>
+
+**Profile Page**
+![App](./docs/Profile.png)
 
 <a name="contributing"></a>
 
