@@ -1,7 +1,14 @@
 # MoviesApp
 
 
-MoviesApp es una aplicación que te permite clasificar peliculas en listas. Te ofrece la facilidad de llevar un orden en las peliculas que has visto o que quieres ver, además de crear tus propias listas de peliculas.
+
+MoviesApp is an application that allows you to classify movies in lists. It offers you to keep an order for the movies that you have seen or you want to see, in addition you can create your own movies lists.
+
+
+
+![App](./docs/App.png)
+
+
 
 
 
@@ -9,10 +16,8 @@ MoviesApp es una aplicación que te permite clasificar peliculas en listas. Te o
 
 - [Technologies](#techs)
 - [File Structure](#files)
-
-- [Instalation](#installing)
 - [Prerequisites](#pre)
-
+- [Installing](#installing)
 - [Deployment](#dep)
 - [Contributing](#contributing)
 - [Authors](#authors)
@@ -47,14 +52,54 @@ This project uses the following technologies:
 
 ## File Structure
 
-
-
-
-
-<a name="installing"></a>
-
-## Installing
-
+```bash
+MoviesApp
+  ├── docs/
+  └── client
+      ├── node_modules/
+      ├── package.json
+      ├── package-lock.json
+      ├── public/
+      └── src
+          ├── components
+          │   ├── lists/
+          │   ├── movies/
+          │   ├── partials/
+          │   └── users/
+          ├── helpers/
+          ├── styles/
+          ├── svg/
+          ├── views/
+          ├── App.js
+          ├── index.js
+          └── setupProxy.js
+  ├── node_modules/
+  ├── package.json
+  ├── package-lock.json
+  ├── README.md
+  └── server
+      ├── config
+      │   └── serverAuth.js
+      ├── controllers
+      │   ├── lists.controllers.js
+      │   ├── movies.controllers.js
+      │   └── users.controllers.js
+      ├── database.js
+      ├── index.js
+      ├── models
+      │   ├── List.js
+      │   ├── Movie.js
+      │   └── User.js
+      ├── routes
+      │   ├── index.js
+      │   ├── lists.routes.js
+      │   ├── movies.routes.js
+      │   └── users.routes.js
+      ├── server.js
+      └── validator
+          ├── login.js
+          └── register.js
+```
 
 
 
@@ -62,6 +107,14 @@ This project uses the following technologies:
 <a name="pre"></a>
 
 ## Prerequisites
+
+
+
+
+
+<a name="installing"></a>
+
+## Installing
 
 
 
