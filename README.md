@@ -14,13 +14,15 @@ MoviesApp is an application that allows you to classify movies in lists. It offe
 
 ## Table of contents
 
-- [Technologies](#techs)
-- [File Structure](#filesStr)
-- [Prerequisites](#pre)
-- [Installing](#installing)
-- [Deployment](#dep)
-- [Contributing](#contributing)
-- [Authors](#autors)
+1. [Technologies](#techs)
+2. [File Structure](#filesStr)
+3. [Prerequisites](#pre)
+4. [Installing](#installing)
+5. [Deployment](#dep)
+6. [Contributing](#contributing)
+7. [BUGs or comments](#bugs)
+8. [Version](#version)
+9. [Authors](#autors)
 
 
 
@@ -108,7 +110,15 @@ MoviesApp
 
 ## Prerequisites
 
+- [MongoDB](https://gist.github.com/nrollr/9f523ae17ecdbb50311980503409aeb3)
+- [Node](https://nodejs.org/en/download/)
+- [npm](https://nodejs.org/en/download/package-manager/)
 
+You need to create a .env file on the root of the project and put your JWT_SECRET key like that:
+
+```
+JWT_SECRET=secret
+```
 
 
 
@@ -116,17 +126,33 @@ MoviesApp
 
 ## Installing
 
+1. Fork, then download or clone the repo.
+```bash
+git clone https://github.com/mariobalrod/MoviesApp.git
+```
+2. *Make sure MongoDB service is running.*
 
+3. For the **back-end**, install the dependencies once via the terminal.
+```bash
+npm install
+```
 
+4. For the **front-end**, install the dependencies once via the terminal.
+```bash
+cd client/
+npm install
+```
 
 
 <a name="dep"></a>
 
 ## Deployment
 
+To deploy simply run the next command on the root of the project
 
-
-
+```
+npm run dev
+```
 
 <a name="contributing"></a>
 
@@ -135,6 +161,19 @@ MoviesApp
 Please feel free to send pull request if you want to contribute!
 
 
+<a name="bugs"></a>
+
+## BUGs or comments
+
+[Create new Issues](https://github.com/mariobalrod/MoviesApp/issues) (preferred)
+
+or Email Me: marioballestero.rdg@gmail.com 
+
+<a name="version"></a>
+
+## Version
+
+1.0.0
 
 <a name="autors"></a>
 
