@@ -21,12 +21,13 @@ const Home = (props) => {
     const [lists, setLists] = useState([]);
 
     useEffect(() => {
-        const user = props.currentUser._id;
         const endpoint = `${apiUrl}${option}?api_key=${apiKey}&language=en-US&page=1`;
         fetchMovies(endpoint);
-
-        fetchList(user);
-    }, [option, props.currentUser._id]);
+        if(props.currentUser) {
+            const user = props.currentUser._id;
+            fetchList(user);
+        }
+    }, [option]);
 
     const fetchList = async (user) => {
         const listsF = await getLists(user);

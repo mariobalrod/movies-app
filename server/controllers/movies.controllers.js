@@ -52,11 +52,6 @@ async function deleteMovie(req, res) {
     res.json({success: true, msg: "Pelicula Eliminada"});
 }
 
-async function deleteMovieReqId(req, res) {
-    await Movie.findByIdAndDelete(req.id);
-    res.json({success: true, msg: "Pelicula Eliminada"});
-}
-
 async function deleteMovieById(req, res) {
     await Movie.findByIdAndDelete(req.params.id);
     res.json({success: true, msg: "Pelicula Eliminada"});

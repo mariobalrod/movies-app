@@ -23,25 +23,30 @@ const ProfileCard = (props) => {
                         <h6 style={{textAlign: "center"}}><EditTwoToneIcon/></h6>
                     </Link>
                     <h1 className="">{props.currentUser.username}</h1>
-                    <div className="coords">
-                        <span>Joined {props.currentUser.date}</span>
-                    </div>
-                    <div className="stats">
-                        <div>
-                            <div className="title">Vistas</div>
-                            <i className="fa fa-trophy"></i>
-                            <div className="value">{props.vistas}</div>
-                        </div>
-                        <div>
-                            <div className="title">Pendientes</div>
-                            <i className="fa fa-gamepad"></i>
-                            <div className="value">{props.pendientes}</div>
-                        </div>
-                        <div>
-                            <div className="title">Favoritas</div>
-                            <i className="fa fa-group"></i>
-                            <div className="value">{props.favoritas}</div>
-                        </div>
+                    <h4 style={{textAlign: "center", color: "white", marginTop: 25}}>Your stats:</h4>
+                    <div className="container1Profile">
+                        <div className="container2Profile ">
+                            <div>
+                                <div className="title">Total Lists</div>
+                                <i className="fa fa-gamepad"></i>
+                                <div className="value">{props.totalLists+3}</div>
+                            </div>
+                            <div>
+                                <div className="title">Vistas</div>
+                                <i className="fa fa-trophy"></i>
+                                <div className="value">{props.vistas}</div>
+                            </div>
+                            <div>
+                                <div className="title">Pendientes</div>
+                                <i className="fa fa-gamepad"></i>
+                                <div className="value">{props.pendientes}</div>
+                            </div>
+                            <div>
+                                <div className="title">Favoritas</div>
+                                <i className="fa fa-group"></i>
+                                <div className="value">{props.favoritas}</div>
+                            </div>
+                        </div>  
                     </div>
                 </div>
             </div>

@@ -48,8 +48,6 @@ const updateTypeMovies = async function(user_id, type, newType) {
     
 }
 
-
-
 module.exports = {
     addMovie,
     deleteMovie,

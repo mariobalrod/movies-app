@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 
-import { getCountMoviesByType } from '../helpers/moviesActions';
+import { getCountMoviesByType, getAllMovies } from '../helpers/moviesActions';
 import {fetchDescription} from '../helpers/usersActions';
+import {getCountList} from '../helpers/listsActions';
 
 import ProfileCard from '../components/users/ProfileCard';
 
@@ -10,6 +11,7 @@ const Profile = (props) => {
     const [vistas, setVistas] = useState(0);
     const [pendientes, setPendientes] = useState(0);
     const [favoritas, setFavoritas] = useState(0);
+    const [totalLists, setTotalLists] = useState(0);
     const [description, setDescription] = useState('');
 
     useEffect(() => {
@@ -27,10 +29,12 @@ const Profile = (props) => {
         const vistasCount = await getCountMoviesByType('vista', userId);
         const pendientesCount = await getCountMoviesByType('pendiente', userId);
         const favoritasCount = await getCountMoviesByType('favorita', userId);
+        const totalListsCount = await getCountList(userId);
 
         setVistas(vistasCount);
         setPendientes(pendientesCount);
         setFavoritas(favoritasCount);
+        setTotalLists(totalListsCount);
     }
     
     return (
@@ -45,6 +49,7 @@ const Profile = (props) => {
                     vistas={vistas} 
                     pendientes={pendientes} 
                     favoritas={favoritas} 
+                    totalLists={totalLists}
                 />  
             </div>
         </div>

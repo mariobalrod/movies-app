@@ -7,7 +7,7 @@
   
   .cardP {
     width: 450px;
-    height: 250px;
+    height: 550px;
     background-color: #fff;
     background: linear-gradient(#f8f8f8, #fff);
     box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
@@ -109,44 +109,63 @@
   .cardP .additional .coords span + span {
     float: right;
   }
+
+.container1Profile {
+    display: flex;
+    position: relative;
+    width: 100%;
+    border: 2px solid transparent;
+    justify-content: center;
+    align-items: center;
+}
+
+.container2Profile  {
+    display: flex;
+    position: relative;
+    border: 1px solid transparent;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
   
-  .cardP .additional .stats {
+  .cardP .additional .container1Profile .container2Profile {
+    width: 80px;
     font-size: 2rem;
     display: flex;
-    position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-    right: 1rem;
-    top: auto;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid transparent;
     color: #fff;
   }
   
-  .cardP.gray .additional .stats {
+  .cardP.gray .additional .container1Profile .container2Profile {
     color: rgb(255, 255, 255);
   }
   
-  .cardP .additional .stats > div {
+  .cardP .additional .container1Profile .container2Profile > div {
+    margin-top: 30px;
     flex: 1;
     text-align: center;
   }
   
-  .cardP .additional .stats i {
+  .cardP .additional .container1Profile .container2Profile i {
     display: block;
   }
   
-  .cardP .additional .stats div.title {
+  .cardP .additional .container1Profile .container2Profile div.title {
     font-size: 0.75rem;
     font-weight: bold;
     text-transform: uppercase;
   }
   
-  .cardP .additional .stats div.value {
+  .cardP .additional .container1Profile .container2Profile div.value {
     font-size: 1.5rem;
     font-weight: bold;
     line-height: 1.5rem;
   }
   
-  .cardP .additional .stats div.value.infinity {
+  .cardP .additional .container1Profile .container2Profile div.value.infinity {
     font-size: 2.5rem;
   }
   
