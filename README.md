@@ -15,7 +15,7 @@ MoviesApp is an application that allows you to classify movies in lists. It offe
 ## Table of contents
 
 - [Technologies](#techs)
-- [File Structure](#files)
+- [File Structure](#filesStr)
 - [Prerequisites](#pre)
 - [Installing](#installing)
 - [Deployment](#dep)
@@ -48,7 +48,7 @@ This project uses the following technologies:
 
 
 
-<a name="files"></a>
+<a name="filesStr"></a>
 
 ## File Structure
 
