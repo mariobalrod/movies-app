@@ -17,7 +17,7 @@ MoviesApp is an application that allows you to classify movies in lists. It offe
 2. [File Structure](#filesStr)
 3. [Prerequisites](#pre)
 4. [Installing](#installing)
-5. [Deployment](#dep)
+5. [Start](#start)
 6. [About the App](#app)
 
     6.1. [Data models](#models)
@@ -147,9 +147,9 @@ npm install
 ```
 
 
-<a name="dep"></a>
+<a name="start"></a>
 
-## Deployment
+## Start
 
 To deploy simply run the next command on the root of the project
 
