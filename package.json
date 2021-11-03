@@ -35,7 +35,7 @@
     "mongoose": "^5.9.9",
     "morgan": "^1.10.0",
     "moviedb": "^0.2.10",
-    "validator": "^13.0.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "concurrently": "^5.1.0",
